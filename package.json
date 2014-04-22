@@ -1,0 +1,18 @@
+{
+  "name": "please",
+  "version": "0.1.0",
+  "author": {
+    "name": "Vincent De Oliveira"
+  },
+  "description": "Please",
+  "main": "./lib/index",
+  "dependencies": {
+    "postcss": "0.3.4",
+    "csswring": "~0.1.0",
+    "postcss-vars": "~0.1.0",
+    "autoprefixer": "~1.1.20140410",
+    "css-mqpacker": "~0.1.0",
+    "pixrem": "https://github.com/iamvdo/node-pixrem/tarball/master",
+    "deep-extend": "~0.2.8"
+  }
+}
