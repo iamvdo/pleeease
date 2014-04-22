@@ -71,6 +71,7 @@ And returns (with default options):
 }
 .elem {
 	font-size: 32px;
+	font-size: 2rem;
 	color: red;
 	background: red;
 	width: -webkit-calc(100% - 50px);
