@@ -57,8 +57,6 @@ It takes this CSS:
 }
 @media screen and (min-width: 36em) {
 	.classe {
-		background: -webkit-gradient(linear, left top, left bottom, from(green), to(blue));
-		background: -webkit-linear-gradient(green, blue);
 		background: linear-gradient(green, blue);
 	}
 }
@@ -83,6 +81,8 @@ And returns (with default options):
 		color: blue
 	}
 	.classe {
+		background: -webkit-gradient(linear, left top, left bottom, from(green), to(blue));
+		background: -webkit-linear-gradient(green, blue);
 		background: linear-gradient(green, blue);
 	}
 }

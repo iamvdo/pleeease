@@ -1,6 +1,7 @@
 {
   "name": "please",
   "version": "0.1.1",
+  "description": "Polite CSS postprocessor",
   "author": {
     "name": "Vincent De Oliveira"
   },
