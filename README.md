@@ -57,7 +57,9 @@ It takes this CSS:
 }
 @media screen and (min-width: 36em) {
 	.classe {
-		background: linear-gradient(green, var(--color-secondary));
+		background: -webkit-gradient(linear, left top, left bottom, from(green), to(blue));
+		background: -webkit-linear-gradient(green, blue);
+		background: linear-gradient(green, blue);
 	}
 }
 ```
@@ -113,6 +115,7 @@ Add support for [Autoprefixer](https://github.com/ai/autoprefixer) that add vend
 var options = {
 	autoprefixer: ['last 4 versions', 'Android 2.3']
 }
+```
 
 See [available options](https://github.com/ai/autoprefixer#browsers).
 
@@ -139,5 +142,6 @@ var options = {
 		rem: ['16px', {replace: true}]
 	}
 }
+```
 
 See [available options](https://github.com/iamvdo/node-pixrem#parameters).
