@@ -142,6 +142,10 @@ var options = {
 		rem: ['16px', {replace: true}]
 	}
 }
-```
+``
 
 See [available options](https://github.com/iamvdo/node-pixrem#parameters).
+
+##Licence
+
+MIT
