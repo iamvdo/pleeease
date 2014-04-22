@@ -1,11 +1,10 @@
 {
   "name": "please",
-  "version": "0.1.1",
-  "description": "Polite CSS postprocessor",
+  "version": "0.1.2",
+  "description": "Please",
   "author": {
     "name": "Vincent De Oliveira"
   },
-  "description": "Please",
   "main": "./lib/index",
   "dependencies": {
     "postcss": "0.3.4",
