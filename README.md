@@ -133,7 +133,7 @@ Add support for a "not so bad" [CSS variables polyfill](https://github.com/iamvd
 
 ###polyfills.rem
 
-Add support for [pixrem]() that generates pixel fallbacks for rem units. Add options as an array:
+Add support for [pixrem](https://github.com/iamvdo/node-pixrem) that generates pixel fallbacks for rem units. Add options as an array:
 
 ```javascript
 // set options
@@ -145,6 +145,8 @@ var options = {
 ```
 
 See [available options](https://github.com/iamvdo/node-pixrem#parameters).
+
+For now, this use a fork form [pixrem](https://github.com/robwierzbowski/node-pixrem) since the [PR was accepted or not](https://github.com/robwierzbowski/node-pixrem/pull/10).
 
 ##Licence
 
