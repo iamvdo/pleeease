@@ -37,7 +37,7 @@ fs.writeFile('app.min.css', fixed, function (err) {
 
 Use [pleeease-brunch](https://github.com/iamvdo/pleeease-brunch)
 
-###Example:
+##Example
 
 It takes this CSS:
 
@@ -150,6 +150,10 @@ var options = {
 See [available options](https://github.com/iamvdo/node-pixrem#parameters).
 
 For now, this uses a fork from [pixrem](https://github.com/robwierzbowski/node-pixrem) until the [PR will be accepted or not](https://github.com/robwierzbowski/node-pixrem/pull/10).
+
+##More
+
+More postprocess tasks are coming, mainly polyfills (eg. CSS filters, pseudo-classes/pseudo-elements, rgba/hsla functions, etc.).
 
 ##Licence
 
