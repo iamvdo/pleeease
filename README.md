@@ -1,27 +1,29 @@
-Please
+Pleeease
 ======
 
-Polite CSS postprocessor.
+Postprocess CSS with ease.
 
-Please is the best tool for your CSS. It adds prefixes, variables, `rem` unit support, packs same media-query in one `@media` rule and minify it.
+Pleeease is the best toolchain for your CSS. Keep writing DRY, future-proof CSS.
 
-Please is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
+For now, it adds prefixes, variables and `rem` unit support, packs same media-query in one `@media` rule and minify it.
+
+Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 
 
 ##Usage
 
-	npm install please
+	npm install pleeease
 
 ```javascript
-var please = require('please'),
-	fs     = require('fs');
+var pleeease = require('pleeease'),
+	fs       = require('fs');
 
 var css = fs.readFileSync('app.css', 'utf8');
 
 // define options here
 var options = {};
 
-var fixed = please.process(css, options);
+var fixed = pleeease.process(css, options);
 
 fs.writeFile('app.min.css', fixed, function (err) {
   if (err) {
@@ -33,7 +35,7 @@ fs.writeFile('app.min.css', fixed, function (err) {
 
 ###With Brunch
 
-Use [please-brunch](https://github.com/iamvdo/please-brunch)
+Use [pleeease-brunch](https://github.com/iamvdo/pleeease-brunch)
 
 ###Example:
 
@@ -147,7 +149,7 @@ var options = {
 
 See [available options](https://github.com/iamvdo/node-pixrem#parameters).
 
-For now, this use a fork form [pixrem](https://github.com/robwierzbowski/node-pixrem) since the [PR was accepted or not](https://github.com/robwierzbowski/node-pixrem/pull/10).
+For now, this uses a fork from [pixrem](https://github.com/robwierzbowski/node-pixrem) until the [PR will be accepted or not](https://github.com/robwierzbowski/node-pixrem/pull/10).
 
 ##Licence
 
