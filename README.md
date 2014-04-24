@@ -149,7 +149,6 @@ These are the default options for now:
 * `minifier`: `true`
 * `mqpacker`: `true`
 * `polyfills`:
-
 	* `variables`: `true`
 	* `rem`: `false`
 
