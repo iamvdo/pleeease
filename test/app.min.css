@@ -1,0 +1,32 @@
+:root {
+  --color-primary: blue;
+  --color-secondary: black;
+}
+.elem {
+  font-size: 32px;
+  font-size: 2rem;
+  color: red;
+  background: blue;
+  width: -webkit-calc(100% - 50px);
+  width: calc(100% - 50px);
+}
+.toto {
+	color: blue;
+	display: block;
+	bottom: 0;
+}
+@media screen and (min-width: 36em) {
+  .elem {
+    color: black
+  }
+  .classe {
+    background: -webkit-gradient(linear, left top, left bottom, from(green), to(blue));
+    background: -webkit-linear-gradient(green, blue);
+    background: linear-gradient(green, blue);
+  }
+  .toto {
+    background: -webkit-gradient(linear, left top, left bottom, from(green), to(blue));
+    background: -webkit-linear-gradient(green, blue);
+    background: linear-gradient(green, blue);
+  }
+}

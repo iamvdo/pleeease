@@ -1,0 +1,10 @@
+.foo {
+	color: var(--color-primary);
+	display: block;
+	bottom: 0;
+}
+@media screen and (min-width: 36em) {
+  .foo {
+    background: linear-gradient(green, blue);
+  }
+}
