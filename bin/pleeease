@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+	options = require('../lib/options');
+
+program.
+	command('compile [file...]', 'compile one more files (default: "' + options.input + '")').
+	command('watch [file...]', 'watch for changes and compile (default: "' + options.input + '")').
+	parse(process.argv);
+
+if (process.argv.length === 2) {
+	return program.help();
+};

@@ -9,34 +9,6 @@ For now, it adds prefixes, variables and `rem` unit support, packs same media-qu
 
 Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 
-
-##Usage
-
-	npm install pleeease
-
-```javascript
-var pleeease = require('pleeease'),
-	fs       = require('fs');
-
-var css = fs.readFileSync('app.css', 'utf8');
-
-// define options here
-var options = {};
-
-var fixed = pleeease.process(css, options);
-
-fs.writeFile('app.min.css', fixed, function (err) {
-  if (err) {
-    throw err;
-  }
-  console.log('File saved!');
-});
-```
-
-###With Brunch
-
-Use [pleeease-brunch](https://github.com/iamvdo/pleeease-brunch)
-
 ##Example
 
 It takes this CSS:
@@ -91,23 +63,97 @@ And returns (with default options):
 }
 ```
 
+##Installation
+
+	$ npm install pleeease
+
+##Usage
+
+###Programmatic
+
+```javascript
+var pleeease = require('pleeease'),
+	fs       = require('fs');
+
+var css = fs.readFileSync('app.css', 'utf8');
+
+// define options here
+var options = {};
+
+var fixed = pleeease.process(css, options);
+
+fs.writeFile('app.min.css', fixed, function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log('File saved!');
+});
+```
+
+###CLI
+
+Install Pleeease globally
+
+	$ npm install -g pleeease
+
+Or use alternate syntax
+
+	$ node ./bin/pleeease
+
+Compile all CSS files from the root projet to `app.min.css`
+
+	$ pleeease compile
+	$ pleeease compile *.css to app.min.css
+
+Compile `foo.css` to `bar.css`
+
+	$ pleeease compile foo.css to bar.css
+
+Compile multiple files to `app.min.css`
+
+	$ pleeease compile foo.css bar.css
+
+Compile `css/` folder to `public/css/app.min.css` (if folders doesn't exist, they will be created)
+
+	$ pleeease compile css/ to public/css/app.min.css
+
+You can also `watch` (with the same syntax) for live compilation.
+
+	$ pleeease watch foo.css
+
+Pleeease options can be set in a `.pleeeaserc` file (JSON-like), for example:
+
+```javascript
+{
+	"input": ["foo.css"],
+	"output": "bar.css",
+	"autoprefixer": true,
+	"minifier": false
+}
+```
+
+* `input` is an array of files (default `[*.css]`)
+* `output` is the path to the compiled file (default `app.min.css`)
+
+For other options, see below.
+
+###With Brunch
+
+If you're using [Brunch](http://brunch.io), see [pleeease-brunch](https://github.com/iamvdo/pleeease-brunch)
+
 ##Options
 
 These are the default options for now:
 
-```javascript
-var options = {
-	autoprefixer: true,
-	minifier: true,
-	mqpacker: true,
-	polyfills: {
-		variables: true,
-		rem: false
-	}
-}
-```
+* `autoprefixer`: `true`
+* `minifier`: `true`
+* `mqpacker`: `true`
+* `polyfills`:
 
-All options can be disabled with `false` keyword.
+	* `variables`: `true`
+	* `rem`: `false`
+
+All options can be disabled with `false` keyword or modified using each postprocessor options.
 
 ###autoprefixer
 
@@ -120,7 +166,14 @@ var options = {
 }
 ```
 
-See [available options](https://github.com/ai/autoprefixer#browsers).
+```javascript
+// .pleeeaserc file
+{
+	"autoprefixer": ["last 4 versions", "Android 2.3"]
+}
+```
+
+See [available options for Autoprefixer](https://github.com/ai/autoprefixer#browsers).
 
 ###minifier
 
@@ -147,7 +200,16 @@ var options = {
 }
 ```
 
-See [available options](https://github.com/iamvdo/node-pixrem#parameters).
+```javascript
+// .pleeeaserc file
+{
+	"polyfills": {
+		"rem": ["16px", {"replace": true}]
+	}
+}
+```
+
+See [available options for pixrem](https://github.com/iamvdo/node-pixrem#parameters).
 
 For now, this uses a fork from [pixrem](https://github.com/robwierzbowski/node-pixrem) until the [PR will be accepted or not](https://github.com/robwierzbowski/node-pixrem/pull/10).
 

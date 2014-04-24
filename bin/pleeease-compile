@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+var cli       = require('../lib/cli'),
+	options   = require('../lib/options'),
+	program   = require('commander');
+
+program.
+	option('-t, to [file]', 'save compiled files to [file] (default: "' + options.output + '")', options.output).
+	parse(process.argv);
+
+var files = program.args;
+
+if (!files.length) {
+	files = options.input;
+};
+
+var inputs = files,
+	output = program.to;
+
+cli.init('compile', inputs, output);

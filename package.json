@@ -6,6 +6,9 @@
     "name": "Vincent De Oliveira"
   },
   "main": "./lib/index",
+  "bin": {
+    "pleeease": "./bin/pleeease"
+  },
   "dependencies": {
     "postcss": "0.3.4",
     "csswring": "~0.1.0",
@@ -13,6 +16,10 @@
     "autoprefixer": "~1.1.20140410",
     "css-mqpacker": "~0.1.0",
     "pixrem": "https://github.com/iamvdo/node-pixrem/tarball/master",
-    "deep-extend": "~0.2.8"
+    "deep-extend": "~0.2.8",
+    "commander": "~2.2.0",
+    "multi-glob": "~0.4.0",
+    "mkdirp": "~0.4.0",
+    "chokidar": "~0.8.2"
   }
 }
