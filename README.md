@@ -11,7 +11,7 @@ Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 
 ##Example
 
-It takes this CSS:
+You write `foo.css`:
 
 ```css
 :root {
@@ -36,7 +36,7 @@ It takes this CSS:
 }
 ```
 
-And returns (with default options):
+You get `bar.css` (with all options set to `true`, except `minifier`)
 
 ```css
 :root {
@@ -149,8 +149,8 @@ These are the default options for now:
 * `minifier`: `true`
 * `mqpacker`: `true`
 * `polyfills`:
-	* `variables`: `true`
-	* `rem`: `false`
+	* `variables`: `false`
+	* `rem`: `true`
 
 All options can be disabled with `false` keyword or modified using each postprocessor options.
 
