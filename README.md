@@ -3,7 +3,7 @@ Pleeease
 
 Postprocess CSS with ease.
 
-Pleeease is the best toolchain for your CSS. Keep writing DRY, future-proof CSS.
+Pleeease is the best toolchain for your CSS. Just write DRY, future-proof CSS and Pleeease do the job for you.
 
 For now, it adds prefixes, variables and `rem` unit support, packs same media-query in one `@media` rule and minify it.
 
@@ -148,7 +148,7 @@ These are the default options for now:
 * `autoprefixer`: `true`
 * `minifier`: `true`
 * `mqpacker`: `true`
-* `polyfills`:
+* `fallbacks`:
 	* `variables`: `false`
 	* `rem`: `true`
 
@@ -182,18 +182,18 @@ Add support for [CSS Wring](https://github.com/hail2u/node-csswring), a CSS mini
 
 Add support for [MQ Packer](https://github.com/hail2u/node-css-mqpacker) that pack same CSS media query rules into one media query rule. There are no options.
 
-###polyfills.variables
+###fallbacks.variables
 
 Add support for a "not so bad" [CSS variables polyfill](https://github.com/iamvdo/postcss-vars). There are no options.
 
-###polyfills.rem
+###fallbacks.rem
 
 Add support for [pixrem](https://github.com/iamvdo/node-pixrem) that generates pixel fallbacks for rem units. Add options as an array:
 
 ```javascript
 // set options
 var options = {
-	polyfills: {
+	fallbacks: {
 		rem: ['16px', {replace: true}]
 	}
 }
@@ -202,7 +202,7 @@ var options = {
 ```javascript
 // .pleeeaserc file
 {
-	"polyfills": {
+	"fallbacks": {
 		"rem": ["16px", {"replace": true}]
 	}
 }
