@@ -1,6 +1,6 @@
 {
   "name": "pleeease",
-  "version": "0.1.4",
+  "version": "0.2.1",
   "description": "Postprocess CSS with ease",
   "author": {
     "name": "Vincent De Oliveira"
@@ -9,6 +9,12 @@
   "bin": {
     "pleeease": "./bin/pleeease"
   },
+  "keywords": [
+    "postprocessor",
+    "css",
+    "postcss",
+    "pleeease"
+  ],
   "dependencies": {
     "postcss": "0.3.4",
     "csswring": "~0.1.0",
