@@ -7,15 +7,7 @@
 var fs       = require('fs'),
     path     = require('path'),
     pleeease = require('../lib/'),
-    options  = {
-      autoprefixer: false,
-      minifier: false,
-      mqpacker: false,
-      polyfills: {
-        variables: false,
-        rem: false
-      }
-    };
+    options  = require('../lib/options');
 
 describe('pleeease', function () {
 
@@ -38,7 +30,7 @@ describe('pleeease', function () {
     var expected = ':root { --color-primary: red; } .elem { color: red; }';
     // options
     var opts = options;
-    opts.polyfills.variables = true;
+    opts.fallbacks.variables = true;
     // process
     var processed = pleeease.process(css, opts);
 
@@ -51,7 +43,7 @@ describe('pleeease', function () {
     var expected = ':root { --color-primary: red; --color-secondary: var(--color-primary); } .elem { color: red; }';
     // options
     var opts = options;
-    opts.polyfills.variables = true;
+    opts.fallbacks.variables = true;
     // process
     var processed = pleeease.process(css, opts);
 
