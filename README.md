@@ -149,7 +149,7 @@ These are the default options for now:
 * `minifier`: `true`
 * `mqpacker`: `true`
 * `fallbacks`:
-	* `variables`: `false`
+	* `variables`: `true`
 	* `rem`: `true`
 
 All options can be disabled with `false` keyword or modified using each postprocessor options.
