@@ -43,8 +43,9 @@ You write `foo.css`:
 You get `bar.css` (with all options set to `true`, except `minifier`)
 
 ```css
+/* pseudo-elements are converted */
 *,
-*:after, /* pseudo-elements are converted */
+*:after,
 *:before {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -226,7 +227,7 @@ For now, this uses a fork from [pixrem](https://github.com/robwierzbowski/node-p
 
 ###fallbacks.pseudoElements
 
-Convert pseudo-elements using CSS3 syntax (two-colons notation like `::after`, `::before`, `::first-line` and `::first-letter`) with the old one, using only one colon.
+Convert pseudo-elements using CSS3 syntax (two-colons notation like `::after`, `::before`, `::first-line` and `::first-letter`) with the old one, using only one colon (useful for IE8 support).
 
 ```css
 .element::after {
