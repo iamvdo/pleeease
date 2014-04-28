@@ -8,6 +8,7 @@ var fs       = require('fs'),
     path     = require('path'),
     pleeease = require('../lib/'),
     options  = require('../lib/options');
+    options.minifier = false;
 
 describe('pleeease', function () {
 
@@ -44,6 +45,32 @@ describe('pleeease', function () {
     // options
     var opts = options;
     opts.fallbacks.variables = true;
+    // process
+    var processed = pleeease.process(css, opts);
+
+    expect(processed).toBe(expected);
+  });
+
+  it('should replace pseudo-elements syntax', function () {
+    // css
+    var css = '.test::after, .test::before { content: \'\' }';
+    var expected = '.test:after, .test:before { content: \'\' }';
+    // options
+    var opts = options;
+    opts.fallbacks.pseudoElements = true;
+    // process
+    var processed = pleeease.process(css, opts);
+
+    expect(processed).toBe(expected);
+  });
+
+  it('should replace pseudo-elements syntax in media-queries', function () {
+    // css
+    var css = '@media screen { .test::after, .test::before { content: \'\' } }';
+    var expected = '@media screen { .test:after, .test:before { content: \'\' } }';
+    // options
+    var opts = options;
+    opts.fallbacks.pseudoElements = true;
     // process
     var processed = pleeease.process(css, opts);
 
