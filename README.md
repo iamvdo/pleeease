@@ -5,7 +5,7 @@ Postprocess CSS with ease.
 
 Pleeease is the best toolchain for your CSS. Just write DRY, future-proof CSS and Pleeease do the job for you.
 
-For now, it adds prefixes, variables and `rem` unit support, packs same media-query in one `@media` rule and minify it.
+For now, it adds prefixes, variables, pseudo-elements and `rem` unit support, packs same media-query in one `@media` rule and minify it.
 
 Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 
@@ -14,13 +14,17 @@ Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 You write `foo.css`:
 
 ```css
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
 :root {
 	--color-primary: red;
 	--color-secondary: blue;
 }
 .elem {
 	font-size: 2rem;
-	color: red;
 	background: var(--color-primary);
 	width: calc(100% - 50px);
 }
@@ -39,18 +43,25 @@ You write `foo.css`:
 You get `bar.css` (with all options set to `true`, except `minifier`)
 
 ```css
+*,
+*:after, /* pseudo-elements are converted */
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
 :root {
 	--color-primary: red;
 	--color-secondary: blue;
 }
 .elem {
-	font-size: 32px;
+	font-size: 32px; /* fallback for rem support */
 	font-size: 2rem;
-	color: red;
-	background: red;
-	width: -webkit-calc(100% - 50px);
+	background: red; /* resolve variables */
+	width: -webkit-calc(100% - 50px); /* add prefixes */
 	width: calc(100% - 50px);
 }
+/* pack same media-queries */
 @media screen and (min-width: 36em) {
 	.elem {
 		color: blue
@@ -151,6 +162,7 @@ These are the default options for now:
 * `fallbacks`:
 	* `variables`: `true`
 	* `rem`: `true`
+	* `pseudoElements`: `true`
 
 All options can be disabled with `false` keyword or modified using each postprocessor options.
 
@@ -211,6 +223,22 @@ var options = {
 See [available options for pixrem](https://github.com/iamvdo/node-pixrem#parameters).
 
 For now, this uses a fork from [pixrem](https://github.com/robwierzbowski/node-pixrem) until the [PR will be accepted or not](https://github.com/robwierzbowski/node-pixrem/pull/10).
+
+###fallbacks.pseudoElements
+
+Convert pseudo-elements using CSS3 syntax (two-colons notation like `::after`, `::before`, `::first-line` and `::first-letter`) with the old one, using only one colon.
+
+```css
+.element::after {
+	/* you write */
+}
+```
+
+```css
+.element:after {
+	/* you get */
+}
+```
 
 ##More
 
