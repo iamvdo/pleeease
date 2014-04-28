@@ -1,3 +1,8 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
 :root {
   --color-primary: blue;
   --color-secondary: black;

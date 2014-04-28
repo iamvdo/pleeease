@@ -1,0 +1,6 @@
+{
+	"minifier": false,
+	"fallbacks": {
+		"pseudoElements": true
+	}
+}
