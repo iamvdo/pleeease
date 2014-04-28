@@ -247,3 +247,5 @@ More postprocess tasks are coming, mainly polyfills (eg. CSS filters, pseudo-cla
 ##Licence
 
 MIT
+
+Vincent De Oliveira
