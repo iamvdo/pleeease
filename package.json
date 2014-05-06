@@ -28,10 +28,5 @@
     "mkdirp": "~0.4.0",
     "chokidar": "~0.8.2",
     "colors": "~0.6.2"
-  },
-  "devDependencies": {
-    "gulp-load-plugins": "~0.5.0",
-    "gulp": "~3.6.2",
-    "gulp-jshint": "~1.5.5"
   }
 }
