@@ -3,11 +3,13 @@ Pleeease
 
 Postprocess CSS with ease.
 
-Pleeease is the best toolchain for your CSS. Just write DRY, future-proof CSS and Pleeease do the job for you.
+Pleeease is the best toolchain for your CSS. Just write DRY, future-proof CSS and Pleeease does the job for you.
 
 For now, it adds prefixes, variables, pseudo-elements and `rem` unit support, packs same media-query in one `@media` rule and minify it.
 
 Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
+
+http://pleeease.io
 
 ##Example
 
