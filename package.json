@@ -1,13 +1,15 @@
 {
   "name": "pleeease",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Postprocess CSS with ease",
   "author": {
     "name": "Vincent De Oliveira"
   },
   "main": "./lib/index",
   "bin": {
-    "pleeease": "./bin/pleeease"
+    "pleeease": "./bin/pleeease",
+    "pleeease-compile": "./bin/pleeease-compile",
+    "pleeease-watch": "./bin/pleeease-watch"
   },
   "keywords": [
     "postprocessor",
