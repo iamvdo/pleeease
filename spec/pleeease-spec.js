@@ -10,7 +10,7 @@ var fs       = require('fs'),
     options  = require('../lib/options');
 
 beforeEach(function() {
-  options.minifier = false;
+  options.optimizers.minifier = false;
 });
 
 describe('pleeease', function () {
@@ -20,7 +20,7 @@ describe('pleeease', function () {
     var css = fs.readFileSync(path.join(__dirname, 'prefixes.css'));
     var expected = '.elem { width: -webkit-calc(100% - 50px); width: calc(100% - 50px); }';
     // options
-    options.autoprefixer = ['iOS 6'];
+    options.fallbacks.autoprefixer = ['iOS 6'];
     // process
     var processed = pleeease.process(css, options);
 
@@ -82,7 +82,7 @@ describe('pleeease', function () {
         '}';
     var expected = '.elem{color:#f39}';
     // options
-    options.minifier = true;
+    options.optimizers.minifier = true;
     // process
     var processed = pleeease.process(css, options);
 
@@ -95,12 +95,15 @@ describe('pleeease', function () {
       var CSS = inputs.map(function(input) {
         return fs.readFileSync(input).toString();
       });
+      // options
+      options.fallbacks.autoprefixer = true;
+      options.optimizers.import = false;
       // fixed CSS
       return pleeease.process(CSS.join('\n'), options);
     };
 
     // process
-    var processed = compile(['test/bar.css', 'test/foo.css'], options);
+    var processed = compile(['test/foo.css', 'test/bar.css'], options);
     var expected = fs.readFileSync('test/app.min.css').toString();
 
     expect(processed).toBe(expected);
