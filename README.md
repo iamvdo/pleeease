@@ -186,14 +186,18 @@ Add support for [Autoprefixer](https://github.com/ai/autoprefixer) that add vend
 ```javascript
 // set options
 var options = {
-	autoprefixer: ['last 4 versions', 'Android 2.3']
+	fallbacks: {
+		autoprefixer: ['last 4 versions', 'Android 2.3']
+	}
 }
 ```
 
 ```javascript
 // .pleeeaserc file
 {
-	"autoprefixer": ["last 4 versions", "Android 2.3"]
+	"fallbacks": {
+		"autoprefixer": ["last 4 versions", "Android 2.3"]
+	}
 }
 ```
 
