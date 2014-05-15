@@ -5,7 +5,7 @@ Postprocess CSS with ease.
 
 Pleeease is the best toolchain for your CSS. Just write DRY, future-proof CSS and Pleeease does the job for you.
 
-For now, it adds prefixes, variables, pseudo-elements and `rem` unit support, packs same media-query in one `@media` rule and minify it.
+For now, it adds **prefixes**, **variables**, **pseudo-elements** and **`rem`** unit support, **packs same media-query** in one `@media` rule, **inline `@import`** styles and **minify the result**.
 
 Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 
@@ -16,6 +16,7 @@ http://pleeease.io
 You write `foo.css`:
 
 ```css
+@import url("bar.css");
 *,
 *::after,
 *::before {
@@ -42,9 +43,12 @@ You write `foo.css`:
 }
 ```
 
-You get `bar.css` (with all options set to `true`, except `minifier`)
+You get `baz.css` (with all options set to `true`, except `minifier`)
 
 ```css
+.bar {
+	/* imported styles */
+}
 /* pseudo-elements are converted */
 *,
 *:after,
@@ -141,8 +145,12 @@ Pleeease options can be set in a `.pleeeaserc` file (JSON-like), for example:
 {
 	"input": ["foo.css"],
 	"output": "bar.css",
-	"autoprefixer": true,
-	"minifier": false
+	"fallbacks": {
+		"autoprefixer": true
+	},
+	"optimizers": {
+		"minifier": false
+	}
 }
 ```
 
@@ -159,17 +167,19 @@ If you're using [Brunch](http://brunch.io), see [pleeease-brunch](https://github
 
 These are the default options for now:
 
-* `autoprefixer`: `true`
-* `minifier`: `true`
-* `mqpacker`: `true`
 * `fallbacks`:
+	* `autoprefixer`: `true`
 	* `variables`: `true`
 	* `rem`: `true`
 	* `pseudoElements`: `true`
+* `optimizers`:
+	* `import`: `true`
+	* `minifier`: `true`
+	* `mqpacker`: `true`
 
 All options can be disabled with `false` keyword or modified using each postprocessor options.
 
-###autoprefixer
+###fallbacks.autoprefixer
 
 Add support for [Autoprefixer](https://github.com/ai/autoprefixer) that add vendor prefixes to CSS. Add options as an array:
 
@@ -188,14 +198,6 @@ var options = {
 ```
 
 See [available options for Autoprefixer](https://github.com/ai/autoprefixer#browsers).
-
-###minifier
-
-Add support for [CSS Wring](https://github.com/hail2u/node-csswring), a CSS minifier. There are no options.
-
-###mqpacker
-
-Add support for [MQ Packer](https://github.com/hail2u/node-css-mqpacker) that pack same CSS media query rules into one media query rule. There are no options.
 
 ###fallbacks.variables
 
@@ -243,9 +245,30 @@ Convert pseudo-elements using CSS3 syntax (two-colons notation like `::after`, `
 }
 ```
 
+###optimizers.import
+
+Inline `@import` styles with relative paths (absolute ones will be unaffected). `@import` including media-queries are not changed either.
+
+You can use the CSS syntax you want:
+
+```css
+@import "file.css";
+@import url(file.css);
+@import url("http://foo.com/bar.css"); /* not imported */
+@import url("file.css") screen and (max-width: 35em); /* not imported */
+```
+
+###optimizers.minifier
+
+Add support for [CSS Wring](https://github.com/hail2u/node-csswring), a CSS minifier. There are no options.
+
+###optimizers.mqpacker
+
+Add support for [MQ Packer](https://github.com/hail2u/node-css-mqpacker) that pack same CSS media query rules into one media query rule. There are no options.
+
 ##More
 
-More postprocess tasks are coming, mainly polyfills (eg. CSS filters, pseudo-classes/pseudo-elements, rgba/hsla functions, etc.).
+More postprocess tasks are coming, mainly fallbacks (eg. CSS filters, rgba/hsla functions, etc.). If you want more, open an issue!
 
 ##Licence
 
