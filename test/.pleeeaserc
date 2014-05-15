@@ -1,6 +1,7 @@
 {
-	"minifier": false,
-	"fallbacks": {
-		"pseudoElements": true
+	"input": ["foo.css", "bar.css"],
+	"optimizers": {
+		"import": false,
+		"minifier": false
 	}
 }

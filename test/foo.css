@@ -1,7 +1,22 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+:root {
+  --color-primary: blue;
+  --color-secondary: black;
+}
 .foo {
-	color: var(--color-primary);
-	display: block;
-	bottom: 0;
+  font-size: 2rem;
+  color: red;
+  background: var(--color-primary);
+  width: calc(100% - 50px);
+}
+@media screen and (min-width: 36em) {
+  .foo {
+    color: var(--color-secondary)
+  }
 }
 @media screen and (min-width: 36em) {
   .foo {

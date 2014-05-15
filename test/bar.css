@@ -1,22 +1,8 @@
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
-}
-:root {
-  --color-primary: blue;
-  --color-secondary: black;
-}
+@import url("import/imported.css");
 .bar {
-  font-size: 2rem;
-  color: red;
-  background: var(--color-primary);
-  width: calc(100% - 50px);
-}
-@media screen and (min-width: 36em) {
-  .bar {
-    color: var(--color-secondary)
-  }
+	color: var(--color-primary);
+	display: block;
+	bottom: 0;
 }
 @media screen and (min-width: 36em) {
   .bar {
