@@ -1,7 +1,7 @@
 {
 	"input": ["foo.css", "bar.css"],
 	"optimizers": {
-		"import": false,
+		"import": true,
 		"minifier": false
 	}
 }

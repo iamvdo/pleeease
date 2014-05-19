@@ -17,7 +17,9 @@
   width: -webkit-calc(100% - 50px);
   width: calc(100% - 50px);
 }
-@import url("import/imported.css");
+.imported {
+	/* imported style here */
+}
 .bar {
 	color: blue;
 	display: block;
