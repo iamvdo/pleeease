@@ -274,6 +274,13 @@ Add support for [MQ Packer](https://github.com/hail2u/node-css-mqpacker) that pa
 
 More postprocess tasks are coming, mainly fallbacks (eg. CSS filters, rgba/hsla functions, etc.). If you want more, open an issue!
 
+##Changelog
+
+###0.3.0 (2014-05-19)
+
+* Add `@import` processor
+* Refactor default options
+
 ##Licence
 
 MIT
