@@ -28,7 +28,7 @@
     "commander": "~2.2.0",
     "multi-glob": "~0.4.0",
     "mkdirp": "~0.4.0",
-    "chokidar": "~0.8.2",
+    "node-watch": "~0.3.4",
     "colors": "~0.6.2"
   }
 }
