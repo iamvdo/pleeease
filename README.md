@@ -3,7 +3,9 @@ Pleeease
 
 Postprocess CSS with ease.
 
-Pleeease is the best toolchain for your CSS. Just write DRY, future-proof CSS and Pleeease does the job for you.
+Pleeease is a CSS post-processor. The main goal of this tool is to **perform all treatments that a pre-processor shouldn't have to do!** (eg, dealing with prefixes, convert `rem` to `px`, support older browsers, etc.).
+
+***Pleeease* is also a great tool if you want to write DRY, future-proof CSS.**
 
 For now, it adds **prefixes**, **variables**, **pseudo-elements** and **`rem`** unit support, **packs same media-query** in one `@media` rule, **inline `@import`** styles and **minify the result**.
 
