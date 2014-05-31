@@ -18,7 +18,7 @@
     "pleeease"
   ],
   "dependencies": {
-    "postcss": "0.3.4",
+    "postcss": "0.3.5",
     "csswring": "~0.1.0",
     "postcss-vars": "~0.1.0",
     "autoprefixer": "~1.1.20140410",
