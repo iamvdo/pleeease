@@ -1,5 +1,9 @@
 {
 	"input": ["foo.css", "bar.css"],
+	"sourcemaps": false,
+	"fallbacks": {
+		"autoprefixer": ["last 20 versions"]
+	},
 	"optimizers": {
 		"import": true,
 		"minifier": false

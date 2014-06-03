@@ -17,7 +17,7 @@ describe('pleeease', function () {
 
   it('should generate -webkit- prefixes for calc() (support iOS6)', function () {
     // css
-    var css = fs.readFileSync(path.join(__dirname, 'prefixes.css'));
+    var css = '.elem { width: calc(100% - 50px); }';
     var expected = '.elem { width: -webkit-calc(100% - 50px); width: calc(100% - 50px); }';
     // options
     options.fallbacks.autoprefixer = ['iOS 6'];
@@ -97,14 +97,16 @@ describe('pleeease', function () {
       });
       // options
       options.fallbacks.autoprefixer = true;
-      options.optimizers.import = false;
+      options.optimizers.minifier = true;
       // fixed CSS
       return pleeease.process(CSS.join('\n'), options);
     };
 
+    options.input = ['spec/files/foo.css', 'spec/files/foobar.css'];
+
     // process
-    var processed = compile(['test/foo.css', 'test/bar.css'], options);
-    var expected = fs.readFileSync('test/app.min.css').toString();
+    var processed = compile(options.input, options);
+    var expected = fs.readFileSync('spec/files/app.min.css').toString();
 
     expect(processed).toBe(expected);
   });

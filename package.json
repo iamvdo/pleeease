@@ -17,6 +17,9 @@
     "postcss",
     "pleeease"
   ],
+  "scripts": {
+    "test": "jasmine-node spec"
+  },
   "dependencies": {
     "postcss": "0.3.5",
     "csswring": "~0.1.0",
@@ -30,5 +33,8 @@
     "mkdirp": "~0.4.0",
     "chokidar": "~0.8.2",
     "colors": "~0.6.2"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1.14.3"
   }
 }

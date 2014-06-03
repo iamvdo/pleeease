@@ -1,3 +1,15 @@
+/*from foo.css*/.inception {
+	color: red;
+}
+.foo {
+	height: 200px;
+}
+.imported {
+	/* imported style here */
+}
+.foo {
+	border: 5px solid red;
+}
 *,
 *:after,
 *:before {
@@ -6,37 +18,47 @@
   box-sizing: border-box;
 }
 :root {
-  --color-primary: blue;
-  --color-secondary: black;
+  --color-foo: blue;
+  --color-bar: black;
 }
 .foo {
   font-size: 32px;
   font-size: 2rem;
-  color: red;
   background: blue;
   width: -webkit-calc(100% - 50px);
+  width: -moz-calc(100% - 50px);
   width: calc(100% - 50px);
+}.inception {
+	color: red;
+}
+.foo {
+	height: 200px;
 }
 .imported {
 	/* imported style here */
 }
+.foo {
+	border: 5px solid red;
+}
 .bar {
-	color: blue;
-	display: block;
-	bottom: 0;
+	color: black;
 }
 @media screen and (min-width: 36em) {
   .foo {
-    color: black
+    color: blue;
   }
   .foo {
     background: -webkit-gradient(linear, left top, left bottom, from(green), to(blue));
     background: -webkit-linear-gradient(green, blue);
+    background: -moz-linear-gradient(green, blue);
+    background: -o-linear-gradient(green, blue);
     background: linear-gradient(green, blue);
   }
   .bar {
     background: -webkit-gradient(linear, left top, left bottom, from(green), to(blue));
     background: -webkit-linear-gradient(green, blue);
+    background: -moz-linear-gradient(green, blue);
+    background: -o-linear-gradient(green, blue);
     background: linear-gradient(green, blue);
   }
 }
