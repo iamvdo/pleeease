@@ -1,6 +1,6 @@
 {
 	"input": ["foo.css", "bar.css"],
-	"sourcemaps": false,
+	"sourcemaps": true,
 	"fallbacks": {
 		"autoprefixer": ["last 20 versions"]
 	},
