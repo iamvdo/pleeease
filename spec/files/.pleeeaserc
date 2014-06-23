@@ -1,0 +1,12 @@
+{
+	"in": ["foo.css"],
+	"out": "fixed.css",
+	"sourcemaps": true,
+	"fallbacks": {
+		"autoprefixer": ["last 20 versions"]
+	},
+	"optimizers": {
+		"import": true,
+		"minifier": false
+	}
+}
