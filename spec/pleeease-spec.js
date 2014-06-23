@@ -1,11 +1,9 @@
 // Jasmine unit tests
 // To run tests, run these commands from the project root:
-// 1. `npm install -g jasmine-node`
-// 2. `jasmine-node spec`
+// 1. `npm test`
 
 'use strict';
 var fs       = require('fs'),
-    path     = require('path'),
     pleeease = require('../lib/'),
     options  = require('../lib/options');
 
@@ -98,6 +96,7 @@ describe('pleeease', function () {
       // options
       options.fallbacks.autoprefixer = true;
       options.optimizers.minifier = true;
+      options.optimizers.import = 'spec/files';
       // fixed CSS
       return pleeease.process(CSS.join('\n'), options);
     };
