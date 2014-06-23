@@ -1,11 +1,11 @@
 {
-	"input": ["foo.css", "bar.css"],
+	"input": ["import/imported.css"],
 	"sourcemaps": true,
 	"fallbacks": {
 		"autoprefixer": ["last 20 versions"]
 	},
 	"optimizers": {
-		"import": true,
+		"import": "import",
 		"minifier": false
 	}
 }
