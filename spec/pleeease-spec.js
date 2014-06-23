@@ -87,7 +87,7 @@ describe('pleeease', function () {
     expect(processed).toBe(expected);
   });
 
-  it('should combine files', function() {
+  it('should combine files with imports', function() {
     var compile = function (inputs, options) {
       // get inputs files
       var CSS = inputs.map(function(input) {
