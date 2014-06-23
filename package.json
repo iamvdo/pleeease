@@ -21,7 +21,7 @@
     "test": "jasmine-node spec"
   },
   "dependencies": {
-    "postcss": "0.3.5",
+    "postcss": "1.0.0",
     "csswring": "~0.1.0",
     "postcss-vars": "~0.1.0",
     "autoprefixer": "~1.1.20140410",
