@@ -145,8 +145,8 @@ Pleeease options can be set in a `.pleeeaserc` file (JSON-like), for example:
 
 ```javascript
 {
-	"input": ["foo.css"],
-	"output": "bar.css",
+	"in": ["foo.css"],
+	"out": "bar.css",
 	"fallbacks": {
 		"autoprefixer": true
 	},
@@ -156,8 +156,8 @@ Pleeease options can be set in a `.pleeeaserc` file (JSON-like), for example:
 }
 ```
 
-* `input` is an array of files (default `[*.css]`)
-* `output` is the path to the compiled file (default `app.min.css`)
+* `in` is an array of files (default `[*.css]`)
+* `out` is the path to the compiled file (default `app.min.css`)
 
 For other options, see below.
 
@@ -262,6 +262,17 @@ You can use the CSS syntax you want:
 @import url(file.css);
 @import url("http://foo.com/bar.css"); /* not imported */
 @import url("file.css") screen and (max-width: 35em); /* not imported */
+```
+
+Note that you can set the "root" folder for imported files, even if this is not the root of your project (default is `process.cwd()`). For example, if you compile `css/foo.css` containing an `@import` to `import.css` (so, in the same folder `css`), set options like this:
+
+```javascript
+// .pleeeaserc file
+{
+	"optimizers": {
+		"import": "css"
+	}
+}
 ```
 
 ###optimizers.minifier
