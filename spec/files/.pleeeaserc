@@ -1,12 +1,12 @@
 {
-	"in": ["foo.css"],
-	"out": "fixed.css",
-	"sourcemaps": true,
+	"in": ["foo.css", "foobar.css"],
+	"out": "app.min.css",
+	"sourcemaps": false,
 	"fallbacks": {
-		"autoprefixer": ["last 20 versions"]
+		"autoprefixer": true
 	},
 	"optimizers": {
 		"import": true,
-		"minifier": false
+		"minifier": true
 	}
 }
