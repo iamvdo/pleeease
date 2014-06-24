@@ -73,6 +73,18 @@ describe('pleeease', function () {
     expect(processed).toBe(expected);
   });
 
+  it('should combine media-queries', function () {
+    // css
+    var css = '@media (max-width: 360px) { .test { color: red } }@media (max-width: 360px) { .test { color: blue } }';
+    var expected = '@media (max-width: 360px){.test{color:red}.test{color:blue}}';
+    // options
+    options.optimizers.minifier = true;
+    // process
+    var processed = pleeease.process(css, options);
+
+    expect(processed).toBe(expected);
+  });
+
   it('should minify when asked', function() {
     //css
     var css = '.elem {\n' +
@@ -101,10 +113,10 @@ describe('pleeease', function () {
       return pleeease.process(CSS.join('\n'), options);
     };
 
-    options.input = ['spec/files/foo.css', 'spec/files/foobar.css'];
+    options.in = ['spec/files/foo.css', 'spec/files/foobar.css'];
 
     // process
-    var processed = compile(options.input, options);
+    var processed = compile(options.in, options);
     var expected = fs.readFileSync('spec/files/app.min.css').toString();
 
     expect(processed).toBe(expected);
