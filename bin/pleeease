@@ -4,8 +4,8 @@ var program = require('commander'),
 	options = require('../lib/options');
 
 program.
-	command('compile [file...]', 'compile one more files (default: "' + options.input + '")').
-	command('watch [file...]', 'watch for changes and compile (default: "' + options.input + '")').
+	command('compile [file...]', 'compile one more files (default: "' + options.in + '")').
+	command('watch [file...]', 'watch for changes and compile (default: "' + options.in + '")').
 	parse(process.argv);
 
 if (process.argv.length === 2) {
