@@ -1,0 +1,8 @@
+.e:after {
+	content: 'foo';
+}
+@media screen {
+	.e:after {
+		content: 'bar';
+	}
+}

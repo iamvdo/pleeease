@@ -1,0 +1,8 @@
+{
+	"fallbacks": {
+		"autoprefixer": false
+	},
+	"optimizers": {
+		"minifier": true
+	}
+}

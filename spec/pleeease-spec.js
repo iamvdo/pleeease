@@ -7,83 +7,27 @@ var fs       = require('fs'),
     pleeease = require('../lib/'),
     options  = require('../lib/options');
 
+var __dir    = 'spec/files/cases/';
+
+var test     = function (name, opts) {
+  if (typeof opts === undefined) {
+    opts = options;
+  }
+  // css
+  var css = fs.readFileSync(__dir + name + '.css', 'utf-8');
+  var expected = fs.readFileSync(__dir + name + '.out.css', 'utf-8');
+
+  // process
+  var processed = pleeease.process(css, opts);
+
+  expect(processed).toBe(expected);
+}
+
 beforeEach(function() {
   options.optimizers.minifier = false;
 });
 
 describe('pleeease', function () {
-
-  it('should generate -webkit- prefixes for calc() (support iOS6)', function () {
-    // css
-    var css = '.elem { width: calc(100% - 50px); }';
-    var expected = '.elem { width: -webkit-calc(100% - 50px); width: calc(100% - 50px); }';
-    // options
-    options.fallbacks.autoprefixer = ['iOS 6'];
-    // process
-    var processed = pleeease.process(css, options);
-
-    expect(processed).toBe(expected);
-  });
-
-  it('should evaluate variables', function () {
-    // css
-    var css = ':root { --color-primary: red; } .elem { color: var(--color-primary); }';
-    var expected = ':root { --color-primary: red; } .elem { color: red; }';
-    // options
-    options.fallbacks.variables = true;
-    // process
-    var processed = pleeease.process(css, options);
-
-    expect(processed).toBe(expected);
-  });
-
-  it('should evaluate variables in variables', function () {
-    // css
-    var css = ':root { --color-primary: red; --color-secondary: var(--color-primary); } .elem { color: var(--color-secondary); }';
-    var expected = ':root { --color-primary: red; --color-secondary: var(--color-primary); } .elem { color: red; }';
-    // options
-    options.fallbacks.variables = true;
-    // process
-    var processed = pleeease.process(css, options);
-
-    expect(processed).toBe(expected);
-  });
-
-  it('should replace pseudo-elements syntax', function () {
-    // css
-    var css = '.test::after, .test::before { content: \'\' }';
-    var expected = '.test:after, .test:before { content: \'\' }';
-    // options
-    options.fallbacks.pseudoElements = true;
-    // process
-    var processed = pleeease.process(css, options);
-
-    expect(processed).toBe(expected);
-  });
-
-  it('should replace pseudo-elements syntax in media-queries', function () {
-    // css
-    var css = '@media screen { .test::after, .test::before { content: \'\' } }';
-    var expected = '@media screen { .test:after, .test:before { content: \'\' } }';
-    // options
-    options.fallbacks.pseudoElements = true;
-    // process
-    var processed = pleeease.process(css, options);
-
-    expect(processed).toBe(expected);
-  });
-
-  it('should combine media-queries', function () {
-    // css
-    var css = '@media (max-width: 360px) { .test { color: red } }@media (max-width: 360px) { .test { color: blue } }';
-    var expected = '@media (max-width: 360px){.test{color:red}.test{color:blue}}';
-    // options
-    options.optimizers.minifier = true;
-    // process
-    var processed = pleeease.process(css, options);
-
-    expect(processed).toBe(expected);
-  });
 
   it('should minify when asked', function() {
     //css
@@ -99,6 +43,36 @@ describe('pleeease', function () {
     expect(processed).toBe(expected);
   });
 
+  it('should generate -webkit- prefixes for calc() (support iOS6)', function () {
+
+    // options
+    options.fallbacks.autoprefixer = ['iOS 6'];
+    test('prefixes', options);
+
+  });
+
+  it('should evaluate variables', function () {
+
+    // options
+    options.fallbacks.autoprefixer = false;
+    test('variables', options);
+
+  });
+
+  it('should replace pseudo-elements syntax', function () {
+
+    test('pseudoElements');
+
+  });
+
+  it('should combine media-queries', function () {
+
+    // options
+    options.optimizers.minifier = true;
+    test('mq', options);
+
+  });
+
   it('should combine files with imports', function() {
     var compile = function (inputs, options) {
       // get inputs files
@@ -108,16 +82,16 @@ describe('pleeease', function () {
       // options
       options.fallbacks.autoprefixer = true;
       options.optimizers.minifier = true;
-      options.optimizers.import = 'spec/files';
+      options.optimizers.import = __dir;
       // fixed CSS
       return pleeease.process(CSS.join('\n'), options);
     };
 
-    options.in = ['spec/files/foo.css', 'spec/files/foobar.css'];
+    options.in = [__dir + 'import.css', __dir + 'mq.css'];
 
     // process
     var processed = compile(options.in, options);
-    var expected = fs.readFileSync('spec/files/app.min.css').toString();
+    var expected = fs.readFileSync(__dir + 'import.out.css').toString();
 
     expect(processed).toBe(expected);
   });

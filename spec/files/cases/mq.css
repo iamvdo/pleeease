@@ -1,0 +1,13 @@
+@media (max-width: 30em) {
+	.foo {
+		color: #000;
+	}
+}
+.e {
+	color: #000;
+}
+@media (max-width: 30em) {
+	.bar {
+		color: #000;
+	}
+}

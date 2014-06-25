@@ -1,6 +1,6 @@
 {
 	"in": ["foo.css", "foobar.css"],
-	"out": "app.min.css",
+	"out": "fixed.css",
 	"sourcemaps": false,
 	"fallbacks": {
 		"autoprefixer": true

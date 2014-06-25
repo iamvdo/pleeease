@@ -1,11 +1,9 @@
+@import "inception.css";
 .imported {
-	color: red;
+	color: #000;
 }
-.foo {
-	border: 5px solid red;
-}
-@media screen and (min-width: 36em) {
+@media screen {
   .imported {
-    color: blue;
+    color: #FFF;
   }
 }
