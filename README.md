@@ -283,6 +283,17 @@ Add support for [CSS Wring](https://github.com/hail2u/node-csswring), a CSS mini
 
 Add support for [MQ Packer](https://github.com/hail2u/node-css-mqpacker) that pack same CSS media query rules into one media query rule. There are no options.
 
+##Sourcemaps
+
+Pleeease supports sourcemaps from CSS (disabled by default). Enabled them in `.pleeeaserc` file:
+
+```javascript
+// .pleeeaserc file
+{
+	"sourcemaps": true
+}
+```
+
 ##More
 
 More postprocess tasks are coming, mainly fallbacks (eg. CSS filters, rgba/hsla functions, etc.). If you want more, open an issue!
