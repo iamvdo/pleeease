@@ -21,10 +21,10 @@
     "test": "jasmine-node spec"
   },
   "dependencies": {
-    "postcss": "~1.0.0",
+    "postcss": "^1.0.0",
     "csswring": "~0.1.0",
     "postcss-vars": "~0.1.0",
-    "autoprefixer": "~2.0.0",
+    "autoprefixer": "^2.0.0",
     "css-mqpacker": "~0.1.0",
     "pixrem": "https://github.com/iamvdo/node-pixrem/tarball/master",
     "deep-extend": "~0.2.8",
