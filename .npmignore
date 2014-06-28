@@ -1,0 +1,7 @@
+node_modules
+spec
+
+.gitignore
+.jshintignore
+.jshintrc
+jshint.sh
