@@ -7,7 +7,7 @@ Pleeease is a CSS post-processor. The main goal of this tool is to **perform all
 
 ***Pleeease* is also a great tool if you want to write DRY, future-proof CSS.**
 
-For now, it adds **prefixes**, **variables**, **pseudo-elements** and **`rem`** unit support, **packs same media-query** in one `@media` rule, **inline `@import`** styles and **minify the result**.
+For now, it adds **prefixes**, **variables**, **pseudo-elements** and **`rem`** unit support, **converts CSS shorthand filters to SVG ones**, **packs same media-query** in one `@media` rule, **inlines `@import`** styles and **minifies the result**.
 
 Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 
@@ -32,6 +32,7 @@ You write `foo.css`:
 	font-size: 2rem;
 	background: var(--color-primary);
 	width: calc(100% - 50px);
+	filter: blur(4px);
 }
 @media screen and (min-width: 36em) {
 	.elem {
@@ -69,6 +70,8 @@ You get `baz.css` (with all options set to `true`, except `minifier`)
 	background: red; /* resolve variables */
 	width: -webkit-calc(100% - 50px); /* add prefixes */
 	width: calc(100% - 50px);
+	filter: url('data:image/svg+xml;utf8,&lt;svg xmlns="http://www.w3.org/2000/svg">&lt;filter id="filter">&lt;feGaussianBlur stdDeviation="4" />&lt;/filter>&lt;/svg>#filter');
+	filter: blur(4px);
 }
 /* pack same media-queries */
 @media screen and (min-width: 36em) {
@@ -172,6 +175,7 @@ These are the default options for now:
 * `fallbacks`:
 	* `autoprefixer`: `true`
 	* `variables`: `true`
+	* `filters`: true
 	* `rem`: `true`
 	* `pseudoElements`: `true`
 * `optimizers`:
@@ -207,7 +211,31 @@ See [available options for Autoprefixer](https://github.com/ai/autoprefixer#brow
 
 ###fallbacks.variables
 
-Add support for a "not so bad" [CSS variables polyfill](https://github.com/iamvdo/postcss-vars). There are no options.
+Adds support for a "not so bad" [CSS variables polyfill](https://github.com/iamvdo/postcss-vars). There are no options.
+
+###fallbacks.filters
+
+Converts CSS shorthand filters to SVG ones. Uses [pleeease-filters](https://github.com/iamvdo/pleeease-filters). You can also force IE filters with an option:
+
+```javascript
+// set options
+var options = {
+	fallbacks: {
+		filters: {oldIE: true}
+	}
+}
+```
+
+```javascript
+// .pleeeaserc file
+{
+	"fallbacks": {
+		"filters": {"oldIE": true}
+	}
+}
+```
+
+**Be careful**, not all browsers support CSS or SVG filters. For your information, latest WebKit browsers support CSS shorthand, Firefox support SVG filters and IE9- support IE filters (limited and slightly degraded). **It means that IE10+, Opera Mini and Android browsers have no support at all.**
 
 ###fallbacks.rem
 
