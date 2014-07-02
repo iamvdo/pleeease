@@ -10,12 +10,16 @@ var fs       = require('fs'),
 var __dir    = 'spec/files/cases/';
 
 var test     = function (name, opts) {
-  if (typeof opts === undefined) {
-    opts = options;
-  }
+
   // css
   var css = fs.readFileSync(__dir + name + '.css', 'utf-8');
   var expected = fs.readFileSync(__dir + name + '.out.css', 'utf-8');
+
+  if (typeof opts === 'undefined') {
+    opts = options;
+  } else if (opts.same) {
+    expected = css;
+  }
 
   // process
   var processed = pleeease.process(css, opts);
@@ -94,6 +98,36 @@ describe('pleeease', function () {
     var expected = fs.readFileSync(__dir + 'import.out.css').toString();
 
     expect(processed).toBe(expected);
+  });
+
+  it('should convert CSS filters to SVG', function () {
+
+    // options
+    options.fallbacks.autoprefixer = false;
+    test('filters', options);
+
+  });
+
+  it('should not convert CSS filters to SVG', function () {
+
+    // options
+    var opts = options;
+    opts.fallbacks.autoprefixer = false;
+    opts.fallbacks.filters = false;
+    opts.same = true;
+    test('filters', opts);
+
+  });
+
+  it('should add IE filters when asking', function () {
+
+    // options
+    var opts = options;
+    opts.fallbacks.autoprefixer = false;
+    opts.fallbacks.filters = { oldIE: true };
+    opts.same = false;
+    test('filters-ie', opts);
+
   });
 
 });

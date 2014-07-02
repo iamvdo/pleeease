@@ -1,0 +1,6 @@
+.blur {
+	filter: blur(4px);
+}
+.case {
+	filter: alpha(opacity=100);
+}
