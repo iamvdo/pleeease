@@ -70,7 +70,7 @@ You get `baz.css` (with all options set to `true`, except `minifier`)
 	background: red; /* resolve variables */
 	width: -webkit-calc(100% - 50px); /* add prefixes */
 	width: calc(100% - 50px);
-	filter: url('data:image/svg+xml;utf8,&lt;svg xmlns="http://www.w3.org/2000/svg">&lt;filter id="filter">&lt;feGaussianBlur stdDeviation="4" />&lt;/filter>&lt;/svg>#filter');
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="4" /></filter></svg>#filter');
 	filter: blur(4px);
 }
 /* pack same media-queries */
@@ -215,7 +215,7 @@ Adds support for a "not so bad" [CSS variables polyfill](https://github.com/iamv
 
 ###fallbacks.filters
 
-Converts CSS shorthand filters to SVG ones. Uses [pleeease-filters](https://github.com/iamvdo/pleeease-filters). You can also force IE filters with an option:
+Converts CSS shorthand filters to SVG equivalents. Uses [pleeease-filters](https://github.com/iamvdo/pleeease-filters). You can also force IE filters with an option:
 
 ```javascript
 // set options
@@ -324,10 +324,8 @@ Pleeease supports sourcemaps from CSS (disabled by default). Enabled them in `.p
 
 ##More
 
-More postprocess tasks are coming, mainly fallbacks (eg. CSS filters, rgba/hsla functions, etc.). If you want more, open an issue!
+More postprocess tasks are coming, mainly fallbacks. If you need absolutely one, open an issue, or contribute!
 
 ##Licence
 
-MIT
-
-Vincent De Oliveira
+MIT © 2014 [Vincent De Oliveira &middot; iamvdo](https://github.com/iamvdo)
