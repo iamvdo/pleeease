@@ -7,7 +7,7 @@ Pleeease is a CSS post-processor. The main goal of this tool is to **perform all
 
 ***Pleeease* is also a great tool if you want to write DRY, future-proof CSS.**
 
-For now, it adds **prefixes**, **variables**, **pseudo-elements** and **`rem`** unit support, **converts CSS shorthand filters to SVG ones**, **packs same media-query** in one `@media` rule, **inlines `@import`** styles and **minifies the result**.
+For now, it adds **prefixes**, **variables**, **pseudo-elements** and **`rem`** unit support, **converts CSS shorthand filters to SVG equivalents**, **packs same media-query** in one `@media` rule, **inlines `@import`** styles and **minifies the result**.
 
 Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 
@@ -175,7 +175,7 @@ These are the default options for now:
 * `fallbacks`:
 	* `autoprefixer`: `true`
 	* `variables`: `true`
-	* `filters`: true
+	* `filters`: `true`
 	* `rem`: `true`
 	* `pseudoElements`: `true`
 * `optimizers`:
@@ -187,7 +187,7 @@ All options can be disabled with `false` keyword or modified using each postproc
 
 ###fallbacks.autoprefixer
 
-Add support for [Autoprefixer](https://github.com/ai/autoprefixer) that add vendor prefixes to CSS. Add options as an array:
+Adds support for [Autoprefixer](https://github.com/ai/autoprefixer) that add vendor prefixes to CSS. Add options as an array:
 
 ```javascript
 // set options
@@ -239,7 +239,7 @@ var options = {
 
 ###fallbacks.rem
 
-Add support for [pixrem](https://github.com/iamvdo/node-pixrem) that generates pixel fallbacks for rem units. Add options as an array:
+Adds support for [pixrem](https://github.com/iamvdo/node-pixrem) that generates pixel fallbacks for rem units. Add options as an array:
 
 ```javascript
 // set options
@@ -265,7 +265,7 @@ For now, this uses a fork from [pixrem](https://github.com/robwierzbowski/node-p
 
 ###fallbacks.pseudoElements
 
-Convert pseudo-elements using CSS3 syntax (two-colons notation like `::after`, `::before`, `::first-line` and `::first-letter`) with the old one, using only one colon (useful for IE8 support).
+Converts pseudo-elements using CSS3 syntax (two-colons notation like `::after`, `::before`, `::first-line` and `::first-letter`) with the old one, using only one colon (useful for IE8 support).
 
 ```css
 .element::after {
@@ -281,7 +281,7 @@ Convert pseudo-elements using CSS3 syntax (two-colons notation like `::after`, `
 
 ###optimizers.import
 
-Inline `@import` styles with relative paths (absolute ones will be unaffected). `@import` including media-queries are not changed either.
+Inlines `@import` styles with relative paths (absolute ones will be unaffected). `@import` including media-queries are not changed either.
 
 You can use the CSS syntax you want:
 
@@ -305,11 +305,11 @@ Note that you can set the "root" folder for imported files, even if this is not 
 
 ###optimizers.minifier
 
-Add support for [CSS Wring](https://github.com/hail2u/node-csswring), a CSS minifier. There are no options.
+Adds support for [CSS Wring](https://github.com/hail2u/node-csswring), a CSS minifier. There are no options.
 
 ###optimizers.mqpacker
 
-Add support for [MQ Packer](https://github.com/hail2u/node-css-mqpacker) that pack same CSS media query rules into one media query rule. There are no options.
+Adds support for [MQ Packer](https://github.com/hail2u/node-css-mqpacker) that pack same CSS media query rules into one media query rule. There are no options.
 
 ##Sourcemaps
 
