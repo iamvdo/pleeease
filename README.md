@@ -7,7 +7,7 @@ Pleeease is a CSS post-processor. The main goal of this tool is to **perform all
 
 ***Pleeease* is also a great tool if you want to write DRY, future-proof CSS.**
 
-For now, it adds **prefixes**, **variables**, **pseudo-elements** and **`rem`** unit support, **converts CSS shorthand filters to SVG equivalents**, **packs same media-query** in one `@media` rule, **inlines `@import`** styles and **minifies the result**.
+For now, it adds **prefixes**, **variables**, **pseudo-elements** and **`rem`** unit support, **converts CSS shorthand filters to SVG equivalent**, **packs same media-query** in one `@media` rule, **inlines `@import`** styles and **minifies the result**.
 
 Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 
@@ -215,7 +215,7 @@ Adds support for a "not so bad" [CSS variables polyfill](https://github.com/iamv
 
 ###fallbacks.filters
 
-Converts CSS shorthand filters to SVG equivalents. Uses [pleeease-filters](https://github.com/iamvdo/pleeease-filters). You can also force IE filters with an option:
+Converts CSS shorthand filters to SVG equivalent. Uses [pleeease-filters](https://github.com/iamvdo/pleeease-filters). You can also force IE filters with an option:
 
 ```javascript
 // set options
