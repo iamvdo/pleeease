@@ -1,3 +1,7 @@
+##0.4.1
+
+* Add pleeease-filters postprocessor: converts CSS shorthand filters to SVG equivalents
+
 ##0.4.0
 
 * PostCSS 1.0 and Autoprefixer 2.0
