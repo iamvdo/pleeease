@@ -4,7 +4,7 @@ var program = require('commander'),
 	options = require('../lib/options');
 
 program.
-	version('0.4.0').
+	version('0.4.1').
 	command('compile [file...]', 'compile one more files (default: "' + options.in + '")').
 	command('watch [file...]', 'watch for changes and compile (default: "' + options.in + '")').
 	parse(process.argv);
