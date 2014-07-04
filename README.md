@@ -71,7 +71,8 @@ You get `baz.css` (with all options set to `true`, except `minifier`)
 	width: -webkit-calc(100% - 50px); /* add prefixes */
 	width: calc(100% - 50px);
 	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="4" /></filter></svg>#filter');
-	filter: blur(4px);
+	-webkit-filter: blur(4px);
+	        filter: blur(4px);
 }
 /* pack same media-queries */
 @media screen and (min-width: 36em) {
