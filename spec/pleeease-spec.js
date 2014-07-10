@@ -27,11 +27,11 @@ var test     = function (name, opts) {
   expect(processed).toBe(expected);
 }
 
-beforeEach(function() {
-  options.optimizers.minifier = false;
-});
-
 describe('pleeease', function () {
+
+  beforeEach(function() {
+    options.optimizers.minifier = false;
+  });
 
   it('should minify when asked', function() {
     //css
@@ -127,6 +127,27 @@ describe('pleeease', function () {
     opts.fallbacks.filters = { oldIE: true };
     opts.same = false;
     test('filters-ie', opts);
+
+  });
+
+  it('should create default inline sourcemaps', function () {
+
+    options.sourcemaps = true;
+    test('sourcemaps');
+
+  });
+
+  it('should return result.map and/or result.css when asked', function () {
+
+    options.sourcemaps = false;
+    var processed = pleeease.process('div { color: white }', options);
+    expect(processed.map).toBeUndefined();
+    expect(processed.css).toBeUndefined();
+
+    options.sourcemaps = { map: true };
+    var processed = pleeease.process('div { color: white }', options);
+    expect(processed.map).toBeDefined();
+    expect(processed.css).toBeDefined();
 
   });
 
