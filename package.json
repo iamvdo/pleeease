@@ -36,13 +36,14 @@
     "colors": "~0.6.2"
   },
   "devDependencies": {
-    "gulp":                "3.8.6",
-    "browserify":          "~4.2.1",
-    "gulp-jshint":         "~1.7.1",
-    "gulp-uglify":         "~0.3.1",
-    "jasmine-node":        "~1.14.3",
-    "jshint-stylish":      "~0.4.0",
-    "gulp-streamify":      "~0.0.4",
+    "gulp": "3.8.6",
+    "browserify": "~4.2.1",
+    "gulp-jshint": "~1.7.1",
+    "gulp-uglify": "~0.3.1",
+    "gulp-jasmine": "~0.2.0",
+    "jasmine-node": "1.14.2",
+    "jshint-stylish": "~0.4.0",
+    "gulp-streamify": "~0.0.4",
     "vinyl-source-stream": "~0.1.1"
   }
 }

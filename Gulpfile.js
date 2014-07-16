@@ -43,3 +43,16 @@ gulp.task('lint:tests', function() {
         .pipe(jshint.reporter('jshint-stylish'));
 });
 gulp.task('lint', ['lint:lib', 'lint:tests']);
+
+
+/**
+ *
+ * Test spec
+ *
+ */
+gulp.task('test', function () {
+    var jasmine = require('gulp-jasmine');
+
+    return gulp.src('spec/*.js')
+          .pipe(jasmine());
+});
