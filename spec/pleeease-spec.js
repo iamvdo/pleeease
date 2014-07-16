@@ -24,6 +24,10 @@ var test     = function (name, opts) {
   // process
   var processed = pleeease.process(css, opts);
 
+  if (typeof processed === 'object') {
+    processed = processed.css;
+  }
+
   expect(processed).toBe(expected);
 };
 
@@ -132,7 +136,11 @@ describe('pleeease', function () {
 
   it('should create default inline sourcemaps', function () {
 
-    options.sourcemaps = true;
+    options.sourcemaps = {
+                map:  'inline',
+                from: 'from.css',
+                to:   'to.css'
+            };
     test('sourcemaps');
 
   });
