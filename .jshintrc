@@ -23,6 +23,7 @@
         "describe",
         "expect",
         "it",
-        "require"
+        "require",
+        "beforeEach"
     ]
 }

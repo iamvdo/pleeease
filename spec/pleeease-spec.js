@@ -25,7 +25,7 @@ var test     = function (name, opts) {
   var processed = pleeease.process(css, opts);
 
   expect(processed).toBe(expected);
-}
+};
 
 describe('pleeease', function () {
 
@@ -145,7 +145,7 @@ describe('pleeease', function () {
     expect(processed.css).toBeUndefined();
 
     options.sourcemaps = { map: true };
-    var processed = pleeease.process('div { color: white }', options);
+        processed = pleeease.process('div { color: white }', options);
     expect(processed.map).toBeDefined();
     expect(processed.css).toBeDefined();
 
