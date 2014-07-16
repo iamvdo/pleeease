@@ -5,11 +5,11 @@ var options = require('../lib/options');
 var version = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))['version'];
 
 program.
-	version(version).
-	command('compile [file...]', 'compile one more files (default: "' + options.in + '")').
-	command('watch [file...]', 'watch for changes and compile (default: "' + options.in + '")').
-	parse(process.argv);
+    version(version).
+    command('compile [file...]', 'compile one more files (default: "' + options.in + '")').
+    command('watch [file...]', 'watch for changes and compile (default: "' + options.in + '")').
+    parse(process.argv);
 
 if (process.argv.length === 2) {
-	return program.help();
+    return program.help();
 };
