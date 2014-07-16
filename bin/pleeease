@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-
-var program = require('commander'),
-	options = require('../lib/options');
+var fs      = require('fs');
+var program = require('commander');
+var options = require('../lib/options');
+var version = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))['version'];
 
 program.
-	version('0.4.1').
+	version(version).
 	command('compile [file...]', 'compile one more files (default: "' + options.in + '")').
 	command('watch [file...]', 'watch for changes and compile (default: "' + options.in + '")').
 	parse(process.argv);
