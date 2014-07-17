@@ -1,4 +1,15 @@
-var gulp = require('gulp');
+var fs          = require('fs-extra');
+var gulp        = require('gulp');
+var runSequence = require('run-sequence');
+
+/**
+ *
+ * Clean standalone
+ *
+ */
+gulp.task('clean', function (done) {
+    fs.remove('./standalone', done);
+});
 
 /**
  *
@@ -6,7 +17,7 @@ var gulp = require('gulp');
  * ./standalone/pleeease-<version>.min.js
  *
  */
-gulp.task('standalone', function() {
+gulp.task('standalone', ['clean'], function() {
     var fs         = require('fs');
     var source     = require('vinyl-source-stream');
     var uglify     = require('gulp-uglify');
@@ -44,7 +55,6 @@ gulp.task('lint:tests', function() {
 });
 gulp.task('lint', ['lint:lib', 'lint:tests']);
 
-
 /**
  *
  * Test spec
@@ -55,4 +65,25 @@ gulp.task('test', function () {
 
     return gulp.src('spec/*.js')
           .pipe(jasmine());
+});
+
+/**
+ *
+ * Bump version
+ * gulp bump --type <patch, minor, major>
+ *
+ */
+gulp.task('_bump', function () {
+    var bump = require('gulp-bump');
+    var args = require('yargs');
+
+    return gulp.src('package.json')
+            .pipe(bump({ type: args.type }))
+            .pipe(gulp.dest('./'));
+
+});
+gulp.task('bump', function (cb) {
+
+    runSequence('_bump', 'standalone', cb);
+
 });
