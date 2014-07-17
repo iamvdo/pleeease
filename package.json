@@ -1,6 +1,6 @@
 {
   "name": "pleeease",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Postprocess CSS with ease",
   "author": {
     "name": "Vincent De Oliveira"
@@ -44,6 +44,10 @@
     "jasmine-node": "1.14.2",
     "jshint-stylish": "~0.4.0",
     "gulp-streamify": "~0.0.4",
-    "vinyl-source-stream": "~0.1.1"
+    "vinyl-source-stream": "~0.1.1",
+    "gulp-bump": "~0.1.10",
+    "run-sequence": "~0.3.6",
+    "fs-extra": "~0.10.0",
+    "yargs": "~1.2.6"
   }
 }

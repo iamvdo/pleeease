@@ -1,3 +1,8 @@
+##0.4.2 (2014-07-17)
+
+* Better sourcemaps integration. Now read prev sourcemaps (from Sass for example)
+* Standalone version available now for each version
+
 ##0.4.1 (2014-07-02)
 
 * Add pleeease-filters postprocessor: converts CSS shorthand filters to SVG equivalents
