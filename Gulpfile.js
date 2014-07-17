@@ -31,14 +31,14 @@ gulp.task('standalone', function() {
 gulp.task('lint:lib', function() {
     var jshint = require('gulp-jshint');
 
-    gulp.src(['bin/*.js', 'lib/*.js'])
+    gulp.src(['bin/**/*.js', 'lib/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
 gulp.task('lint:tests', function() {
     var jshint = require('gulp-jshint');
 
-    gulp.src(['spec/*.js'])
+    gulp.src(['spec/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
