@@ -1,8 +1,15 @@
 #!/usr/bin/env node
-var fs      = require('fs');
+
 var program = require('commander');
 var options = require('../lib/options');
-var version = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))['version'];
+var json    = require('../package.json');
+var version;
+for (var key in json) {
+    if ('version' === key) {
+        version = json[key];
+        break;
+    }
+}
 
 program.
     version(version).
