@@ -18,7 +18,7 @@
     "pleeease"
   ],
   "scripts": {
-    "test": "jasmine-node spec"
+    "test": "mocha --reporter spec"
   },
   "dependencies": {
     "postcss": "^2.0.0",
@@ -40,14 +40,14 @@
     "browserify": "~4.2.1",
     "gulp-jshint": "~1.7.1",
     "gulp-uglify": "~0.3.1",
-    "gulp-jasmine": "~0.2.0",
-    "jasmine-node": "1.14.2",
     "jshint-stylish": "~0.4.0",
     "gulp-streamify": "~0.0.4",
     "vinyl-source-stream": "~0.1.1",
     "gulp-bump": "~0.1.10",
     "run-sequence": "~0.3.6",
     "fs-extra": "~0.10.0",
-    "yargs": "~1.2.6"
+    "yargs": "~1.2.6",
+    "mocha": "~1.20.1",
+    "gulp-mocha": "~0.5.1"
   }
 }

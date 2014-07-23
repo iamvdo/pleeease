@@ -61,10 +61,10 @@ gulp.task('lint', ['lint:lib', 'lint:tests']);
  *
  */
 gulp.task('test', function () {
-    var jasmine = require('gulp-jasmine');
+    var mocha = require('gulp-mocha');
 
-    return gulp.src('spec/*.js')
-          .pipe(jasmine());
+    return gulp.src('test/*.js', {read: false})
+          .pipe(mocha({reporter: 'spec'}));
 });
 
 /**

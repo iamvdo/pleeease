@@ -1,9 +1,0 @@
-@import url("import/imported.css");
-.bar {
-	color: var(--color-bar);
-}
-@media screen and (min-width: 36em) {
-  .bar {
-    background: linear-gradient(green, blue);
-  }
-}
