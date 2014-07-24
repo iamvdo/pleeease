@@ -1,22 +1,17 @@
 'use strict';
 
-var fs      = require('fs');
-var path    = require('path');
-var assert  = require('assert');
-var exec    = require('child_process').exec;
-var options = require('../lib/options');
-var bin     = 'node ' + path.resolve(__dirname, '../bin/pleeease');
+var fs         = require('fs');
+var path       = require('path');
+var assert     = require('assert');
+var exec       = require('child_process').exec;
+var options    = require('../lib/options');
+var bin        = 'node ' + path.resolve(__dirname, '../bin/pleeease');
+var readFile   = require('../test/_helpers.js').readFile;
+var removeFile = require('../test/_helpers.js').removeFile;
 
 var __dirname__ = 'test/cli/';
 var __in__      = __dirname__ + 'in.css';
 var __out__     = __dirname__ + 'out';
-
-var readFile = function (filename) {
-  return fs.readFileSync(filename, 'utf-8');
-}
-var removeFile = function (filename) {
-  return fs.unlinkSync(filename);
-}
 
 /**
  *

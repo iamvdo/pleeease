@@ -1,9 +1,10 @@
 'use strict';
-var options  = require('../lib/options');
-var pleeease = require('../lib/');
-var assert   = require('assert');
-var test     = require('../test/_helpers.js').test;
-
+var pleeease   = require('../lib/');
+var assert     = require('assert');
+var test       = require('../test/_helpers.js').test;
+var readFile   = require('../test/_helpers.js').readFile;
+var removeFile = require('../test/_helpers.js').removeFile;
+var requireWithoutCache = require('../test/_helpers.js').requireWithoutCache;
 /**
  *
  * Describe Pleeease
@@ -11,7 +12,10 @@ var test     = require('../test/_helpers.js').test;
  */
 describe('Pleeease', function () {
 
+  var options = {};
+
   beforeEach(function() {
+    options = requireWithoutCache('../lib/options');
     options.optimizers.minifier = false;
   });
 
@@ -22,7 +26,7 @@ describe('Pleeease', function () {
                 from: 'from.css',
                 to:   'to.css'
             };
-    test('sourcemaps');
+    test('sourcemaps', options);
 
   });
 
@@ -64,6 +68,26 @@ describe('Pleeease', function () {
     var expected = standalone.process(css);
 
     assert.equal(expected, css);
+
+  });
+
+  it('should convert filters in standalone version', function () {
+
+    var json = require('../package.json');
+    var version;
+    for (var key in json) {
+      if ('version' === key) {
+        version = json[key];
+        break;
+      }
+    }
+    var standalone = require('../standalone/pleeease-' + version + '.min.js');
+    var css      = readFile('test/features/filters.css');
+    var expected = readFile('test/features/filters.out.css');
+    options.fallbacks.autoprefixer = false;
+    var result   = standalone.process(css, options);
+
+    assert.equal(expected, result);
 
   });
 
