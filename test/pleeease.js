@@ -64,24 +64,6 @@ describe('Pleeease', function () {
       }
     }
     var standalone = require('../standalone/pleeease-' + version + '.min.js');
-    var css = 'a{color:#FFF}';
-    var expected = standalone.process(css);
-
-    assert.equal(expected, css);
-
-  });
-
-  it('should convert filters in standalone version', function () {
-
-    var json = require('../package.json');
-    var version;
-    for (var key in json) {
-      if ('version' === key) {
-        version = json[key];
-        break;
-      }
-    }
-    var standalone = require('../standalone/pleeease-' + version + '.min.js');
     var css      = readFile('test/features/filters.css');
     var expected = readFile('test/features/filters.out.css');
     options.fallbacks.autoprefixer = false;
