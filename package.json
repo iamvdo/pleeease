@@ -1,6 +1,6 @@
 {
   "name": "pleeease",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Postprocess CSS with ease",
   "author": {
     "name": "Vincent De Oliveira"
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "gulp": "3.8.6",
-    "browserify": "~4.2.1",
+    "browserify": "~5.0.0",
     "gulp-jshint": "~1.7.1",
     "gulp-uglify": "~0.3.1",
     "jshint-stylish": "~0.4.0",

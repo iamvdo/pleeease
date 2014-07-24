@@ -26,8 +26,8 @@ gulp.task('standalone', ['clean'], function() {
 
     var version = JSON.parse(fs.readFileSync('package.json', 'utf-8'))['version'];
 
-    return browserify('./lib/index.js')
-          .bundle({standalone: 'pleeease'})
+    return browserify({entries: './lib/index.js', standalone: 'pleeease'})
+          .bundle()
           .pipe(source('pleeease-' + version + '.min.js'))
           .pipe(streamify(uglify()))
           .pipe(gulp.dest('./standalone'));
