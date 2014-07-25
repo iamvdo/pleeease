@@ -1,6 +1,8 @@
 Pleeease
 ======
 
+[![Build Status](https://travis-ci.org/iamvdo/pleeease.svg?branch=master)](https://travis-ci.org/iamvdo/pleeease)
+
 Postprocess CSS with ease.
 
 Pleeease is a CSS post-processor. The main goal of this tool is to **perform all treatments that a pre-processor shouldn't have to do!** (eg, dealing with prefixes, convert `rem` to `px`, support older browsers, etc.).
