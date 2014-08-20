@@ -31,10 +31,6 @@ describe('Options', function () {
     opts = Options().extend(opts);
     opts.autoprefixer.should.be.an.instanceof(Array);
 
-    opts.import = true;
-    opts = Options().extend(opts);
-    opts.import.should.be.an.instanceof(String);
-
   });
 
   it('should extend default values for pleeease.next', function () {

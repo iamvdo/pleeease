@@ -110,7 +110,7 @@ describe('Features', function () {
         // options
         options.autoprefixer = true;
         options.minifier = true;
-        options.import = __features;
+        options.import = {path: __features};
         // fixed CSS
         return pleeease.process(CSS.join('\n'), options);
       };
