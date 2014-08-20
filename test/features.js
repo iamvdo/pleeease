@@ -1,7 +1,7 @@
 'use strict';
 
 var fs          = require('fs');
-var options     = require('../lib/options');
+var options     = require('../lib/options')().defaults;
 var pleeease    = require('../lib/');
 var assert      = require('assert');
 var test        = require('../test/_helpers.js').test;
@@ -15,7 +15,7 @@ var __features  = require('../test/_helpers.js').dirname['features'];
 describe('Features', function () {
 
   beforeEach(function() {
-    options.optimizers.minifier = false;
+    options.minifier = false;
   });
 
   describe('Prefixes', function () {
@@ -23,7 +23,7 @@ describe('Features', function () {
     it('should generate -webkit- prefixes for calc() (support iOS6)', function () {
 
       // options
-      options.fallbacks.autoprefixer = ['iOS 6'];
+      options.autoprefixer = ['iOS 6'];
       test('prefixes', options);
 
     });
@@ -35,7 +35,7 @@ describe('Features', function () {
     it('should evaluate variables', function () {
 
       // options
-      options.fallbacks.autoprefixer = false;
+      options.autoprefixer = false;
       test('variables', options);
 
     });
@@ -46,7 +46,7 @@ describe('Features', function () {
 
     it('should replace pseudo-elements syntax', function () {
 
-      test('pseudoElements');
+      test('pseudoElements', options);
 
     });
 
@@ -57,7 +57,7 @@ describe('Features', function () {
     it('should convert CSS filters to SVG', function () {
 
       // options
-      options.fallbacks.autoprefixer = false;
+      options.autoprefixer = false;
       test('filters', options);
 
     });
@@ -66,9 +66,12 @@ describe('Features', function () {
 
       // options
       var opts = options;
-      opts.fallbacks.autoprefixer = false;
-      opts.fallbacks.filters = false;
+      opts.autoprefixer = false;
+      opts.filters = false;
       opts.same = true;
+
+      console.log('----filters---', opts);
+
       test('filters', opts);
 
     });
@@ -77,8 +80,8 @@ describe('Features', function () {
 
       // options
       var opts = options;
-      opts.fallbacks.autoprefixer = false;
-      opts.fallbacks.filters = { oldIE: true };
+      opts.autoprefixer = false;
+      opts.filters = { oldIE: true };
       opts.same = false;
       test('filters-ie', opts);
 
@@ -91,7 +94,7 @@ describe('Features', function () {
     it('should combine media-queries', function () {
 
       // options
-      options.optimizers.minifier = true;
+      options.minifier = true;
       test('mq', options);
 
     });
@@ -107,9 +110,9 @@ describe('Features', function () {
           return fs.readFileSync(input).toString();
         });
         // options
-        options.fallbacks.autoprefixer = true;
-        options.optimizers.minifier = true;
-        options.optimizers.import = __features;
+        options.autoprefixer = true;
+        options.minifier = true;
+        options.import = __features;
         // fixed CSS
         return pleeease.process(CSS.join('\n'), options);
       };
@@ -134,7 +137,7 @@ describe('Features', function () {
           '}';
       var expected = '.elem{color:#f39}';
       // options
-      options.optimizers.minifier = true;
+      options.minifier = true;
       // process
       var processed = pleeease.process(css, options);
 

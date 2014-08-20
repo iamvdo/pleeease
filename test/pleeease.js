@@ -15,8 +15,8 @@ describe('Pleeease', function () {
   var options = {};
 
   beforeEach(function() {
-    options = requireWithoutCache('../lib/options');
-    options.optimizers.minifier = false;
+    options = requireWithoutCache('../lib/options')().defaults;
+    options.minifier = false;
   });
 
   it('should create default inline sourcemaps', function () {
@@ -66,7 +66,7 @@ describe('Pleeease', function () {
     var standalone = require('../standalone/pleeease-' + version + '.min.js');
     var css      = readFile('test/features/filters.css');
     var expected = readFile('test/features/filters.out.css');
-    options.fallbacks.autoprefixer = false;
+    options.autoprefixer = false;
     var result   = standalone.process(css, options);
 
     assert.equal(expected, result);

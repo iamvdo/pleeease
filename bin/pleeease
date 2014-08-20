@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-var options = require('../lib/options');
+var options = require('../lib/options')().defaults;
 var json    = require('../package.json');
 var version;
 for (var key in json) {

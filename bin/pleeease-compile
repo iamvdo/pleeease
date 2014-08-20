@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var cli       = require('../lib/cli'),
-    options   = require('../lib/options'),
+    options   = require('../lib/options')().defaults,
     program   = require('commander');
 
 program.

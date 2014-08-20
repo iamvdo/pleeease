@@ -4,7 +4,7 @@ var fs         = require('fs');
 var path       = require('path');
 var assert     = require('assert');
 var exec       = require('child_process').exec;
-var options    = require('../lib/options');
+var options    = require('../lib/options')().defaults;
 var bin        = 'node ' + path.resolve(__dirname, '../bin/pleeease');
 var readFile   = require('../test/_helpers.js').readFile;
 var removeFile = require('../test/_helpers.js').removeFile;
@@ -90,6 +90,8 @@ describe('CLI', function () {
 
     exec('cd ' + __dirname__ + ' && node ../../bin/pleeease compile', function (err, stdout) {
       if (err) return done(err);
+
+      console.log(process.cwd());
 
       var input  = readFile(__in__);
       var output = readFile(__out__);

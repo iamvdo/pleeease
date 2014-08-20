@@ -1,7 +1,7 @@
 'use strict';
 
 var fs           = require('fs');
-var options      = require('../lib/options');
+var options      = require('../lib/options')().defaults;
 var pleeease     = require('../lib/');
 var assert       = require('assert');
 var __dirnames__ = {
@@ -19,6 +19,7 @@ module.exports = {
     if (typeof opts === 'undefined') {
       opts = options;
     } else if (opts.same) {
+      console.log('yep');
       expected = css;
     }
 
