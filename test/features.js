@@ -70,8 +70,6 @@ describe('Features', function () {
       opts.filters = false;
       opts.same = true;
 
-      console.log('----filters---', opts);
-
       test('filters', opts);
 
     });

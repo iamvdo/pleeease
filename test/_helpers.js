@@ -19,7 +19,6 @@ module.exports = {
     if (typeof opts === 'undefined') {
       opts = options;
     } else if (opts.same) {
-      console.log('yep');
       expected = css;
     }
 

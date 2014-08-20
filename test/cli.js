@@ -91,8 +91,6 @@ describe('CLI', function () {
     exec('cd ' + __dirname__ + ' && node ../../bin/pleeease compile', function (err, stdout) {
       if (err) return done(err);
 
-      console.log(process.cwd());
-
       var input  = readFile(__in__);
       var output = readFile(__out__);
 
