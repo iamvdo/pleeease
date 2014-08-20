@@ -23,7 +23,7 @@
   "dependencies": {
     "postcss": "^2.0.0",
     "csswring": "~0.1.0",
-    "postcss-vars": "~0.1.0",
+    "postcss-custom-properties": "~0.1.0",
     "autoprefixer": "^2.0.0",
     "css-mqpacker": "~0.1.0",
     "pixrem": "https://github.com/iamvdo/node-pixrem/tarball/master",
