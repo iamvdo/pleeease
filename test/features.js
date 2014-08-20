@@ -143,6 +143,18 @@ describe('Features', function () {
 
     });
 
+    it('should keep hacks', function() {
+      //css
+      var css = 'a{_color:#000}';
+      // options
+      options.minifier = true;
+      // process
+      var processed = pleeease.process(css, options);
+
+      assert.equal(processed, css);
+
+    });
+
   });
 
 });

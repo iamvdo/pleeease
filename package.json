@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "postcss": "^2.0.0",
-    "csswring": "~0.1.0",
+    "csswring": "~1.0.0",
     "postcss-custom-properties": "~0.1.0",
     "postcss-import": "~1.0.0",
     "autoprefixer": "^2.0.0",

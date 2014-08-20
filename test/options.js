@@ -31,6 +31,10 @@ describe('Options', function () {
     opts = Options().extend(opts);
     opts.autoprefixer.should.be.an.instanceof(Array);
 
+    opts.minifier = true;
+    opts = Options().extend(opts);
+    opts.minifier.should.have.property('preserveHacks').eql(true);
+
   });
 
   it('should extend default values for pleeease.next', function () {
