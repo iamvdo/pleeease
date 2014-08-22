@@ -14,8 +14,11 @@ var __features  = require('../test/_helpers.js').dirname['features'];
  */
 describe('Features', function () {
 
+  var opts;
+
   beforeEach(function() {
-    options.minifier = false;
+    opts = {};
+    opts.minifier = false;
   });
 
   describe('Prefixes', function () {
@@ -23,20 +26,8 @@ describe('Features', function () {
     it('should generate -webkit- prefixes for calc() (support iOS6)', function () {
 
       // options
-      options.autoprefixer = ['iOS 6'];
-      test('prefixes', options);
-
-    });
-
-  });
-
-  describe('Variables', function () {
-
-    it('should evaluate variables', function () {
-
-      // options
-      options.autoprefixer = false;
-      test('variables', options);
+      opts.autoprefixer = ['iOS 6'];
+      test('prefixes', opts);
 
     });
 
@@ -46,7 +37,7 @@ describe('Features', function () {
 
     it('should replace pseudo-elements syntax', function () {
 
-      test('pseudoElements', options);
+      test('pseudoElements', opts);
 
     });
 
@@ -57,15 +48,14 @@ describe('Features', function () {
     it('should convert CSS filters to SVG', function () {
 
       // options
-      options.autoprefixer = false;
-      test('filters', options);
+      opts.autoprefixer = false;
+      test('filters', opts);
 
     });
 
     it('should not convert CSS filters to SVG when asked', function () {
 
       // options
-      var opts = options;
       opts.autoprefixer = false;
       opts.filters = false;
       opts.same = true;
@@ -77,7 +67,6 @@ describe('Features', function () {
     it('should add IE filters when asked', function () {
 
       // options
-      var opts = options;
       opts.autoprefixer = false;
       opts.filters = { oldIE: true };
       opts.same = false;
@@ -92,8 +81,8 @@ describe('Features', function () {
     it('should combine media-queries', function () {
 
       // options
-      options.minifier = true;
-      test('mq', options);
+      opts.minifier = true;
+      test('mq', opts);
 
     });
 
@@ -108,17 +97,17 @@ describe('Features', function () {
           return fs.readFileSync(input).toString();
         });
         // options
-        options.autoprefixer = true;
-        options.minifier = true;
-        options.import = {path: __features};
+        opts.autoprefixer = true;
+        opts.minifier = true;
+        opts.import = {path: __features};
         // fixed CSS
-        return pleeease.process(CSS.join('\n'), options);
+        return pleeease.process(CSS.join('\n'), opts);
       };
 
-      options.in = [__features + 'import.css', __features + 'mq.css'];
+      opts.in = [__features + 'import.css', __features + 'mq.css'];
 
       // process
-      var processed = compile(options.in, options);
+      var processed = compile(opts.in, opts);
       var expected = fs.readFileSync(__features + 'import.out.css').toString();
 
       assert.equal(processed,expected);
@@ -135,9 +124,9 @@ describe('Features', function () {
           '}';
       var expected = '.elem{color:#f39}';
       // options
-      options.minifier = true;
+      opts.minifier = true;
       // process
-      var processed = pleeease.process(css, options);
+      var processed = pleeease.process(css, opts);
 
       assert.equal(processed, expected);
 
@@ -147,11 +136,46 @@ describe('Features', function () {
       //css
       var css = 'a{_color:#000}';
       // options
-      options.minifier = true;
+      opts.minifier = true;
       // process
-      var processed = pleeease.process(css, options);
+      var processed = pleeease.process(css, opts);
 
       assert.equal(processed, css);
+
+    });
+
+  });
+
+  describe('NEXT', function () {
+
+    it('should combined all postprocessors', function () {
+
+      // options
+      opts.autoprefixer = ['iOS 6'];
+      opts.next = true;
+      test('next', opts);
+
+    });
+
+    describe('Options', function () {
+
+      it('should not evaluate any by default', function () {
+
+        // options
+        opts.autoprefixer = false;
+        opts.same = true;
+        test('next.options', opts);
+
+      });
+
+      it('should evaluate only one when asked', function () {
+
+        // options
+        opts.autoprefixer = false;
+        opts.next = {customProperties: true};
+        test('next.options', opts);
+
+      });
 
     });
 

@@ -1,9 +1,0 @@
-
-.e {
-	color: red;
-}
-@media screen {
-	.e {
-		background: linear-gradient(red, red);
-	}
-}

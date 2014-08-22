@@ -1,0 +1,21 @@
+@custom-media --small-viewport (max-width: 35em);
+
+:root {
+  --main-font-size: 16px;
+  --color: color(black a(.5));
+}
+
+body {
+  font-size: var(--main-font-size);
+}
+
+h1 {
+  font-size: calc(var(--main-font-size) * 2);
+  height: calc(100px - 2em);
+}
+
+@media (--small-viewport) {
+  h1 {
+    color: var(--color);
+  }
+}
