@@ -1,7 +1,9 @@
 .e:after {
 	content: 'foo';
-}@media screen {
-	.e:after {
-		content: 'bar';
-	}
+}
+.e:hover:after {
+	content: 'foo';
+}
+.e:after:hover {
+	content: 'foo';
 }
