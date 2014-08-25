@@ -76,7 +76,7 @@ gulp.task('test', function () {
  */
 gulp.task('_bump', function () {
     var bump = require('gulp-bump');
-    var args = require('yargs');
+    var args = require('yargs').argv;
 
     return gulp.src('package.json')
             .pipe(bump({ type: args.type }))
