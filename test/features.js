@@ -76,6 +76,17 @@ describe('Features', function () {
 
   });
 
+  describe('Opacity', function () {
+
+    it('should convert opacity into filter', function () {
+
+      // options
+      test('opacity', opts);
+
+    });
+
+  });
+
   describe('MQs', function () {
 
     it('should combine media-queries', function () {
