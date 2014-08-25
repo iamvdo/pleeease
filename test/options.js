@@ -19,9 +19,9 @@ describe('Options', function () {
 
   it('should extend default values for postprocessors', function () {
 
-    opts.autoprefixer = ["last 20 versions"];
+    opts.autoprefixer = {browsers: ["last 20 versions"]};
     opts = Options().extend(opts);
-    opts.autoprefixer.should.eql(["last 20 versions"]);
+    opts.autoprefixer.browsers.should.eql(["last 20 versions"]);
 
   });
 
@@ -29,7 +29,7 @@ describe('Options', function () {
 
     opts.autoprefixer = true;
     opts = Options().extend(opts);
-    opts.autoprefixer.should.be.an.instanceof(Array);
+    opts.autoprefixer.should.eql({});
 
     opts.minifier = true;
     opts = Options().extend(opts);

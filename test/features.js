@@ -26,7 +26,7 @@ describe('Features', function () {
     it('should generate -webkit- prefixes for calc() (support iOS6)', function () {
 
       // options
-      opts.autoprefixer = ['iOS 6'];
+      opts.autoprefixer = {browsers: ['iOS 6']};
       test('prefixes', opts);
 
     });
@@ -151,7 +151,7 @@ describe('Features', function () {
     it('should combined all postprocessors', function () {
 
       // options
-      opts.autoprefixer = ['iOS 6'];
+      opts.autoprefixer = {browsers: ['iOS 6']};
       opts.next = true;
       test('next', opts);
 

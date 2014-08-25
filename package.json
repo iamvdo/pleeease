@@ -28,7 +28,7 @@
     "postcss-import": "~1.0.0",
     "postcss-calc": "^2.0.0",
     "postcss-color": "^1.0.0",
-    "autoprefixer": "^2.0.0",
+    "autoprefixer-core": "^3.0.0",
     "css-mqpacker": "^1.0.0",
     "pixrem": "https://github.com/iamvdo/node-pixrem/tarball/master",
     "pleeease-filters": "~0.1.0",
