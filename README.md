@@ -4,12 +4,12 @@ Pleeease
 **Postprocess CSS with ease.**
 
 * [Website](http://pleeease.io)
-* [Documentation](http://pleeease.io/options.html)
-* [Interactive Demo](http://pleeease.io/playground.html)
+* [Documentation](http://pleeease.io/docs)
+* [Interactive Demo](http://pleeease.io/play)
 
 Pleeease is a CSS postprocessor. It simplifies the use of preprocessors and helps keep stylesheets as small as possible for a better maintenability. This means no more Compass for prefixes, no more rem mixins, and so on. Pleeease is also a great tool if you want to write plain CSS as it helps support older browsers.
 
-Pleeease.NEXT goes even further and allows you to use some of the future CSS features today. [Read cautionary note](http://pleeease.io/options.html).
+Pleeease.NEXT goes even further and allows you to use some of the future CSS features today. [Read cautionary note](http://pleeease.io/docs/#pleeease-next).
 
 Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor.
 
