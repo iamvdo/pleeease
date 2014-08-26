@@ -33,6 +33,16 @@ describe('Features', function () {
 
   });
 
+  describe('rem', function () {
+
+    it('should add fallback for rem unit', function () {
+
+      test('rem', opts);
+
+    });
+
+  });
+
   describe('Pseudo-elements', function () {
 
     it('should replace pseudo-elements syntax', function () {
