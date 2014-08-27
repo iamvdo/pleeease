@@ -153,6 +153,16 @@ describe('Features', function () {
 
     });
 
+    it('should minify all possible features', function() {
+
+      // options
+      opts.autoprefixer = false;
+      opts.minifier = true;
+      opts.filters = { oldIE: true };
+      test('minifier', opts);
+
+    });
+
     it('should keep hacks', function() {
       //css
       var css = 'a{_color:#000}';
@@ -175,6 +185,23 @@ describe('Features', function () {
       opts.autoprefixer = {browsers: ['iOS 6']};
       opts.next = true;
       test('next', opts);
+
+    });
+
+    it('should minify correctly', function () {
+
+      // options
+      opts.autoprefixer = false;
+      opts.minifier = true;
+      opts.next = true;
+
+      var css = fs.readFileSync(__features + 'next.css', 'utf-8');
+      var expected = fs.readFileSync(__features + 'next.minify.out.css', 'utf-8');
+
+      // process
+      var processed = pleeease.process(css, opts);
+
+      assert.equal(processed, expected);
 
     });
 

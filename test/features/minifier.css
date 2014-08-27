@@ -1,0 +1,9 @@
+a {
+  filter: blur(4px);
+}
+a {
+  font-size: 2rem;
+}
+a {
+  opacity: .5;
+}
