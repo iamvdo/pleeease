@@ -41,6 +41,19 @@ describe('Features', function () {
 
     });
 
+    it('should convert using config', function () {
+
+      var css = fs.readFileSync('test/features/rem.css', 'utf-8');
+      var expected = fs.readFileSync('test/features/rem.2.out.css', 'utf-8');
+
+      // process
+      opts.rem = ['10px', {replace: true}];
+      var processed = pleeease.process(css, opts);
+
+      assert.equal(processed,expected);
+
+    });
+
   });
 
   describe('Pseudo-elements', function () {
