@@ -1,3 +1,5 @@
+See changelog for versions > 1.0 in [Releases](https://github.com/iamvdo/pleeease/releases).
+
 ##0.4.4 (2014-07-24)
 
 * PostCSS 2.x
