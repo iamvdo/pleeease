@@ -21,11 +21,7 @@ describe('Pleeease', function () {
 
   it('should create default inline sourcemaps', function () {
 
-    options.sourcemaps = {
-                map:  'inline',
-                from: 'from.css',
-                to:   'to.css'
-            };
+    options.sourcemaps = true;
     test('sourcemaps', options);
 
   });
@@ -43,7 +39,7 @@ describe('Pleeease', function () {
 
   it('should return object result.map and result.css when sourcemaps are enabled', function () {
 
-    options.sourcemaps = { map: true };
+    options.sourcemaps = { map: {inline: false} };
     var processed = pleeease.process('div { color: white }', options);
 
     assert.notStrictEqual(processed.map, undefined);
