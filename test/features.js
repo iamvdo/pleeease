@@ -116,6 +116,7 @@ describe('Features', function () {
 
       // options
       opts.minifier = true;
+      opts.mqpacker = true;
       test('mq', opts);
 
     });
@@ -133,6 +134,7 @@ describe('Features', function () {
         // options
         opts.autoprefixer = true;
         opts.minifier = true;
+        opts.mqpacker = true;
         opts.import = {path: __features};
         // fixed CSS
         return pleeease.process(CSS.join('\n'), opts);
