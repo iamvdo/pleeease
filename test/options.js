@@ -52,4 +52,34 @@ describe('Options', function () {
 
   });
 
+  it('should override values when `browsers` option is set', function () {
+
+    opts.rem = ['20px'];
+    opts.browsers = ['ie 9'];
+    opts = Options().extend(opts);
+
+    opts.autoprefixer.should.have.property('browsers').eql(['ie 9']);
+    opts.rem.should.eql(false);
+    opts.opacity.should.eql(false);
+    opts.pseudoElements.should.eql(false);
+
+  });
+
+  it('should override values when `browsers` option is set in `autoprefixer` too', function () {
+
+    opts.autoprefixer = {browsers: ['ie 9']};
+    opts = Options().extend(opts);
+    opts.rem.should.eql(false);
+
+  });
+
+  it('should use `browsers` option instead of `autoprefixer` one', function () {
+
+    opts.autoprefixer = {browsers: ['ie 8']};
+    opts.browsers = ['ie 9'];
+    opts = Options().extend(opts);
+    opts.rem.should.eql(false);
+
+  });
+
 });
