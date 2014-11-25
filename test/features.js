@@ -41,16 +41,11 @@ describe('Features', function () {
 
     });
 
-    it('should convert using config', function () {
+    it('should convert rem using config', function () {
 
-      var css = fs.readFileSync('test/features/rem.css', 'utf-8');
-      var expected = fs.readFileSync('test/features/rem.2.out.css', 'utf-8');
-
-      // process
+      // options
       opts.rem = ['10px', {replace: true}];
-      var processed = pleeease.process(css, opts);
-
-      assert.equal(processed,expected);
+      test('rem.2', opts);
 
     });
 

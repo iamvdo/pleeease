@@ -30,7 +30,7 @@
     "postcss-color": "^1.0.0",
     "autoprefixer-core": "^4.0.0",
     "css-mqpacker": "^2.0.0",
-    "pixrem": "https://github.com/iamvdo/node-pixrem/tarball/master",
+    "pixrem": "^1.0.0",
     "pleeease-filters": "~0.1.0",
     "deep-extend": "~0.2.8",
     "commander": "~2.2.0",
