@@ -82,4 +82,13 @@ describe('Options', function () {
 
   });
 
+  it('should convert `browsers` option to Array if it\'s not', function () {
+
+    opts.browsers = 'ie 9';
+    opts = Options().extend(opts);
+
+    opts.autoprefixer.should.have.property('browsers').eql(['ie 9']);
+
+  });
+
 });
