@@ -25,7 +25,7 @@
     "csswring": "^2.0.0",
     "postcss-custom-properties": "^2.0.0",
     "postcss-custom-media": "^1.0.0",
-    "postcss-import": "^2.0.0",
+    "postcss-import": "^4.0.0",
     "postcss-calc": "^2.0.0",
     "postcss-color": "^1.0.0",
     "autoprefixer-core": "^4.0.0",
