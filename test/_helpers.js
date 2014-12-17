@@ -5,16 +5,24 @@ var options      = require('../lib/options')().defaults;
 var pleeease     = require('../lib/');
 var assert       = require('assert');
 var __dirnames__ = {
-  features: 'test/features/'
+  features: 'test/features/',
+  preprocessors: 'test/preprocessors/'
 };
 
 module.exports = {
 
   test: function (name, opts) {
 
+    var dirname;
+    if (opts.sass) {
+      dirname = __dirnames__['preproc'];
+    } else {
+      dirname = __dirnames__['features'];
+    }
+
     // css
-    var css = fs.readFileSync(__dirnames__['features'] + name + '.css', 'utf-8');
-    var expected = fs.readFileSync(__dirnames__['features'] + name + '.out.css', 'utf-8');
+    var css = fs.readFileSync(dirname + name + '.css', 'utf-8');
+    var expected = fs.readFileSync(dirname + name + '.out.css', 'utf-8');
 
     if (typeof opts === 'undefined') {
       opts = options;

@@ -1,0 +1,10 @@
+@color: #fff;
+
+.color(@c) {
+  color: @c;
+}
+
+.element {
+  color: @color;
+  .color(#000);
+}

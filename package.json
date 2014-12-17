@@ -37,7 +37,10 @@
     "multi-glob": "~0.4.0",
     "mkdirp": "~0.4.0",
     "chokidar": "~0.8.2",
-    "colors": "~0.6.2"
+    "colors": "~0.6.2",
+    "node-sass": "~1.2.3",
+    "less": "~2.1.1",
+    "stylus": "~0.49.3"
   },
   "devDependencies": {
     "gulp": "3.8.6",

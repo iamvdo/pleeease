@@ -1,0 +1,10 @@
+$color: #fff;
+
+@mixin color($c) {
+  color: $c;
+}
+
+.element {
+  color: $color;
+  @include color(#000);
+}

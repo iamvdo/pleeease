@@ -12,7 +12,7 @@ var __features  = require('../test/_helpers.js').dirname['features'];
  * Describe Features
  *
  */
-describe('Features', function () {
+describe('Postprocessors features', function () {
 
   var opts;
 
