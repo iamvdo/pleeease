@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var cli       = require('../lib/cli'),
+var CLI       = require('../lib/cli'),
     options   = require('../lib/options')().defaults,
     program   = require('commander');
 
@@ -17,4 +17,5 @@ if (!files.length) {
 var inputs = files,
     output = program.to;
 
-cli.init('compile', inputs, output);
+var cli = new CLI();
+    cli.init('compile', inputs, output);

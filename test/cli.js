@@ -4,10 +4,11 @@ var fs         = require('fs');
 var path       = require('path');
 var assert     = require('assert');
 var exec       = require('child_process').exec;
-var options    = require('../lib/options')().defaults;
+var Options    = require('../lib/options');
 var bin        = 'node ' + path.resolve(__dirname, '../bin/pleeease');
 var readFile   = require('../test/_helpers.js').readFile;
 var removeFile = require('../test/_helpers.js').removeFile;
+var CLI = require('../lib/cli');
 
 var __dirname__ = 'test/cli/';
 var __in__      = __dirname__ + 'in.css';
@@ -21,13 +22,30 @@ var __out__     = __dirname__ + 'out';
 describe('CLI', function () {
 
   var out = __out__;
+  var cli, options, remove;
 
   beforeEach(function() {
+
+    cli     = new CLI();
+    options = new Options().options;
+    remove = true;
 
   });
 
   afterEach(function() {
-    removeFile(out);
+    if (remove) {
+      removeFile(out);
+    }
+  });
+
+  it('should extend options', function(done) {
+
+    cli.options.should.eql(options);
+
+    remove = false;
+
+    done();
+
   });
 
   it('should read from input file and write to output file', function(done) {
