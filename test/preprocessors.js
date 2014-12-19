@@ -20,43 +20,102 @@ describe('Preprocessors', function () {
     opts.minifier = true;
   });
 
+  describe('Sass', function () {
 
-  it('should compile using Sass', function () {
+    beforeEach(function() {
+      opts.sass = true;
+    });
 
-    opts.sass = true;
+    it('should compile using Sass', function () {
 
-    var css      = fs.readFileSync(dirname + 'preproc.scss', 'utf-8');
-    var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
+      var css      = fs.readFileSync(dirname + 'sass/preproc.scss', 'utf-8');
+      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
 
-    var processed = pleeease.process(css, opts);
+      var processed = pleeease.process(css, opts);
 
-    assert.equal(processed, expected);
+      assert.equal(processed, expected);
+
+    });
+
+    it('should import files', function () {
+
+      var css      = fs.readFileSync(dirname + 'sass/import.scss', 'utf-8');
+      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
+
+      opts.sass = {
+        includePaths: ['test/preprocessors/sass']
+      };
+      var processed = pleeease.process(css, opts);
+
+      assert.equal(processed, expected);
+
+    });
 
   });
 
-  it('should compile using LESS', function () {
+  describe('LESS', function () {
 
-    opts.less = true;
+    beforeEach(function() {
+      opts.less = true;
+    });
 
-    var css      = fs.readFileSync(dirname + 'preproc.less', 'utf-8');
-    var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
+    it('should compile using LESS', function () {
 
-    var processed = pleeease.process(css, opts);
+      var css      = fs.readFileSync(dirname + 'less/preproc.less', 'utf-8');
+      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
 
-    assert.equal(processed, expected);
+      var processed = pleeease.process(css, opts);
+
+      assert.equal(processed, expected);
+
+    });
+
+    it('should import files', function () {
+
+      var css      = fs.readFileSync(dirname + 'less/import.less', 'utf-8');
+      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
+
+      opts.less = {
+        paths: ['test/preprocessors/less']
+      };
+      var processed = pleeease.process(css, opts);
+
+      assert.equal(processed, expected);
+
+    });
 
   });
 
-  it('should compile using Stylus', function () {
+  describe('Stylus', function () {
 
-    opts.stylus = true;
+    beforeEach(function() {
+      opts.stylus = true;
+    });
 
-    var css      = fs.readFileSync(dirname + 'preproc.styl', 'utf-8');
-    var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
+    it('should compile using Stylus', function () {
 
-    var processed = pleeease.process(css, opts);
+      var css      = fs.readFileSync(dirname + 'stylus/preproc.styl', 'utf-8');
+      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
 
-    assert.equal(processed, expected);
+      var processed = pleeease.process(css, opts);
+
+      assert.equal(processed, expected);
+
+    });
+
+    it('should import files', function () {
+
+      var css      = fs.readFileSync(dirname + 'stylus/import.styl', 'utf-8');
+      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
+
+      opts.stylus = {
+        paths: ['test/preprocessors/stylus']
+      };
+      var processed = pleeease.process(css, opts);
+
+      assert.equal(processed, expected);
+
+    });
 
   });
 
