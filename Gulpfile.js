@@ -63,8 +63,10 @@ gulp.task('lint', ['lint:lib', 'lint:tests']);
 gulp.task('test', function () {
     require('should');
     var mocha = require('gulp-mocha');
+    var args = require('yargs').argv;
+    var file = args.file || '*';
 
-    return gulp.src('test/*.js', {read: false})
+    return gulp.src('test/' + file + '.js', {read: false})
           .pipe(mocha({reporter: 'spec'}));
 });
 
