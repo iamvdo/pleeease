@@ -56,7 +56,7 @@ describe('Preprocessors', function () {
   describe('LESS', function () {
 
     beforeEach(function() {
-      opts.less = true;
+      opts.less = {};
     });
 
     it('should compile using LESS', function () {
@@ -75,9 +75,7 @@ describe('Preprocessors', function () {
       var css      = fs.readFileSync(dirname + 'less/import.less', 'utf-8');
       var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
 
-      opts.less = {
-        paths: ['test/preprocessors/less']
-      };
+      opts.less.paths = ['test/preprocessors/less'];
       var processed = pleeease.process(css, opts);
 
       assert.equal(processed, expected);
