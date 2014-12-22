@@ -58,6 +58,8 @@ gulp.task('lint', ['lint:lib', 'lint:tests']);
 /**
  *
  * Test spec
+ * `npm test` (without argv)
+ * `gulp test --file cli` (test only cli.js file)
  *
  */
 gulp.task('test', function () {
