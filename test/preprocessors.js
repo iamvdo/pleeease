@@ -1,9 +1,10 @@
 'use strict';
 
-var fs          = require('fs');
-var options     = require('../lib/options')().defaults;
-var pleeease    = require('../lib/');
-var assert      = require('assert');
+var Preprocessor = require('../lib/preprocessors');
+var Options      = require('../lib/options');
+var pleeease     = require('../lib/');
+var fs           = require('fs');
+var assert       = require('assert');
 
 var dirname = 'test/preprocessors/';
 /**
@@ -56,7 +57,7 @@ describe('Preprocessors', function () {
   describe('LESS', function () {
 
     beforeEach(function() {
-      opts.less = {};
+      opts.less = true;
     });
 
     it('should compile using LESS', function () {
@@ -75,10 +76,41 @@ describe('Preprocessors', function () {
       var css      = fs.readFileSync(dirname + 'less/import.less', 'utf-8');
       var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
 
-      opts.less.paths = ['test/preprocessors/less'];
+      opts.less = {
+        paths: ['test/preprocessors/less']
+      };
       var processed = pleeease.process(css, opts);
 
       assert.equal(processed, expected);
+
+    });
+
+    it('should create inline sourcemaps when global sourcemaps option is set', function () {
+
+      opts.sourcemaps = true;
+      opts = new Options().extend(opts);
+      var pre = new Preprocessor('a{}', '<no-source>', opts);
+      opts.less = pre.setSourcemapsOptions('less', opts);
+      opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(true);
+
+    });
+
+    it('should create inline sourcemaps, no matter custom configuration', function () {
+
+      opts = {
+        less: {
+          sourceMap: {
+            sourceMapFileInline: false,
+            sourceTest: 'test'
+          }
+        },
+        sourcemaps: true
+      };
+      opts = new Options().extend(opts);
+      var pre = new Preprocessor('a{}', '<no-source>', opts);
+      opts.less = pre.setSourcemapsOptions('less', opts);
+      opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(true);
+      opts.less.sourceMap.should.not.have.property('sourceTest');
 
     });
 
@@ -112,6 +144,35 @@ describe('Preprocessors', function () {
       var processed = pleeease.process(css, opts);
 
       assert.equal(processed, expected);
+
+    });
+
+    it('should create inline sourcemaps when global sourcemaps option is set', function () {
+
+      opts.sourcemaps = true;
+      opts = new Options().extend(opts);
+      var pre = new Preprocessor('a{}', '<no-source>', opts);
+      opts.stylus = pre.setSourcemapsOptions('stylus', opts);
+      opts.stylus.sourcemap.should.have.property('inline').eql(true);
+
+    });
+
+    it('should create inline sourcemaps, no matter custom configuration', function () {
+
+      opts = {
+        stylus: {
+          sourcemap: {
+            inline: false,
+            sourceTest: 'test'
+          }
+        },
+        sourcemaps: true
+      };
+      opts = new Options().extend(opts);
+      var pre = new Preprocessor('a{}', '<no-source>', opts);
+      opts.stylus = pre.setSourcemapsOptions('stylus', opts);
+      opts.stylus.sourcemap.should.have.property('inline').eql(true);
+      opts.stylus.sourcemap.should.not.have.property('sourceTest');
 
     });
 
