@@ -75,6 +75,8 @@ describe('Options', function () {
     opts.minifier.should.have.property('removeAllComments').eql(true);
     opts.minifier.should.have.property('preserveHacks').eql(true);
 
+  it('should extend values when an object containing a default value is set', function () {
+
     opts.minifier = {
       preserveHacks: false,
       removeAllComments: true
@@ -106,16 +108,6 @@ describe('Options', function () {
     opts = Options().extend(opts);
     opts.next.should.have.property('customProperties').eql(false);
     opts.next.should.have.property('colors').eql({});
-
-  });
-
-  it('should extend LESS options', function () {
-
-    opts.less = {
-      path: ['path']
-    };
-    opts = Options().extend(opts);
-    opts.less.should.have.property('syncImport').eql(true);
 
   });
 
