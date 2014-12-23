@@ -20,6 +20,10 @@
   "scripts": {
     "test": "gulp test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamvdo/pleeease"
+  },
   "dependencies": {
     "postcss": "^3.0.0",
     "csswring": "^2.0.0",
