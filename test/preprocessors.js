@@ -2,7 +2,7 @@
 
 var Preprocessor = require('../lib/preprocessor');
 var Options      = require('../lib/options');
-var pleeease     = require('../lib/');
+var pleeease     = require('../lib/pleeease');
 var fs           = require('fs');
 var assert       = require('assert');
 

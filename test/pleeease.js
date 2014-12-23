@@ -1,5 +1,5 @@
 'use strict';
-var pleeease   = require('../lib/');
+var pleeease   = require('../lib/pleeease');
 var assert     = require('assert');
 var test       = require('../test/_helpers.js').test;
 var readFile   = require('../test/_helpers.js').readFile;

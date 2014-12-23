@@ -2,7 +2,7 @@
 
 var fs           = require('fs');
 var options      = require('../lib/options')().defaults;
-var pleeease     = require('../lib/');
+var pleeease     = require('../lib/pleeease');
 var assert       = require('assert');
 var __dirnames__ = {
   features: 'test/features/',

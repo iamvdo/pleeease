@@ -5,7 +5,7 @@
   "author": {
     "name": "Vincent De Oliveira"
   },
-  "main": "./lib/index",
+  "main": "./lib/pleeease",
   "bin": {
     "pleeease": "./bin/pleeease",
     "pleeease-compile": "./bin/pleeease-compile",
