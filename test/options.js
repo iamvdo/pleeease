@@ -75,6 +75,8 @@ describe('Options', function () {
     opts.minifier.should.have.property('removeAllComments').eql(true);
     opts.minifier.should.have.property('preserveHacks').eql(true);
 
+  });
+
   it('should extend values when an object containing a default value is set', function () {
 
     opts.minifier = {
@@ -159,6 +161,16 @@ describe('Options', function () {
     opts.browsers = 'ie 9';
     opts = Options().extend(opts);
     opts.autoprefixer.should.have.property('browsers').eql(['ie 9']);
+
+  });
+
+  it('should error when using multiple preprocessors', function () {
+
+    opts.sass = true;
+    opts.less = true;
+    (function () {
+      return Options().extend(opts);
+    }).should.throwError();
 
   });
 
