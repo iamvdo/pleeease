@@ -95,6 +95,20 @@ describe('Preprocessors', function () {
 
     });
 
+    it('should force global sourcemaps', function () {
+
+      opts = {
+        less: {
+          sourceMap: true
+        }
+      };
+      opts = new Options().extend(opts);
+      var pre = new Preprocessor('a{}', '<no-source>', opts);
+      opts = pre.setSourcemapsOptions('less', opts);
+      pre.options.sourcemaps.should.eql(true);
+
+    });
+
     it('should create inline sourcemaps, no matter custom configuration', function () {
 
       opts = {
@@ -111,6 +125,20 @@ describe('Preprocessors', function () {
       opts.less = pre.setSourcemapsOptions('less', opts);
       opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(true);
       opts.less.sourceMap.should.not.have.property('sourceTest');
+
+    });
+
+    it('should generate good sourcemaps', function () {
+
+      var css      = fs.readFileSync(dirname + 'less/sourcemaps.less', 'utf-8');
+      var expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
+
+      opts.browsers   = ["last 99 versions"];
+      opts.sourcemaps = true;
+
+      var processed = pleeease.process(css, opts);
+
+      assert.equal(processed, expected);
 
     });
 
@@ -177,7 +205,6 @@ describe('Preprocessors', function () {
     });
 
   });
-
 /*
   it('should import files using preprocessor', function () {
 
@@ -221,7 +248,5 @@ describe('Preprocessors', function () {
     assert.equal(processed, expected);
 
   });
-  */
-
-
+*/
 });
