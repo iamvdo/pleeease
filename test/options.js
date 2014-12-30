@@ -139,6 +139,16 @@ describe('Options', function () {
 
   });
 
+  it('should have correct values when multiple browsers are set', function () {
+
+    opts.browsers = ['last 99 versions'];
+    opts = Options().extend(opts);
+    opts.rem.should.eql(['16px']);
+    opts.opacity.should.eql(true);
+    opts.pseudoElements.should.eql(true);
+
+  });
+
   it('should override values when `browsers` option is set in `autoprefixer` too', function () {
 
     opts.autoprefixer = { browsers: ['ie 9'] };
