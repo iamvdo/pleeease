@@ -1,10 +1,11 @@
 'use strict';
-var pleeease   = require('../lib/pleeease');
-var assert     = require('assert');
-var test       = require('../test/_helpers.js').test;
-var readFile   = require('../test/_helpers.js').readFile;
-var removeFile = require('../test/_helpers.js').removeFile;
-var requireWithoutCache = require('../test/_helpers.js').requireWithoutCache;
+var pleeease   = require('../lib/pleeease'),
+    Options    = require('../lib/options'),
+    postcss    = require('postcss');
+
+var assert     = require('assert'),
+    helpers    = require('../test/_helpers.js');
+
 /**
  *
  * Describe Pleeease
@@ -15,14 +16,48 @@ describe('Pleeease', function () {
   var options = {};
 
   beforeEach(function() {
-    options = requireWithoutCache('../lib/options')().defaults;
+    options = new Options().options;
     options.minifier = false;
+  });
+
+  it('should process CSS as string', function () {
+    pleeease.process('a{a:a}').should.eql('a{a:a}');
+  });
+
+  it('should process CSS as PostCSS AST', function () {
+    var ast = postcss.parse('a{a:a}');
+    pleeease.process(ast).should.eql('a{a:a}');
+  });
+
+  it('should error when no arguments are given', function () {
+    (function () {
+      return pleeease.process();
+    }).should.throw(/^CSS missing/);
+  });
+
+  it('should error when PostCSS fails parsing CSS', function () {
+    (function () {
+      return pleeease.process(true);
+    }).should.throwError;
+    (function () {
+      return pleeease.process({});
+    }).should.throwError;
+  });
+
+  it('should process CSS string with options', function () {
+    pleeease.process('a{}', {minifier: false}).should.eql('a{}');
+  });
+
+  it('should use filename from `sourcemaps.from` option', function () {
+    var file = 'in.css';
+    var map = pleeease.process('a{a:a}', {sourcemaps: {map: {inline: false}, from: file}}).map;
+    map._file.should.eql(file);
   });
 
   it('should create default inline sourcemaps', function () {
 
     options.sourcemaps = true;
-    test('sourcemaps', options);
+    helpers.test('sourcemaps', options);
 
   });
 
@@ -60,8 +95,8 @@ describe('Pleeease', function () {
       }
     }
     var standalone = require('../standalone/pleeease-' + version + '.min.js');
-    var css      = readFile('test/features/filters.css');
-    var expected = readFile('test/features/filters.out.css');
+    var css      = helpers.readFile('test/features/filters.css');
+    var expected = helpers.readFile('test/features/filters.out.css');
     options.autoprefixer = false;
     var result   = standalone.process(css, options);
 
