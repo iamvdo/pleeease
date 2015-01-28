@@ -45,6 +45,7 @@
     "postcss-custom-media": "^1.0.0",
     "postcss-custom-properties": "^3.0.0",
     "postcss-import": "^5.0.0",
+    "postcss-url": "~2.0.0",
     "stylus": "~0.49.3"
   },
   "devDependencies": {

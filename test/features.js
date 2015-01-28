@@ -144,6 +144,20 @@ describe('Postprocessors features', function () {
       assert.equal(processed,expected);
     });
 
+    it('should rebase url', function () {
+
+      opts.minifier = true;
+      opts.import   = {path: 'test/features'};
+
+      var _in  = fs.readFileSync('test/features/url.css', 'utf-8');
+      var _out = fs.readFileSync('test/features/url.out.css', 'utf-8');
+
+      var expected = pleeease.process(_in, opts);
+
+      assert.equal(expected, _out);
+
+    });
+
   });
 
   describe('Minifier', function () {
