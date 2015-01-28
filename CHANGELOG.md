@@ -1,31 +1,91 @@
 See changelog for versions > 1.0 in [Releases](https://github.com/iamvdo/pleeease/releases).
 
-##0.4.4 (2014-07-24)
+## HEAD
 
-* PostCSS 2.x
-* Standalone version now made with Browserify 5.x
+* Added:
+  * PostCSS 4.x (and all modules based on it)
+  * Autoprefixer 5.x
+  * Preprocessors (Sass, LESS, Stylus)
+* Fixed:
+  * `browsers` option when many browsers are set
 
-##0.4.3 (2014-07-20)
+## [2.0.0] - 2014-11-26
 
-* Fix encoding problem in 0.4.2
+* Added:
+  * PostCSS 3.x
+  * Pixrem 1.x
+  * New `browsers` option
+* Changed:
+  * `mqpacker` option set to `false` by default
 
-##0.4.2 (2014-07-17)
+## 1.1.2 - 2014-09-29
 
-* Better sourcemaps integration. Now read prev sourcemaps (from Sass for example)
-* Standalone version available now for each version
+* Fixed:
+  * Pixrem processor call
 
-##0.4.1 (2014-07-02)
+## 1.1.1 - 2014-08-28
 
-* Add pleeease-filters postprocessor: converts CSS shorthand filters to SVG equivalent
+* Fixed:
+  * Update CSS Wring
+  * Update CSS Mqpacker
 
-##0.4.0 (2014-06-27)
+## [1.1.0] - 2014-08-26
 
-* PostCSS 1.x and Autoprefixer 2.x
-* Better watch command
-* Sourcemaps support
-* Options `input` and `output` renamed to `in` and `out`
-* Improve `@import` (`options.optimizers.import` can now receive a dirname)
+* Added:
+  * Opacity filter for IE8
+* Fixed:
+  * `rem` conversion
 
-##0.3.0 (2014-05-19)
-* Add `@import` processor
-* Refactor default options
+## [1.0.0] - 2014-08-25
+
+* Added:
+  * Autoprefixer 3.x
+  * Pleeease.NEXT (mostly cssnext)
+* Changed:
+  * No more "subcategories" for options
+  * Use postcss-import module instead of specific one
+
+## 0.4.4 - 2014-07-24
+
+* Added:
+  * PostCSS 2.x
+* Changed:
+  * Standalone version now made with Browserify 5.x
+
+## 0.4.3 - 2014-07-20
+
+* Fixed:
+  * Fix encoding problem in 0.4.2
+
+## 0.4.2 - 2014-07-17
+
+* Added:
+  * Standalone version available now for each version
+* Changed:
+  * Better sourcemaps integration. Now read prev sourcemaps (from Sass for example)
+
+
+## 0.4.1 - 2014-07-02
+
+* Added:
+  * pleeease-filters postprocessor: converts CSS shorthand filters to SVG equivalent
+
+## 0.4.0 - 2014-06-27
+
+* Added:
+  * PostCSS 1.x and Autoprefixer 2.x
+  * Sourcemaps support
+* Changed:
+  * Better watch command
+  * Options `input` and `output` renamed to `in` and `out`
+  * Improve `@import` (`options.optimizers.import` can now receive a dirname)
+
+## 0.3.0 - 2014-05-19
+* Added:
+  * `@import` processor
+* Changed:
+  * Refactor default options
+
+[1.0.0]: https://github.com/iamvdo/pleeease/releases/tag/1.0.0
+[1.1.0]: https://github.com/iamvdo/pleeease/releases/tag/1.1.0
+[2.0.0]: https://github.com/iamvdo/pleeease/releases/tag/2.0.0
