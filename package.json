@@ -1,16 +1,11 @@
 {
   "name": "pleeease",
-  "version": "2.0.0",
-  "description": "Postprocess CSS with ease",
+  "version": "3.0.0",
+  "description": "Process CSS with ease",
   "author": {
     "name": "Vincent De Oliveira"
   },
   "main": "./lib/pleeease",
-  "bin": {
-    "pleeease": "./bin/pleeease",
-    "pleeease-compile": "./bin/pleeease-compile",
-    "pleeease-watch": "./bin/pleeease-watch"
-  },
   "keywords": [
     "postprocessor",
     "css",
@@ -26,15 +21,10 @@
   },
   "dependencies": {
     "autoprefixer-core": "~5.1.0",
-    "chokidar": "~0.8.2",
-    "cli-color": "~0.3.2",
-    "commander": "~2.2.0",
     "css-mqpacker": "^3.0.0",
     "csswring": "^3.0.0",
     "deep-extend": "~0.2.8",
     "less": "~2.1.1",
-    "mkdirp": "~0.4.0",
-    "multi-glob": "~0.4.0",
     "node-sass": "2.0.0-beta",
     "pixrem": "^1.0.0",
     "pleeease-filters": "^1.0.0",
