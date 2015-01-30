@@ -2,6 +2,7 @@
 var pleeease   = require('../lib/pleeease'),
     Options    = require('../lib/options'),
     postcss    = require('postcss');
+var minifier   = require('csswring');
 
 var assert     = require('assert'),
     helpers    = require('../test/_helpers.js');
@@ -52,6 +53,19 @@ describe('Pleeease', function () {
     var file = 'in.css';
     var map = pleeease.process('a{a:a}', {sourcemaps: {map: {inline: false}, from: file}}).map;
     map._file.should.eql(file);
+  });
+
+  it('can be used as a plugin', function () {
+    assert.equal(postcss().use(pleeease).process('a{a: a}').css, 'a{a:a}');
+  });
+
+  it('accepts options when use as a plugin', function () {
+    assert.equal(postcss().use(pleeease({minifier: false})).process('a{a: a}').css, 'a{a: a}');
+    assert.equal(postcss().use(pleeease({minifier: true})).process('a{a: a}').css, 'a{a:a}');
+  });
+
+  it('can be piped with another module', function () {
+    assert.equal(postcss().use(pleeease({minifier: false})).use(minifier).process('a{a: a}').css, 'a{a:a}');
   });
 
   it('should create default inline sourcemaps', function () {
