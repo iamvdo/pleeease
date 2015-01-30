@@ -107,9 +107,9 @@ describe('Pleeease', function () {
     var css      = helpers.readFile('test/features/filters.css');
     var expected = helpers.readFile('test/features/filters.out.css');
     options.autoprefixer = false;
-    var result   = standalone.process(css, options);
+    var processed   = standalone.process(css, options);
 
-    expected.should.be.eql(result);
+    processed.should.be.eql(expected);
 
   });
 
