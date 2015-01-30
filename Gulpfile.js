@@ -49,7 +49,7 @@ gulp.task('lint:lib', function() {
 gulp.task('lint:tests', function() {
     var jshint = require('gulp-jshint');
 
-    gulp.src(['spec/**/*.js'])
+    gulp.src(['tests/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
