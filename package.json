@@ -25,8 +25,7 @@
     "url": "https://github.com/iamvdo/pleeease"
   },
   "dependencies": {
-    "autoprefixer-core": "^5.0.0",
-    "browserslist": "^0.1.2",
+    "autoprefixer-core": "~5.1.0",
     "chokidar": "~0.8.2",
     "cli-color": "~0.3.2",
     "commander": "~2.2.0",
