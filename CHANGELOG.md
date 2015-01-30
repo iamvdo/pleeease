@@ -5,10 +5,13 @@ See changelog for versions > 1.0 in [Releases](https://github.com/iamvdo/pleeeas
 * Added:
   * PostCSS 4.x (and all modules based on it)
   * Autoprefixer 5.x
-  * Preprocessors (Sass, LESS, Stylus)
-  * Rebase urls in imported files with `postcss-url`
+  * Experimental: adding preprocessors (Sass, LESS, Stylus)
+  * Expose Pleeease as a plugin (can be chained in postcss)
 * Fixed:
   * `browsers` option when many browsers are set
+  * Rebase urls in imported files with `postcss-url`
+* Changed:
+  * Pleeease module no longer contains cli tool, there's now a new [pleeease-cli](https://github.com/iamvdo/pleeease-cli) module
 
 ## [2.0.0] - 2014-11-26
 
