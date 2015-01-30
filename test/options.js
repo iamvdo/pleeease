@@ -10,7 +10,6 @@ var fs = require('fs');
 describe('Options', function () {
 
   var Options  = require('../lib/options');
-  var assert   = require('assert');
 
   var opts;
 
@@ -18,7 +17,7 @@ describe('Options', function () {
     opts = {};
   });
 
-  it('should create options', function () {
+  it('creates options', function () {
 
     opts = Options();
     opts.should.have.property('options');
@@ -26,7 +25,7 @@ describe('Options', function () {
 
   });
 
-  it('should create options with default values', function () {
+  it('creates options with default values', function () {
 
     opts = Options();
     opts = opts.options;
@@ -34,7 +33,7 @@ describe('Options', function () {
 
   });
 
-  it('should extend values', function () {
+  it('extends values', function () {
 
     opts.autoprefixer = {
       browsers: ["last 20 versions"]
@@ -50,7 +49,7 @@ describe('Options', function () {
 
   });
 
-  it('should extend values when set to true', function () {
+  it('extends values when set to true', function () {
 
     opts.autoprefixer = true;
     opts = Options().extend(opts);
@@ -66,7 +65,7 @@ describe('Options', function () {
 
   });
 
-  it('should extend values when an object is set', function () {
+  it('extends values when an object is set', function () {
 
     opts.minifier = {
       removeAllComments: true
@@ -77,7 +76,7 @@ describe('Options', function () {
 
   });
 
-  it('should extend values when an object containing a default value is set', function () {
+  it('extends values when an object containing a default value is set', function () {
 
     opts.minifier = {
       preserveHacks: false,
@@ -89,7 +88,7 @@ describe('Options', function () {
 
   });
 
-  it('should extend values for pleeease.next', function () {
+  it('extends values for pleeease.next', function () {
 
     opts.next = true;
     opts = Options().extend(opts);
@@ -113,7 +112,7 @@ describe('Options', function () {
 
   });
 
-  it('should extend options/values from configuration file', function () {
+  it('extends options/values from configuration file', function () {
 
     var json = '{"autoprefixer": {"browsers": ["ie 8"]},"next": {"colors": true}}';
     var pleeeaseRC = fs.writeFileSync('test/.pleeeaserc', json);
@@ -127,7 +126,7 @@ describe('Options', function () {
 
   });
 
-  it('should override values when `browsers` option is set', function () {
+  it('overrides values when `browsers` option is set', function () {
 
     opts.rem = ['20px'];
     opts.browsers = ['ie 9'];
@@ -139,7 +138,7 @@ describe('Options', function () {
 
   });
 
-  it('should have correct values when multiple browsers are set', function () {
+  it('has correct values when multiple browsers are set', function () {
 
     opts.browsers = ['last 99 versions'];
     opts = Options().extend(opts);
@@ -149,7 +148,7 @@ describe('Options', function () {
 
   });
 
-  it('should override values when `browsers` option is set in `autoprefixer` too', function () {
+  it('overrides values when `browsers` option is set in `autoprefixer` too', function () {
 
     opts.autoprefixer = { browsers: ['ie 9'] };
     opts = Options().extend(opts);
@@ -157,7 +156,7 @@ describe('Options', function () {
 
   });
 
-  it('should use `browsers` option instead of `autoprefixer` one', function () {
+  it('uses `browsers` option instead of `autoprefixer` one', function () {
 
     opts.autoprefixer = { browsers: ['ie 8'] };
     opts.browsers = ['ie 9'];
@@ -166,7 +165,7 @@ describe('Options', function () {
 
   });
 
-  it('should convert `browsers` option to Array if it\'s not', function () {
+  it('converts `browsers` option to Array if it\'s not', function () {
 
     opts.browsers = 'ie 9';
     opts = Options().extend(opts);
@@ -174,7 +173,7 @@ describe('Options', function () {
 
   });
 
-  it('should error when using multiple preprocessors', function () {
+  it('errors when using multiple preprocessors', function () {
 
     opts.sass = true;
     opts.less = true;

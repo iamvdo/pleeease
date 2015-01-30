@@ -27,18 +27,18 @@ describe('Preprocessors', function () {
       opts.sass = true;
     });
 
-    it('should compile using Sass', function () {
+    it('compiles using Sass', function () {
 
       var css      = fs.readFileSync(dirname + 'sass/preproc.scss', 'utf-8');
       var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
 
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, expected);
+      processed.should.eql(expected);
 
     });
 
-    it('should import files', function () {
+    it('imports files', function () {
 
       var css      = fs.readFileSync(dirname + 'sass/import.scss', 'utf-8');
       var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
@@ -48,7 +48,7 @@ describe('Preprocessors', function () {
       };
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, expected);
+      processed.should.eql(expected);
 
     });
 
@@ -60,18 +60,18 @@ describe('Preprocessors', function () {
       opts.less = true;
     });
 
-    it('should compile using LESS', function () {
+    it('compiles using LESS', function () {
 
       var css      = fs.readFileSync(dirname + 'less/preproc.less', 'utf-8');
       var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
 
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, expected);
+      processed.should.eql(expected);
 
     });
 
-    it('should import files', function () {
+    it('imports files', function () {
 
       var css      = fs.readFileSync(dirname + 'less/import.less', 'utf-8');
       var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
@@ -81,11 +81,11 @@ describe('Preprocessors', function () {
       };
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, expected);
+      processed.should.eql(expected);
 
     });
 
-    it('should create inline sourcemaps when global sourcemaps option is set', function () {
+    it('creates inline sourcemaps when global sourcemaps option is set', function () {
 
       opts.sourcemaps = true;
       opts = new Options().extend(opts);
@@ -95,7 +95,7 @@ describe('Preprocessors', function () {
 
     });
 
-    it('should force global sourcemaps', function () {
+    it('forces global sourcemaps', function () {
 
       opts = {
         less: {
@@ -109,7 +109,7 @@ describe('Preprocessors', function () {
 
     });
 
-    it('should create inline sourcemaps, no matter custom configuration', function () {
+    it('creates inline sourcemaps, no matter custom configuration', function () {
 
       opts = {
         less: {
@@ -128,7 +128,7 @@ describe('Preprocessors', function () {
 
     });
 
-    it('should generate good sourcemaps', function () {
+    it('generates good sourcemaps', function () {
 
       var css      = fs.readFileSync(dirname + 'less/sourcemaps.less', 'utf-8');
       var expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
@@ -138,7 +138,7 @@ describe('Preprocessors', function () {
 
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, expected);
+      processed.should.eql(expected);
 
     });
 
@@ -150,18 +150,18 @@ describe('Preprocessors', function () {
       opts.stylus = true;
     });
 
-    it('should compile using Stylus', function () {
+    it('compiles using Stylus', function () {
 
       var css      = fs.readFileSync(dirname + 'stylus/preproc.styl', 'utf-8');
       var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
 
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, expected);
+      processed.should.eql(expected);
 
     });
 
-    it('should import files', function () {
+    it('imports files', function () {
 
       var css      = fs.readFileSync(dirname + 'stylus/import.styl', 'utf-8');
       var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
@@ -171,11 +171,11 @@ describe('Preprocessors', function () {
       };
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, expected);
+      processed.should.eql(expected);
 
     });
 
-    it('should create inline sourcemaps when global sourcemaps option is set', function () {
+    it('creates inline sourcemaps when global sourcemaps option is set', function () {
 
       opts.sourcemaps = true;
       opts = new Options().extend(opts);
@@ -185,7 +185,7 @@ describe('Preprocessors', function () {
 
     });
 
-    it('should create inline sourcemaps, no matter custom configuration', function () {
+    it('creates inline sourcemaps, no matter custom configuration', function () {
 
       opts = {
         stylus: {

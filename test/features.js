@@ -3,7 +3,6 @@
 var fs          = require('fs');
 var options     = require('../lib/options')().defaults;
 var pleeease    = require('../lib/pleeease');
-var assert      = require('assert');
 var test        = require('../test/_helpers.js').test;
 var __features  = require('../test/_helpers.js').dirname['features'];
 
@@ -23,7 +22,7 @@ describe('Postprocessors features', function () {
 
   describe('Prefixes', function () {
 
-    it('should generate -webkit- prefixes for calc() (support iOS6)', function () {
+    it('generates -webkit- prefixes for calc() (support iOS6)', function () {
 
       // options
       opts.autoprefixer = {browsers: ['iOS 6.1']};
@@ -35,13 +34,13 @@ describe('Postprocessors features', function () {
 
   describe('rem', function () {
 
-    it('should add fallback for rem unit', function () {
+    it('adds fallback for rem unit', function () {
 
       test('rem', opts);
 
     });
 
-    it('should convert rem using config', function () {
+    it('converts rem using config', function () {
 
       // options
       opts.rem = ['10px', {replace: true}];
@@ -53,7 +52,7 @@ describe('Postprocessors features', function () {
 
   describe('Pseudo-elements', function () {
 
-    it('should replace pseudo-elements syntax', function () {
+    it('replaces pseudo-elements syntax', function () {
 
       test('pseudoElements', opts);
 
@@ -63,7 +62,7 @@ describe('Postprocessors features', function () {
 
   describe('Filters', function () {
 
-    it('should convert CSS filters to SVG', function () {
+    it('converts CSS filters to SVG', function () {
 
       // options
       opts.autoprefixer = false;
@@ -71,7 +70,7 @@ describe('Postprocessors features', function () {
 
     });
 
-    it('should not convert CSS filters to SVG when asked', function () {
+    it('doesn\'t convert CSS filters to SVG when asked', function () {
 
       // options
       opts.autoprefixer = false;
@@ -82,7 +81,7 @@ describe('Postprocessors features', function () {
 
     });
 
-    it('should add IE filters when asked', function () {
+    it('adds IE filters when asked', function () {
 
       // options
       opts.autoprefixer = false;
@@ -96,7 +95,7 @@ describe('Postprocessors features', function () {
 
   describe('Opacity', function () {
 
-    it('should convert opacity into filter', function () {
+    it('converts opacity into filter', function () {
 
       // options
       test('opacity', opts);
@@ -107,7 +106,7 @@ describe('Postprocessors features', function () {
 
   describe('MQs', function () {
 
-    it('should combine media-queries', function () {
+    it('combines media-queries', function () {
 
       // options
       opts.minifier = true;
@@ -120,7 +119,7 @@ describe('Postprocessors features', function () {
 
   describe('Imports', function () {
 
-    it('should combine files with imports', function() {
+    it('combines files with imports', function() {
       var compile = function (inputs, options) {
         // get inputs files
         var CSS = inputs.map(function(input) {
@@ -141,20 +140,20 @@ describe('Postprocessors features', function () {
       var processed = compile(opts.in, opts);
       var expected = fs.readFileSync(__features + 'import.out.css').toString();
 
-      assert.equal(processed,expected);
+      processed.should.eql(expected);
     });
 
-    it('should rebase url', function () {
+    it('rebases urls', function () {
 
       opts.minifier = true;
       opts.import   = {path: 'test/features'};
 
-      var _in  = fs.readFileSync('test/features/url.css', 'utf-8');
-      var _out = fs.readFileSync('test/features/url.out.css', 'utf-8');
+      var _in      = fs.readFileSync('test/features/url.css', 'utf-8');
+      var expected = fs.readFileSync('test/features/url.out.css', 'utf-8');
 
-      var expected = pleeease.process(_in, opts);
+      var processed = pleeease.process(_in, opts);
 
-      assert.equal(expected, _out);
+      processed.should.eql(expected);
 
     });
 
@@ -162,7 +161,7 @@ describe('Postprocessors features', function () {
 
   describe('Minifier', function () {
 
-    it('should minify when asked', function() {
+    it('minifies when asked', function() {
       //css
       var css = '.elem {\n' +
               'color: #f39;\n' +
@@ -173,11 +172,11 @@ describe('Postprocessors features', function () {
       // process
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, expected);
+      processed.should.eql(expected);
 
     });
 
-    it('should minify all possible features', function() {
+    it('minifies all possible features', function() {
 
       // options
       opts.autoprefixer = false;
@@ -187,7 +186,7 @@ describe('Postprocessors features', function () {
 
     });
 
-    it('should keep hacks', function() {
+    it('keeps hacks', function() {
       //css
       var css = 'a{_color:#000}';
       // options
@@ -195,7 +194,7 @@ describe('Postprocessors features', function () {
       // process
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, css);
+      processed.should.eql(css);
 
     });
 
@@ -203,7 +202,16 @@ describe('Postprocessors features', function () {
 
   describe('NEXT', function () {
 
-    it('should combined all postprocessors', function () {
+    it('doesn\'t apply by default', function () {
+
+      // options
+      opts.autoprefixer = false;
+      opts.same = true;
+      test('next', opts);
+
+    });
+
+    it('applies all postprocessors', function () {
 
       // options
       opts.autoprefixer = {browsers: ['iOS 6.1']};
@@ -212,7 +220,16 @@ describe('Postprocessors features', function () {
 
     });
 
-    it('should minify correctly', function () {
+    it('applies only one feature when asked', function () {
+
+        // options
+        opts.autoprefixer = false;
+        opts.next = {customProperties: true};
+        test('next.options', opts);
+
+      });
+
+    it('minifies correctly', function () {
 
       // options
       opts.autoprefixer = false;
@@ -225,29 +242,7 @@ describe('Postprocessors features', function () {
       // process
       var processed = pleeease.process(css, opts);
 
-      assert.equal(processed, expected);
-
-    });
-
-    describe('Options', function () {
-
-      it('should not evaluate any by default', function () {
-
-        // options
-        opts.autoprefixer = false;
-        opts.same = true;
-        test('next.options', opts);
-
-      });
-
-      it('should evaluate only one when asked', function () {
-
-        // options
-        opts.autoprefixer = false;
-        opts.next = {customProperties: true};
-        test('next.options', opts);
-
-      });
+      processed.should.eql(expected);
 
     });
 
