@@ -20,12 +20,12 @@ describe('Postprocessors features', function () {
     opts.minifier = false;
   });
 
-  describe('Prefixes', function () {
+  describe('autoprefixer', function () {
 
     it('generates -webkit- prefixes for calc() (support iOS6)', function () {
 
       // options
-      opts.autoprefixer = {browsers: ['iOS 6.1']};
+      opts.autoprefixer = {browsers: ['iOS 6']};
       test('prefixes', opts);
 
     });
