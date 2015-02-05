@@ -1,6 +1,4 @@
-See changelog for versions > 1.0 in [Releases](https://github.com/iamvdo/pleeease/releases).
-
-## HEAD
+## [3.0.0] - 2015-02-05
 
 * Added:
   * PostCSS 4.x (and all modules based on it)
@@ -93,3 +91,4 @@ See changelog for versions > 1.0 in [Releases](https://github.com/iamvdo/pleeeas
 [1.0.0]: https://github.com/iamvdo/pleeease/releases/tag/1.0.0
 [1.1.0]: https://github.com/iamvdo/pleeease/releases/tag/1.1.0
 [2.0.0]: https://github.com/iamvdo/pleeease/releases/tag/2.0.0
+[3.0.0]: https://github.com/iamvdo/pleeease/releases/tag/3.0.0
