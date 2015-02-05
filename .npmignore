@@ -1,7 +1,7 @@
 node_modules
-spec
+test
+standalone
 
+.gitattributes
 .gitignore
-.jshintignore
 .jshintrc
-jshint.sh
