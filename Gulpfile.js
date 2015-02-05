@@ -27,7 +27,10 @@ gulp.task('standalone', ['clean'], function() {
     var version = JSON.parse(fs.readFileSync('package.json', 'utf-8'))['version'];
 
     return browserify({entries: './lib/pleeease.js', standalone: 'pleeease'})
+          .ignore('node-sass')
+          .ignore('less')
           .ignore('mime')
+          .ignore('stylus')
           .bundle()
           .pipe(source('pleeease-' + version + '.min.js'))
           .pipe(streamify(uglify()))
