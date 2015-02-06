@@ -200,7 +200,7 @@ describe('Postprocessors features', function () {
 
   });
 
-  describe('NEXT', function () {
+  describe('cssnext', function () {
 
     it('doesn\'t apply by default', function () {
 
@@ -215,26 +215,40 @@ describe('Postprocessors features', function () {
 
       // options
       opts.autoprefixer = {browsers: ['iOS 6.1']};
-      opts.next = true;
+      opts.cssnext = true;
       test('next', opts);
 
     });
 
-    it('applies only one feature when asked', function () {
+    it('uses options when asked', function () {
 
-        // options
-        opts.autoprefixer = false;
-        opts.next = {customProperties: true};
-        test('next.options', opts);
+      // options
+      opts.autoprefixer = false;
+      opts.cssnext = {features: {customProperties: {preserve: true}}};
+      test('next.options', opts);
 
-      });
+    });
+
+    it('doesn\'t use autoprefixer from cssnext', function () {
+
+      // options
+      opts.autoprefixer = false;
+      opts.cssnext = true;
+      opts.same  = true;
+      test('prefixes', opts);
+
+      opts.autoprefixer = {browsers: ['ios 6']};
+      opts.same  = false;
+      test('prefixes', opts);
+
+    });
 
     it('minifies correctly', function () {
 
       // options
       opts.autoprefixer = false;
       opts.minifier = true;
-      opts.next = true;
+      opts.cssnext = true;
 
       var css = fs.readFileSync(__features + 'next.css', 'utf-8');
       var expected = fs.readFileSync(__features + 'next.minify.out.css', 'utf-8');

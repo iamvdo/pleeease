@@ -88,27 +88,51 @@ describe('Options', function () {
 
   });
 
-  it('extends values for pleeease.next', function () {
+  it('extends values for cssnext', function () {
 
-    opts.next = true;
+    opts.cssnext = true;
     opts = Options().extend(opts);
-    opts.next.should.have.property('customProperties').eql({});
-    opts.next.should.have.property('calc').eql(true);
+    opts.cssnext.should.have.property('import').eql(false);
+    opts.cssnext.features.should.have.property('autoprefixer').eql(false);
 
-    opts.next = {
-      customProperties: true
+
+    opts.cssnext = {
+      features: {
+        customProperties: {
+          preserve: true
+        }
+      }
     };
     opts = Options().extend(opts);
-    opts.next.customProperties.should.eql({});
-    opts.next.should.not.have.property('calc');
+    opts.cssnext.features.customProperties.should.have.property('preserve').eql(true);
+    opts.cssnext.features.should.have.property('autoprefixer').eql(false);
+    opts.cssnext.should.have.property('import').eql(false);
 
-    opts.next = {
-      customProperties: false,
-      colors: true
+    opts.cssnext = {
+      features: {
+        customProperties: false
+      }
     };
     opts = Options().extend(opts);
-    opts.next.should.have.property('customProperties').eql(false);
-    opts.next.should.have.property('colors').eql({});
+    opts.cssnext.features.should.have.property('customProperties').eql(false);
+    opts.cssnext.features.should.have.property('autoprefixer').eql(false);
+    opts.cssnext.should.have.property('import').eql(false);
+
+    opts.cssnext = {
+      import: true
+    };
+    opts = Options().extend(opts);
+    opts.cssnext.should.have.property('import').eql(true);
+
+    opts.cssnext = {
+      features: {
+        autoprefixer: {
+          browsers: ['ios 6']
+        }
+      }
+    };
+    opts = Options().extend(opts);
+    opts.cssnext.features.autoprefixer.should.have.property('browsers').eql(['ios 6']);
 
   });
 
