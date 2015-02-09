@@ -51,7 +51,7 @@ describe('Pleeease', function () {
   it('uses filename from `sourcemaps.from` option', function () {
     var file = 'in.css';
     var map = pleeease.process('a{a:a}', {sourcemaps: {map: {inline: false}, from: file}}).map;
-    map._file.should.eql(file);
+    map.toJSON().sources[0].should.eql(file);
   });
 
   it('can be used as a plugin', function () {
