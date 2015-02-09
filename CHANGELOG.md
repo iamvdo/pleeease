@@ -1,3 +1,8 @@
+## [3.0.1] - 2015-02-09
+
+* Fixed:
+  * URLs rewriting by adding `to` to PostCSS options
+
 ## [3.0.0] - 2015-02-05
 
 * Added:
