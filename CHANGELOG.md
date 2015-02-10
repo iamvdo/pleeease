@@ -1,4 +1,10 @@
-## [3.0.1] - 2015-02-09
+## 3.1.0 - 2015-02-10
+
+* Added:
+  * Less 2.4.0
+  * Stylus 0.50.0
+
+## 3.0.1 - 2015-02-09
 
 * Fixed:
   * URLs rewriting by adding `to` to PostCSS options
