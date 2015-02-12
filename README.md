@@ -15,6 +15,10 @@ Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor and 
 
 [![Build Status](https://travis-ci.org/iamvdo/pleeease.svg?branch=master)](https://travis-ci.org/iamvdo/pleeease)
 
+##Plugins
+* for [less.js](https://github.com/bassjobsen/less-plugin-pleeease)
+* for [Meteor](https://github.com/bassjobsen/less-pleeease)
+
 ##Workflow
 
 * for [Gulp](https://github.com/danielhusar/gulp-pleeease)
