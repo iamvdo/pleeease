@@ -25,7 +25,7 @@
     "csswring": "^3.0.0",
     "deep-extend": "~0.2.8",
     "less": "~2.4.0",
-    "node-sass": "2.0.0-beta",
+    "node-sass": "~2.0.0",
     "pixrem": "^1.0.0",
     "pleeease-filters": "^1.0.0",
     "postcss": "^4.0.0",
