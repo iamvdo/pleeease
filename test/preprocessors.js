@@ -15,6 +15,8 @@ var dirname = 'test/preprocessors/';
 describe('Preprocessors', function () {
 
   var opts;
+  var sourcemapLine   = 1;
+  var sourcemapColumn = 541;
 
   beforeEach(function() {
     opts = {};
@@ -49,6 +51,65 @@ describe('Preprocessors', function () {
       var processed = pleeease.process(css, opts);
 
       processed.should.eql(expected);
+
+    });
+
+    it('creates inline sourcemaps when global sourcemaps option is set', function () {
+
+      opts.sourcemaps = true;
+      opts = new Options().extend(opts);
+      var pre = new Preprocessor('a{}', '<no-source>', opts);
+      opts.sass = pre.setSourcemapsOptions('sass', opts);
+      opts.sass.sourceMap.should.eql(true);
+      opts.sass.sourceMapEmbed.should.eql(true);
+
+    });
+
+    it('forces global sourcemaps', function () {
+
+      opts = {
+        sass: {
+          sourceMap: true
+        }
+      };
+      opts = new Options().extend(opts);
+      var pre = new Preprocessor('a{}', '<no-source>', opts);
+      opts = pre.setSourcemapsOptions('sass', opts);
+      pre.options.sourcemaps.should.eql(true);
+
+    });
+
+    it('creates inline sourcemaps, no matter custom configuration', function () {
+
+      opts = {
+        sass: {
+          sourceMap: true,
+          sourceMapEmbed: false
+        },
+        sourcemaps: true
+      };
+      opts = new Options().extend(opts);
+      var pre = new Preprocessor('a{}', '<no-source>', opts);
+      opts.sass = pre.setSourcemapsOptions('sass', opts);
+      opts.sass.sourceMap.should.eql(true);
+      opts.sass.sourceMap.should.eql(true);
+
+    });
+
+    it('generates good sourcemaps', function () {
+
+      var css      = fs.readFileSync(dirname + 'sass/sourcemaps.scss', 'utf-8');
+      var expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
+
+      opts.browsers   = ["last 99 versions"];
+      opts.sourcemaps = {map: {inline: false}};
+
+      var processed = pleeease.process(css, opts);
+      var Map = require('source-map');
+      var smc = new Map.SourceMapConsumer(processed.map.toJSON());
+      var positions = smc.originalPositionFor({line: sourcemapLine, column: sourcemapColumn});
+
+      positions.line.should.eql(31);
 
     });
 
@@ -134,11 +195,15 @@ describe('Preprocessors', function () {
       var expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
 
       opts.browsers   = ["last 99 versions"];
-      opts.sourcemaps = true;
+      opts.sourcemaps = {map: {inline: false}};
 
       var processed = pleeease.process(css, opts);
 
-      processed.should.eql(expected);
+      var Map = require('source-map');
+      var smc = new Map.SourceMapConsumer(processed.map.toJSON());
+      var positions = smc.originalPositionFor({line: sourcemapLine, column: sourcemapColumn});
+
+      positions.line.should.eql(31);
 
     });
 
@@ -201,6 +266,24 @@ describe('Preprocessors', function () {
       opts.stylus = pre.setSourcemapsOptions('stylus', opts);
       opts.stylus.sourcemap.should.have.property('inline').eql(true);
       opts.stylus.sourcemap.should.not.have.property('sourceTest');
+
+    });
+
+    it('generates good sourcemaps', function () {
+
+      var css      = fs.readFileSync(dirname + 'stylus/sourcemaps.styl', 'utf-8');
+      var expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
+
+      opts.browsers   = ["last 99 versions"];
+      opts.sourcemaps = {map: {inline: false}, from: dirname + 'stylus/sourcemaps.styl'};
+
+      var processed = pleeease.process(css, opts);
+
+      var Map = require('source-map');
+      var smc = new Map.SourceMapConsumer(processed.map.toJSON());
+      var positions = smc.originalPositionFor({line: sourcemapLine, column: sourcemapColumn});
+
+      positions.line.should.eql(31);
 
     });
 

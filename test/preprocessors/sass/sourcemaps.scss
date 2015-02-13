@@ -1,4 +1,4 @@
-@color: #fff;
+$color: #fff;
 
 
 
@@ -8,7 +8,7 @@
 
 
 .element {
-  color: @color;
+  color: $color;
   display: flex;
   flex-direction: column;
   justify-content: center;
