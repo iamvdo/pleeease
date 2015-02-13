@@ -21,12 +21,14 @@ describe('Pleeease', function () {
   });
 
   it('processes CSS as string', function () {
-    pleeease.process('a{a:a}').should.eql('a{a:a}');
+    var css = 'a{a:a}';
+    pleeease.process(css).should.eql(css);
   });
 
   it('processes CSS as PostCSS AST', function () {
-    var ast = postcss.parse('a{a:a}');
-    pleeease.process(ast).should.eql('a{a:a}');
+    var css = 'a{a:a}';
+    var ast = postcss.parse(css);
+    pleeease.process(ast).should.eql(css);
   });
 
   it('throws error when no arguments are given', function () {
@@ -45,7 +47,8 @@ describe('Pleeease', function () {
   });
 
   it('processes CSS string with options', function () {
-    pleeease.process('a{}', {minifier: false}).should.eql('a{}');
+    var css = 'a{}';
+    pleeease.process(css, {minifier: false}).should.eql(css);
   });
 
   it('uses filename from `sourcemaps.from` option', function () {
