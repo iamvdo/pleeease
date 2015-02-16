@@ -1,3 +1,11 @@
+## 3.2.0 - 2015-02-16
+
+* Added:
+  * Sass 2.0.0 (node-sass)
+* Fixed:
+  * Sourcemaps from preprocessors to postprocessors
+  * Read .pleeeaserc file with Node.js 0.12
+
 ## 3.1.0 - 2015-02-10
 
 * Added:
