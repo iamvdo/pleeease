@@ -4,9 +4,9 @@ var Preprocessor = require('../lib/preprocessor');
 var Options      = require('../lib/options');
 var pleeease     = require('../lib/pleeease');
 var fs           = require('fs');
-var assert       = require('assert');
 
 var dirname = 'test/preprocessors/';
+
 /**
  *
  * Describe Features
@@ -15,321 +15,268 @@ var dirname = 'test/preprocessors/';
 describe('Preprocessors', function () {
 
   var opts;
-  var sourcemapLine   = 1;
-  var sourcemapColumn = 541;
 
-  beforeEach(function() {
+  beforeEach(function () {
     opts = {};
     opts.minifier = true;
   });
 
-  describe('Sass', function () {
+  describe('Processes plain ol\' CSS', function () {
 
-    beforeEach(function() {
+    var css, expected, processed;
+
+    beforeEach(function () {
+      css      = fs.readFileSync(dirname + 'css.css', 'utf-8');
+      expected = fs.readFileSync(dirname + 'css.out.css', 'utf-8');
+      opts.import = {path: dirname};
+    });
+
+    afterEach(function () {
+      processed = pleeease.process(css, opts);
+      processed.should.eql(expected);
+    });
+    
+    it('using Sass', function () {
       opts.sass = true;
     });
-
-    it('compiles using Sass', function () {
-
-      var css      = fs.readFileSync(dirname + 'sass/preproc.scss', 'utf-8');
-      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
-
-      var processed = pleeease.process(css, opts);
-
-      processed.should.eql(expected);
-
-    });
-
-    it('imports files', function () {
-
-      var css      = fs.readFileSync(dirname + 'sass/import.scss', 'utf-8');
-      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
-
-      opts.sass = {
-        includePaths: ['test/preprocessors/sass']
-      };
-      var processed = pleeease.process(css, opts);
-
-      processed.should.eql(expected);
-
-    });
-
-    it('creates inline sourcemaps when global sourcemaps option is set', function () {
-
-      opts.sourcemaps = true;
-      opts = new Options().extend(opts);
-      var pre = new Preprocessor('a{}', '<no-source>', opts);
-      opts.sass = pre.setSourcemapsOptions('sass', opts);
-      opts.sass.sourceMap.should.eql(true);
-      opts.sass.sourceMapEmbed.should.eql(true);
-
-    });
-
-    it('forces global sourcemaps', function () {
-
-      opts = {
-        sass: {
-          sourceMap: true
-        }
-      };
-      opts = new Options().extend(opts);
-      var pre = new Preprocessor('a{}', '<no-source>', opts);
-      opts = pre.setSourcemapsOptions('sass', opts);
-      pre.options.sourcemaps.should.eql(true);
-
-    });
-
-    it('creates inline sourcemaps, no matter custom configuration', function () {
-
-      opts = {
-        sass: {
-          sourceMap: true,
-          sourceMapEmbed: false
-        },
-        sourcemaps: true
-      };
-      opts = new Options().extend(opts);
-      var pre = new Preprocessor('a{}', '<no-source>', opts);
-      opts.sass = pre.setSourcemapsOptions('sass', opts);
-      opts.sass.sourceMap.should.eql(true);
-      opts.sass.sourceMap.should.eql(true);
-
-    });
-
-    it('generates good sourcemaps', function () {
-
-      var css      = fs.readFileSync(dirname + 'sass/sourcemaps.scss', 'utf-8');
-      var expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
-
-      opts.browsers   = ["last 99 versions"];
-      opts.sourcemaps = {map: {inline: false}};
-
-      var processed = pleeease.process(css, opts);
-      var Map = require('source-map');
-      var smc = new Map.SourceMapConsumer(processed.map.toJSON());
-      var positions = smc.originalPositionFor({line: sourcemapLine, column: sourcemapColumn});
-
-      positions.line.should.eql(31);
-
-    });
-
-  });
-
-  describe('LESS', function () {
-
-    beforeEach(function() {
+    it('using LESS', function () {
       opts.less = true;
     });
-
-    it('compiles using LESS', function () {
-
-      var css      = fs.readFileSync(dirname + 'less/preproc.less', 'utf-8');
-      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
-
-      var processed = pleeease.process(css, opts);
-
-      processed.should.eql(expected);
-
-    });
-
-    it('imports files', function () {
-
-      var css      = fs.readFileSync(dirname + 'less/import.less', 'utf-8');
-      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
-
-      opts.less = {
-        paths: ['test/preprocessors/less']
-      };
-      var processed = pleeease.process(css, opts);
-
-      processed.should.eql(expected);
-
-    });
-
-    it('creates inline sourcemaps when global sourcemaps option is set', function () {
-
-      opts.sourcemaps = true;
-      opts = new Options().extend(opts);
-      var pre = new Preprocessor('a{}', '<no-source>', opts);
-      opts.less = pre.setSourcemapsOptions('less', opts);
-      opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(true);
-
-    });
-
-    it('forces global sourcemaps', function () {
-
-      opts = {
-        less: {
-          sourceMap: true
-        }
-      };
-      opts = new Options().extend(opts);
-      var pre = new Preprocessor('a{}', '<no-source>', opts);
-      opts = pre.setSourcemapsOptions('less', opts);
-      pre.options.sourcemaps.should.eql(true);
-
-    });
-
-    it('creates inline sourcemaps, no matter custom configuration', function () {
-
-      opts = {
-        less: {
-          sourceMap: {
-            sourceMapFileInline: false,
-            sourceTest: 'test'
-          }
-        },
-        sourcemaps: true
-      };
-      opts = new Options().extend(opts);
-      var pre = new Preprocessor('a{}', '<no-source>', opts);
-      opts.less = pre.setSourcemapsOptions('less', opts);
-      opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(true);
-      opts.less.sourceMap.should.not.have.property('sourceTest');
-
-    });
-
-    it('generates good sourcemaps', function () {
-
-      var css      = fs.readFileSync(dirname + 'less/sourcemaps.less', 'utf-8');
-      var expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
-
-      opts.browsers   = ["last 99 versions"];
-      opts.sourcemaps = {map: {inline: false}};
-
-      var processed = pleeease.process(css, opts);
-
-      var Map = require('source-map');
-      var smc = new Map.SourceMapConsumer(processed.map.toJSON());
-      var positions = smc.originalPositionFor({line: sourcemapLine, column: sourcemapColumn});
-
-      positions.line.should.eql(31);
-
-    });
-
-  });
-
-  describe('Stylus', function () {
-
-    beforeEach(function() {
+    it('using Stylus', function () {
       opts.stylus = true;
     });
 
-    it('compiles using Stylus', function () {
+  });
 
-      var css      = fs.readFileSync(dirname + 'stylus/preproc.styl', 'utf-8');
-      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
+  describe('Compiles', function () {
 
-      var processed = pleeease.process(css, opts);
+    var css, expected, processed;
 
-      processed.should.eql(expected);
-
+    beforeEach(function () {
+      expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
     });
 
-    it('imports files', function () {
+    afterEach(function () {
+      processed.should.eql(expected);
+    });
 
-      var css      = fs.readFileSync(dirname + 'stylus/import.styl', 'utf-8');
-      var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
+    it('using Sass', function () {
+      opts.sass = true;
+      css       = fs.readFileSync(dirname + 'sass/preproc.scss', 'utf-8');
+      processed = pleeease.process(css, opts);
+    });
+    it('using LESS', function () {
+      opts.less = true;
+      css       = fs.readFileSync(dirname + 'less/preproc.less', 'utf-8');
+      processed = pleeease.process(css, opts);
+    });
+    it('using Stylus', function () {
+      opts.stylus = true;
+      css         = fs.readFileSync(dirname + 'stylus/preproc.styl', 'utf-8');
+      processed   = pleeease.process(css, opts);
+    });
 
+  });
+
+  describe('Imports', function () {
+
+    var css, expected, processed;
+
+    beforeEach(function () {
+      expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
+    });
+
+    afterEach(function () {
+      processed.should.eql(expected);
+    });
+
+    it('files using Sass', function () {
+      css       = fs.readFileSync(dirname + 'sass/import.scss', 'utf-8');
+      opts.sass = {
+        includePaths: ['test/preprocessors/sass']
+      };
+      processed = pleeease.process(css, opts);
+    });
+    it('files using LESS', function () {
+      css       = fs.readFileSync(dirname + 'less/import.less', 'utf-8');
+      opts.less = {
+        paths: ['test/preprocessors/less']
+      };
+      processed = pleeease.process(css, opts);
+    });
+    it('files using Stylus', function () {
+      css         = fs.readFileSync(dirname + 'stylus/import.styl', 'utf-8');
       opts.stylus = {
         paths: ['test/preprocessors/stylus']
       };
-      var processed = pleeease.process(css, opts);
+      processed = pleeease.process(css, opts);
+    });
 
-      processed.should.eql(expected);
+  });
+
+  describe('Sourcemaps', function () {
+
+    describe('creates specific options when global sourcemaps option is true', function () {
+
+      beforeEach(function () {
+        opts.sourcemaps = true;
+      });
+
+      it('using Sass', function () {
+        opts.sass = true;
+        opts = new Options().extend(opts);
+        var pre = new Preprocessor('a{}', '<no-source>', opts);
+        opts.sass = pre.setSourcemapsOptions('sass', opts);
+        opts.sass.sourceMap.should.eql(true);
+        opts.sass.sourceMapEmbed.should.eql(true);
+      });
+      it('using LESS', function () {
+        opts.less = true;
+        opts = new Options().extend(opts);
+        var pre = new Preprocessor('a{}', '<no-source>', opts);
+        opts.less = pre.setSourcemapsOptions('less', opts);
+        opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(true);
+      });
+      it('using Stylus', function () {
+        opts.stylus = true;
+        opts = new Options().extend(opts);
+        var pre = new Preprocessor('a{}', '<no-source>', opts);
+        opts.stylus = pre.setSourcemapsOptions('stylus', opts);
+        opts.stylus.sourcemap.should.have.property('inline').eql(true);
+      });
 
     });
 
-    it('creates inline sourcemaps when global sourcemaps option is set', function () {
+    describe('creates specific options, no matter custom configuration', function () {
 
-      opts.sourcemaps = true;
-      opts = new Options().extend(opts);
-      var pre = new Preprocessor('a{}', '<no-source>', opts);
-      opts.stylus = pre.setSourcemapsOptions('stylus', opts);
-      opts.stylus.sourcemap.should.have.property('inline').eql(true);
+      it('using Sass', function () {
+        opts = {
+          sass: {
+            sourceMap: true,
+            sourceMapEmbed: false
+          },
+          sourcemaps: true
+        };
+        opts = new Options().extend(opts);
+        var pre = new Preprocessor('a{}', '<no-source>', opts);
+        opts.sass = pre.setSourcemapsOptions('sass', opts);
+        opts.sass.sourceMap.should.eql(true);
+        opts.sass.sourceMap.should.eql(true);
+      });
+      it('using LESS', function () {
+        opts = {
+          less: {
+            sourceMap: {
+              sourceMapFileInline: false,
+              sourceTest: 'test'
+            }
+          },
+          sourcemaps: true
+        };
+        opts = new Options().extend(opts);
+        var pre = new Preprocessor('a{}', '<no-source>', opts);
+        opts.less = pre.setSourcemapsOptions('less', opts);
+        opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(true);
+        opts.less.sourceMap.should.not.have.property('sourceTest');
+      });
+      it('using Stylus', function () {
+        opts = {
+          stylus: {
+            sourcemap: {
+              inline: false,
+              sourceTest: 'test'
+            }
+          },
+          sourcemaps: true
+        };
+        opts = new Options().extend(opts);
+        var pre = new Preprocessor('a{}', '<no-source>', opts);
+        opts.stylus = pre.setSourcemapsOptions('stylus', opts);
+        opts.stylus.sourcemap.should.have.property('inline').eql(true);
+        opts.stylus.sourcemap.should.not.have.property('sourceTest');
+      });
 
     });
 
-    it('creates inline sourcemaps, no matter custom configuration', function () {
+    describe('forces global sourcemaps', function () {
 
-      opts = {
-        stylus: {
-          sourcemap: {
-            inline: false,
-            sourceTest: 'test'
+      var pre;
+
+      afterEach(function () {
+        pre.options.sourcemaps.should.eql(true);
+      });
+
+      it('using Sass', function () {
+        opts = {
+          sass: {
+            sourceMap: true
           }
-        },
-        sourcemaps: true
-      };
-      opts = new Options().extend(opts);
-      var pre = new Preprocessor('a{}', '<no-source>', opts);
-      opts.stylus = pre.setSourcemapsOptions('stylus', opts);
-      opts.stylus.sourcemap.should.have.property('inline').eql(true);
-      opts.stylus.sourcemap.should.not.have.property('sourceTest');
+        };
+        opts = new Options().extend(opts);
+        pre  = new Preprocessor('a{}', '<no-source>', opts);
+        opts = pre.setSourcemapsOptions('sass', opts);
+      });
+      it('using LESS', function () {
+        opts = {
+          less: {
+            sourceMap: true
+          }
+        };
+        opts = new Options().extend(opts);
+        pre  = new Preprocessor('a{}', '<no-source>', opts);
+        opts = pre.setSourcemapsOptions('less', opts);
+      });
+      it('using Stylus', function () {
+        opts = {
+          stylus: {
+            sourcemap: true
+          }
+        };
+        opts = new Options().extend(opts);
+        pre  = new Preprocessor('a{}', '<no-source>', opts);
+        opts = pre.setSourcemapsOptions('stylus', opts);
+      });
 
     });
 
-    it('generates good sourcemaps', function () {
+    describe('generates good sourcemaps', function () {
 
-      var css      = fs.readFileSync(dirname + 'stylus/sourcemaps.styl', 'utf-8');
-      var expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
+      var css, expected, processed;
+      var sourcemapLine   = 1;
+      var sourcemapColumn = 541;
 
-      opts.browsers   = ["last 99 versions"];
-      opts.sourcemaps = {map: {inline: false}, from: dirname + 'stylus/sourcemaps.styl'};
+      beforeEach(function () {
+        opts.browsers   = ["last 99 versions"];
+        opts.sourcemaps = {map: {inline: false}};
+        expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
+      });
 
-      var processed = pleeease.process(css, opts);
+      afterEach(function () {
+        var Map = require('source-map');
+        var smc = new Map.SourceMapConsumer(processed.map.toJSON());
+        var positions = smc.originalPositionFor({line: sourcemapLine, column: sourcemapColumn});
+        positions.line.should.eql(31);
+      })
 
-      var Map = require('source-map');
-      var smc = new Map.SourceMapConsumer(processed.map.toJSON());
-      var positions = smc.originalPositionFor({line: sourcemapLine, column: sourcemapColumn});
-
-      positions.line.should.eql(31);
+      it('using Sass', function () {
+        css       = fs.readFileSync(dirname + 'sass/sourcemaps.scss', 'utf-8');
+        opts.sass = true;
+        processed = pleeease.process(css, opts);
+      });
+      it('using LESS', function () {
+        css       = fs.readFileSync(dirname + 'less/sourcemaps.less', 'utf-8');
+        opts.less = true;
+        processed = pleeease.process(css, opts);
+      });
+      it('using Stylus', function () {
+        css      = fs.readFileSync(dirname + 'stylus/sourcemaps.styl', 'utf-8');
+        opts.stylus = true;
+        opts.sourcemaps.from = dirname + 'stylus/sourcemaps.styl';
+        processed = pleeease.process(css, opts);
+      });
 
     });
 
   });
-/*
-  it('should import files using preprocessor', function () {
 
-    var scss     = fs.readFileSync(dirname + 'import.scss', 'utf-8');
-    var expected = fs.readFileSync(dirname + 'preproc.out.css', 'utf-8');
-
-    opts.sass = {
-      includePaths: ['test/preproc']
-    };
-    var processed = pleeease.process(scss, opts);
-
-    assert.equal(processed, expected);
-
-  });
-
-  it('should process plain ol\' CSS', function () {
-
-    var scss     = fs.readFileSync(dirname + 'css.css', 'utf-8');
-    var expected = fs.readFileSync(dirname + 'css.out.css', 'utf-8');
-
-    // set pleeease import, not sass
-    opts.import = {path: 'test/preproc'};
-
-    var processed = pleeease.process(scss, opts);
-
-    assert.equal(processed, expected);
-
-  });
-
-  it('should generates and updates sourcemaps', function () {
-
-    var scss     = fs.readFileSync('test/preproc/sourcemaps.scss', 'utf-8');
-    var expected = fs.readFileSync('test/preproc/sourcemaps.out.css', 'utf-8');
-
-    // set prefixes for all browsers
-    opts.autoprefixer = { browsers: ['last 99 versions'] };
-    // set sourcemaps
-    opts.sourcemaps = true;
-    var processed = pleeease.process(scss, opts);
-
-    assert.equal(processed, expected);
-
-  });
-*/
 });
