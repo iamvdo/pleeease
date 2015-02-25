@@ -152,4 +152,68 @@ describe('Options', function () {
     }).should.throwError();
   });
 
+  describe('sets sourcemaps files', function () {
+
+    var input  = 'input.css';
+    var output = 'output.css';
+
+    it('creates default sourcemaps', function () {
+      opts.sourcemaps = true;
+      opts = Options().extend(opts);
+      opts.sourcemaps.should.have.property('map').eql(true);
+    });
+
+    it('uses `from` and `to` from sourcemaps for filename', function () {
+      opts.sourcemaps = {
+        'from': input,
+        'to'  : output
+      };
+      opts = Options().extend(opts);
+      opts.sourcemaps.should.have.property('map').eql(true);
+      opts.sourcemaps.should.have.property('from').eql(input);
+      opts.sourcemaps.should.have.property('to').eql(output);
+    });
+
+    it('removes `in` and `out` and set `from` and `to`', function () {
+      opts.in  = input;
+      opts.out = output;
+      opts.sourcemaps = true;
+      opts = Options().extend(opts);
+      console.log(opts);
+      (opts.in  === undefined).should.be.true;
+      (opts.out === undefined).should.be.true;
+      opts.sourcemaps.should.have.property('from').eql(input);
+      opts.sourcemaps.should.have.property('to').eql(output);
+    });
+
+    it('uses `from` and `to` if both `in`/`out` and `from`/`to` are set', function () {
+      opts.in  = input;
+      opts.out = output;
+      opts.sourcemaps = {
+        'from': input,
+        'to'  : output
+      };
+      opts = Options().extend(opts);
+      (opts.in  === undefined).should.be.true;
+      (opts.out === undefined).should.be.true;
+      opts.sourcemaps.should.have.property('from').eql(input);
+      opts.sourcemaps.should.have.property('to').eql(output);
+    });
+
+    it('keeps sourcemaps settings', function () {
+      opts.in  = input;
+      opts.out = output;
+      opts.sourcemaps = {
+        map: { inline: false }
+      };
+      opts = Options().extend(opts);
+      opts.sourcemaps.should.have.property('from').eql(input);
+      opts.sourcemaps.should.have.property('to').eql(output);
+      opts.sourcemaps.map.should.have.property('inline').eql(false);
+      (opts.in  === undefined).should.be.true;
+      (opts.out === undefined).should.be.true;
+    });
+
+  });
+
 });

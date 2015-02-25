@@ -70,32 +70,6 @@ describe('Pleeease', function () {
     postcss().use(pleeease({minifier: false})).use(minifier).process('a{a: a}').css.should.eql('a{a:a}');
   });
 
-  it('creates default inline sourcemaps', function () {
-    options.sourcemaps = true;
-    helpers.test('sourcemaps', options);
-  });
-
-  it('returns processed CSS as string when sourcemaps are disabled', function () {
-    options.sourcemaps = false;
-    var processed = pleeease.process('div { color: white }', options);
-
-    (processed.map === undefined).should.be.true;
-    (processed.css === undefined).should.be.true;
-    processed.should.be.type('string');
-  });
-
-  it('returns object result.map and result.css when sourcemaps are enabled', function () {
-
-    options.sourcemaps = { map: {inline: false} };
-    var processed = pleeease.process('div { color: white }', options);
-
-    (processed.map === undefined).should.be.false;
-    (processed.css === undefined).should.be.false;
-    processed.map.should.be.type('object');
-    processed.css.should.be.type('string');
-
-  });
-
   it('works in standalone version', function () {
 
     var json = require('../package.json');
