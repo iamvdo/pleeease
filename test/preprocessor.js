@@ -1,7 +1,6 @@
 'use strict';
 
 var Preprocessor = require('../lib/preprocessor');
-var Options      = require('../lib/options');
 var pleeease     = require('../lib/pleeease');
 var fs           = require('fs');
 
@@ -12,7 +11,7 @@ var dirname = 'test/preprocessors/';
  * Describe Features
  *
  */
-describe('Preprocessors', function () {
+describe('Preprocessor', function () {
 
   var opts;
 
@@ -116,129 +115,6 @@ describe('Preprocessors', function () {
 
   describe('Sourcemaps', function () {
 
-    describe('creates specific options when global sourcemaps option is true', function () {
-
-      beforeEach(function () {
-        opts.sourcemaps = true;
-      });
-
-      it('using Sass', function () {
-        opts.sass = true;
-        opts = new Options().extend(opts);
-        var pre = new Preprocessor('a{}', '<no-source>', opts);
-        opts.sass = pre.setSourcemapsOptions('sass', opts);
-        opts.sass.sourceMap.should.eql(true);
-        opts.sass.sourceMapEmbed.should.eql(true);
-      });
-      it('using LESS', function () {
-        opts.less = true;
-        opts = new Options().extend(opts);
-        var pre = new Preprocessor('a{}', '<no-source>', opts);
-        opts.less = pre.setSourcemapsOptions('less', opts);
-        opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(true);
-      });
-      it('using Stylus', function () {
-        opts.stylus = true;
-        opts = new Options().extend(opts);
-        var pre = new Preprocessor('a{}', '<no-source>', opts);
-        opts.stylus = pre.setSourcemapsOptions('stylus', opts);
-        opts.stylus.sourcemap.should.have.property('inline').eql(true);
-      });
-
-    });
-
-    describe('creates specific options, no matter custom configuration', function () {
-
-      it('using Sass', function () {
-        opts = {
-          sass: {
-            sourceMap: true,
-            sourceMapEmbed: false
-          },
-          sourcemaps: true
-        };
-        opts = new Options().extend(opts);
-        var pre = new Preprocessor('a{}', '<no-source>', opts);
-        opts.sass = pre.setSourcemapsOptions('sass', opts);
-        opts.sass.sourceMap.should.eql(true);
-        opts.sass.sourceMap.should.eql(true);
-      });
-      it('using LESS', function () {
-        opts = {
-          less: {
-            sourceMap: {
-              sourceMapFileInline: false,
-              sourceTest: 'test'
-            }
-          },
-          sourcemaps: true
-        };
-        opts = new Options().extend(opts);
-        var pre = new Preprocessor('a{}', '<no-source>', opts);
-        opts.less = pre.setSourcemapsOptions('less', opts);
-        opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(true);
-        opts.less.sourceMap.should.not.have.property('sourceTest');
-      });
-      it('using Stylus', function () {
-        opts = {
-          stylus: {
-            sourcemap: {
-              inline: false,
-              sourceTest: 'test'
-            }
-          },
-          sourcemaps: true
-        };
-        opts = new Options().extend(opts);
-        var pre = new Preprocessor('a{}', '<no-source>', opts);
-        opts.stylus = pre.setSourcemapsOptions('stylus', opts);
-        opts.stylus.sourcemap.should.have.property('inline').eql(true);
-        opts.stylus.sourcemap.should.not.have.property('sourceTest');
-      });
-
-    });
-
-    describe('forces global sourcemaps', function () {
-
-      var pre;
-
-      afterEach(function () {
-        pre.options.sourcemaps.should.eql(true);
-      });
-
-      it('using Sass', function () {
-        opts = {
-          sass: {
-            sourceMap: true
-          }
-        };
-        opts = new Options().extend(opts);
-        pre  = new Preprocessor('a{}', '<no-source>', opts);
-        opts = pre.setSourcemapsOptions('sass', opts);
-      });
-      it('using LESS', function () {
-        opts = {
-          less: {
-            sourceMap: true
-          }
-        };
-        opts = new Options().extend(opts);
-        pre  = new Preprocessor('a{}', '<no-source>', opts);
-        opts = pre.setSourcemapsOptions('less', opts);
-      });
-      it('using Stylus', function () {
-        opts = {
-          stylus: {
-            sourcemap: true
-          }
-        };
-        opts = new Options().extend(opts);
-        pre  = new Preprocessor('a{}', '<no-source>', opts);
-        opts = pre.setSourcemapsOptions('stylus', opts);
-      });
-
-    });
-
     describe('generates good sourcemaps', function () {
 
       var css, expected, processed;
@@ -271,7 +147,7 @@ describe('Preprocessors', function () {
       it('using Stylus', function () {
         css      = fs.readFileSync(dirname + 'stylus/sourcemaps.styl', 'utf-8');
         opts.stylus = true;
-        opts.sourcemaps.from = dirname + 'stylus/sourcemaps.styl';
+        opts.sourcemaps.to = dirname + 'stylus/sourcemaps.styl';
         processed = pleeease.process(css, opts);
       });
 
