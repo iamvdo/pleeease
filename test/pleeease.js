@@ -1,6 +1,5 @@
 'use strict';
 var pleeease   = require('../lib/pleeease'),
-    Options    = require('../lib/options'),
     postcss    = require('postcss'),
     minifier   = require('csswring');
 
@@ -13,11 +12,7 @@ var helpers    = require('../test/_helpers.js');
  */
 describe('Pleeease', function () {
 
-  var options = {};
-
   beforeEach(function() {
-    options = new Options().options;
-    options.minifier = false;
   });
 
   it('processes CSS as string', function () {
@@ -70,32 +65,6 @@ describe('Pleeease', function () {
     postcss().use(pleeease({minifier: false})).use(minifier).process('a{a: a}').css.should.eql('a{a:a}');
   });
 
-  it('creates default inline sourcemaps', function () {
-    options.sourcemaps = true;
-    helpers.test('sourcemaps', options);
-  });
-
-  it('returns processed CSS as string when sourcemaps are disabled', function () {
-    options.sourcemaps = false;
-    var processed = pleeease.process('div { color: white }', options);
-
-    (processed.map === undefined).should.be.true;
-    (processed.css === undefined).should.be.true;
-    processed.should.be.type('string');
-  });
-
-  it('returns object result.map and result.css when sourcemaps are enabled', function () {
-
-    options.sourcemaps = { map: {inline: false} };
-    var processed = pleeease.process('div { color: white }', options);
-
-    (processed.map === undefined).should.be.false;
-    (processed.css === undefined).should.be.false;
-    processed.map.should.be.type('object');
-    processed.css.should.be.type('string');
-
-  });
-
   it('works in standalone version', function () {
 
     var json = require('../package.json');
@@ -109,8 +78,11 @@ describe('Pleeease', function () {
     var standalone = require('../standalone/pleeease-' + version + '.min.js');
     var css      = helpers.readFile('test/features/filters.css');
     var expected = helpers.readFile('test/features/filters.out.css');
-    options.autoprefixer = false;
-    var processed   = standalone.process(css, options);
+    var opts = {
+      autoprefixer: false,
+      minifier    : false
+    };
+    var processed   = standalone.process(css, opts);
 
     processed.should.be.eql(expected);
 
