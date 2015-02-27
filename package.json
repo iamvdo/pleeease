@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "autoprefixer-core": "~5.1.0",
-    "common-dir": "^0.1.4",
+    "commondir": "0.0.1",
     "css-mqpacker": "^3.0.0",
     "csswring": "^3.0.0",
     "deep-extend": "~0.2.8",

@@ -88,44 +88,4 @@ describe('Pleeease', function () {
 
   });
 
-  describe('Sourcemaps', function () {
-
-    var opts = {};
-
-    beforeEach(function() {
-      opts.minifier = false;
-    });
-
-    it('creates default inline sourcemaps', function () {
-      opts.sourcemaps = true;
-      helpers.test('sourcemaps', opts);
-    });
-
-    it('returns processed CSS as string when sourcemaps are disabled', function () {
-      opts.sourcemaps = false;
-      var processed = pleeease.process('a{a:a}', opts);
-      (processed.map === undefined).should.be.true;
-      (processed.css === undefined).should.be.true;
-      processed.should.be.type('string');
-    });
-
-    it('returns processed CSS as string when sourcemaps are enabled (not inlined)', function () {
-      opts.sourcemaps = true;
-      var processed = pleeease.process('a{a:a}', opts);
-      (processed.map === undefined).should.be.true;
-      (processed.css === undefined).should.be.true;
-      processed.should.be.type('string');
-    });
-
-    it('returns result.map and result.css when sourcemaps are not inlined', function () {
-      opts.sourcemaps = { map: {inline: false} };
-      var processed = pleeease.process('a{a:a}', opts);
-      (processed.map === undefined).should.be.false;
-      (processed.css === undefined).should.be.false;
-      processed.map.should.be.type('object');
-      processed.css.should.be.type('string');
-    });
-
-  });
-
 });
