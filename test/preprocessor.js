@@ -188,7 +188,7 @@ describe('Preprocessor', function () {
         var positions = smc.generatedPositionFor({source: '../src/modules/module.scss', line: 1, column: 0});
         positions.column.should.eql(19);
       });
-
+*/
       it('using LESS', function () {
         var fs = require('fs');
         var input  = 'test/sourcemaps/src/files/main.less';
@@ -211,18 +211,18 @@ describe('Preprocessor', function () {
         fs.writeFileSync('test/sourcemaps/pub/main.css', processed.css);
         fs.writeFileSync('test/sourcemaps/pub/main.css.map', processed.map);
         var sourcemap = processed.map.toJSON();
-        console.log(sourcemap);
-        sourcemap.sources.should.be.instanceOf(Array).with.lengthOf(3);
-        sourcemap.sources[0].should.startWith('../src/files/_import.');
-        sourcemap.sources[1].should.startWith('../src/files/main.');
-        sourcemap.sources[2].should.startWith('../src/modules/module.');
+        sourcemap.sources.should.be.instanceOf(Array).with.lengthOf(4);
+        sourcemap.sources.should.containEql('../src/files/_import.less');
+        sourcemap.sources.should.containEql('main.css');
+        sourcemap.sources.should.containEql('../src/files/main.less');
+        sourcemap.sources.should.containEql('../src/modules/module.less');
 
         var Map = require('source-map');
         var smc = new Map.SourceMapConsumer(processed.map.toJSON());
         var positions = smc.generatedPositionFor({source: '../src/modules/module.less', line: 1, column: 0});
         positions.column.should.eql(19);
       });
-*/
+
       it('using Stylus', function () {
         var fs = require('fs');
         var input  = 'test/sourcemaps/src/files/main.styl';
@@ -234,6 +234,7 @@ describe('Preprocessor', function () {
           stylus: {
             paths: ['test/sourcemaps/src/files']
           },
+          minifier: true,
           sourcemaps: {
             map: {
               inline: false
@@ -245,11 +246,11 @@ describe('Preprocessor', function () {
         fs.writeFileSync('test/sourcemaps/pub/main.css', processed.css);
         fs.writeFileSync('test/sourcemaps/pub/main.css.map', processed.map);
         var sourcemap = processed.map.toJSON();
-        //console.log(sourcemap);
-        sourcemap.sources.should.be.instanceOf(Array).with.lengthOf(3);
-        sourcemap.sources[0].should.startWith('../src/files/_import.');
-        sourcemap.sources[1].should.startWith('../src/files/main.');
-        sourcemap.sources[2].should.startWith('../src/modules/module.');
+        sourcemap.sources.should.be.instanceOf(Array).with.lengthOf(4);
+        sourcemap.sources.should.containEql('../src/files/_import.styl');
+        sourcemap.sources.should.containEql('main.css');
+        sourcemap.sources.should.containEql('../src/files/main.styl');
+        sourcemap.sources.should.containEql('../src/modules/module.styl');
 
         var Map = require('source-map');
         var smc = new Map.SourceMapConsumer(processed.map.toJSON());

@@ -103,7 +103,15 @@ describe('Pleeease', function () {
 
     it('returns processed CSS as string when sourcemaps are disabled', function () {
       opts.sourcemaps = false;
-      var processed = pleeease.process('div { color: white }', opts);
+      var processed = pleeease.process('a{a:a}', opts);
+      (processed.map === undefined).should.be.true;
+      (processed.css === undefined).should.be.true;
+      processed.should.be.type('string');
+    });
+
+    it('returns processed CSS as string when sourcemaps are enabled (not inlined)', function () {
+      opts.sourcemaps = true;
+      var processed = pleeease.process('a{a:a}', opts);
       (processed.map === undefined).should.be.true;
       (processed.css === undefined).should.be.true;
       processed.should.be.type('string');
