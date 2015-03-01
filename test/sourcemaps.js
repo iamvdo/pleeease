@@ -56,7 +56,7 @@ describe('Sourcemaps', function () {
 
       opts.sourcemaps = {map: {inline: false}};
       opts = Options().extend(opts);
-      opts.sourcemaps.should.have.property('map').eql({inline: false});
+      opts.sourcemaps.should.have.property('map').eql({inline: false, annotation: false});
     });
 
     it('uses `from` and `to` from sourcemaps for filename', function () {
@@ -239,12 +239,7 @@ describe('Sourcemaps', function () {
   describe('Pleeease', function () {
 
     beforeEach(function() {
-      opts.minifier = false;
-    });
-
-    it('creates default inline sourcemaps', function () {
-      opts.sourcemaps = true;
-      helpers.test('sourcemaps', opts);
+      
     });
 
     it('returns processed CSS as string when sourcemaps are disabled', function () {
@@ -270,6 +265,18 @@ describe('Sourcemaps', function () {
       (processed.css === undefined).should.be.false;
       processed.map.should.be.type('object');
       processed.css.should.be.type('string');
+    });
+
+    it('does not add annotation when sourcemaps are not inlined', function () {
+      opts.sourcemaps = { map: {inline: false} };
+      var processed = pleeease.process('a{a:a}', opts);
+      processed.css.should.not.containEql('sourceMappingURL=');
+    });
+
+    it('creates default inline sourcemaps', function () {
+      opts.sourcemaps = true;
+      opts.minifier = false;
+      helpers.test('sourcemaps', opts);
     });
 
   });
@@ -361,7 +368,7 @@ describe('Sourcemaps', function () {
         opts.sass = {
           includePaths: ['test/sourcemaps/src/files']
         };
-        check(process('scss', opts), {nb: 3});
+        check(process('scss', opts), {nb: 4});
       });
 
       it('using LESS', function () {
