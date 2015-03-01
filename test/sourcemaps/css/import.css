@@ -1,0 +1,4 @@
+@import 'imported.css';
+.import {
+  color: #000;
+}

@@ -273,6 +273,63 @@ describe('Sourcemaps', function () {
       processed.css.should.not.containEql('sourceMappingURL=');
     });
 
+    it('create sourcemaps', function () {
+      var dirname = 'test/sourcemaps/css/';
+      var input   = dirname + 'import.css';
+      var output  = dirname + 'to.css';
+      opts.sourcemaps = { map: {inline: false}, from: input, to: output};
+      opts.import = {
+        path: [dirname]
+      };
+      opts.minifier = false;
+      var css = fs.readFileSync(input);
+      var processed = pleeease.process(css, opts);
+
+      var smc = new Map.SourceMapConsumer(processed.map.toJSON());
+      var positions = smc.originalPositionFor({line: 4, column: 0});
+      positions.source.should.eql('import.css');
+      positions.line.should.eql(2);
+      positions.column.should.eql(0);
+
+      positions = smc.originalPositionFor({line: 1, column: 0});
+      positions.source.should.eql('imported.css');
+      positions.line.should.eql(1);
+      positions.column.should.eql(0);
+
+      positions = smc.generatedPositionFor({source: 'import.css', line: 2, column: 0});
+      positions.line.should.eql(4);
+      positions.column.should.eql(0);
+
+      positions = smc.generatedPositionFor({source: 'imported.css', line: 1, column: 0});
+      positions.line.should.eql(1);
+      positions.column.should.eql(0);
+
+      // with minifier
+      /*
+      opts.minifier = true;
+      processed = pleeease.process(css, opts);
+
+      smc = new Map.SourceMapConsumer(processed.map.toJSON());
+      positions = smc.originalPositionFor({line: 1, column: 23});
+      positions.source.should.eql('import.css');
+      positions.line.should.eql(2);
+      positions.column.should.eql(0);
+
+      positions = smc.originalPositionFor({line: 1, column: 0});
+      positions.source.should.eql('imported.css');
+      positions.line.should.eql(1);
+      positions.column.should.eql(0);
+
+      positions = smc.generatedPositionFor({source: 'import.css', line: 2, column: 0});
+      positions.line.should.eql(1);
+      positions.column.should.eql(21);
+
+      positions = smc.generatedPositionFor({source: 'imported.css', line: 1, column: 0});
+      positions.line.should.eql(1);
+      positions.column.should.eql(0);
+      */
+    });
+
     it('creates default inline sourcemaps', function () {
       opts.sourcemaps = true;
       opts.minifier = false;
