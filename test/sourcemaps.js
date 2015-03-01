@@ -56,7 +56,7 @@ describe('Sourcemaps', function () {
 
       opts.sourcemaps = {map: {inline: false}};
       opts = new Options().extend(opts);
-      opts.sourcemaps.should.have.property('map').eql({inline: false, annotation: false});
+      opts.sourcemaps.should.have.property('map').eql({inline: false, annotation: true});
     });
 
     it('uses `from` and `to` from sourcemaps for filename', function () {
@@ -266,10 +266,10 @@ describe('Sourcemaps', function () {
       processed.css.should.be.type('string');
     });
 
-    it('does not add annotation when sourcemaps are not inlined', function () {
+    it('adds annotation when sourcemaps are not inlined', function () {
       opts.sourcemaps = {map: {inline: false}};
       var processed = pleeease.process('a{a:a}', opts);
-      processed.css.should.not.containEql('sourceMappingURL=');
+      processed.css.should.containEql('sourceMappingURL=');
     });
 
     it('create sourcemaps', function () {
@@ -340,6 +340,23 @@ describe('Sourcemaps', function () {
   describe('Preprocessors', function () {
 
     var dirname = 'test/preprocessors/';
+
+    it('adds annotations with preprocessors', function () {
+      opts.sourcemaps = {map: {inline: false}};
+      opts.sass = true;
+      var processed = pleeease.process('a{a:a}', opts);
+      processed.css.should.containEql('sourceMappingURL=');
+
+      opts.sass = false;
+      opts.less = true;
+      var processed = pleeease.process('a{a:a}', opts);
+      processed.css.should.containEql('sourceMappingURL=');
+
+      opts.sass = opts.less = false;
+      opts.stylus = true;
+      var processed = pleeease.process('a{a:a}', opts);
+      processed.css.should.containEql('sourceMappingURL=');
+    });
 
     describe('generates good sourcemaps', function () {
 
@@ -418,7 +435,7 @@ describe('Sourcemaps', function () {
         opts.sass = {
           includePaths: ['test/sourcemaps/src/files']
         };
-        check(process('scss', opts), {nb: 4});
+        check(process('scss', opts), {nb: 3});
       });
 
       it('using LESS', function () {
