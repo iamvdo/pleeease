@@ -1,9 +1,9 @@
 'use strict';
 
-var pleeease = require('../lib/pleeease');
-var Options  = require('../lib/options');
-var Map      = require('source-map');
-var fs       = require('fs');
+var pleeease  = require('../lib/pleeease');
+var Options   = require('../lib/options');
+var SourceMap = require('source-map');
+var fs        = require('fs');
 
 var helpers  = require('../test/_helpers.js');
 
@@ -27,35 +27,35 @@ describe('Sourcemaps', function () {
 
     it('creates default sourcemaps options', function () {
       opts.sourcemaps = true;
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
 
       opts.sourcemaps = false;
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.eql(false);
 
       opts.sourcemaps = {};
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
 
       opts.sourcemaps = {map: true};
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
 
       opts.sourcemaps = {map: false};
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.eql(false);
 
       opts.sourcemaps = {map: {}};
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
 
       opts.sourcemaps = {map: {inline: true}};
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
 
       opts.sourcemaps = {map: {inline: false}};
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: false, annotation: false});
     });
 
@@ -64,7 +64,7 @@ describe('Sourcemaps', function () {
         'from': input,
         'to'  : output
       };
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
       opts.sourcemaps.should.have.property('from').eql(input);
       opts.sourcemaps.should.have.property('to').eql(output);
@@ -74,7 +74,7 @@ describe('Sourcemaps', function () {
       opts.in  = input;
       opts.out = output;
       opts.sourcemaps = true;
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       (opts.in  === undefined).should.be.true;
       (opts.out === undefined).should.be.true;
       opts.sourcemaps.should.have.property('from').eql(input);
@@ -88,7 +88,7 @@ describe('Sourcemaps', function () {
         'from': input,
         'to'  : output
       };
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       (opts.in  === undefined).should.be.true;
       (opts.out === undefined).should.be.true;
       opts.sourcemaps.should.have.property('from').eql(input);
@@ -101,7 +101,7 @@ describe('Sourcemaps', function () {
         map: { inline: false },
         from: input
       };
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('from').eql(input);
       opts.sourcemaps.should.have.property('to').eql(output);
       opts.sourcemaps.map.should.have.property('inline').eql(false);
@@ -112,7 +112,7 @@ describe('Sourcemaps', function () {
       var from = '<no-source>';
       var to   = '<no-output>';
       opts.sourcemaps = true;
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('from').eql(from);
       opts.sourcemaps.should.have.property('to').eql(to);
     });
@@ -120,7 +120,7 @@ describe('Sourcemaps', function () {
     it('does not add specific config when sourcemaps is disabled', function () {
       opts.sass = true;
       opts.sourcemaps = false;
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sourcemaps.should.eql(false);
       opts.sass.should.eql({});
     });
@@ -129,7 +129,7 @@ describe('Sourcemaps', function () {
       function test (type, sourcemap) {
         var opts = {};
         opts[type] = sourcemap;
-        opts = Options().extend(opts);
+        opts = new Options().extend(opts);
         opts.sourcemaps.should.not.eql(false);
       }
       // Sass
@@ -143,7 +143,7 @@ describe('Sourcemaps', function () {
         sass: true,
         sourcemaps: true
       };
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.sass.sourceMap.should.eql(true);
       opts.sass.sourceMapEmbed.should.eql(false);
 
@@ -151,14 +151,14 @@ describe('Sourcemaps', function () {
         less: true,
         sourcemaps: true
       };
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.less.sourceMap.should.have.property('sourceMapFileInline').eql(false);
 
       opts = {
         stylus: true,
         sourcemaps: true
       };
-      opts = Options().extend(opts);
+      opts = new Options().extend(opts);
       opts.stylus.sourcemap.should.have.property('inline').eql(false);
     });
 
@@ -285,7 +285,7 @@ describe('Sourcemaps', function () {
       var css = fs.readFileSync(input);
       var processed = pleeease.process(css, opts);
 
-      var smc = new Map.SourceMapConsumer(processed.map.toJSON());
+      var smc = new SourceMap.SourceMapConsumer(processed.map.toJSON());
       var positions = smc.originalPositionFor({line: 4, column: 0});
       positions.source.should.eql('import.css');
       positions.line.should.eql(2);
@@ -309,7 +309,7 @@ describe('Sourcemaps', function () {
       opts.minifier = true;
       processed = pleeease.process(css, opts);
 
-      smc = new Map.SourceMapConsumer(processed.map.toJSON());
+      smc = new SourceMap.SourceMapConsumer(processed.map.toJSON());
       positions = smc.originalPositionFor({line: 1, column: 23});
       positions.source.should.eql('import.css');
       positions.line.should.eql(2);
@@ -342,12 +342,6 @@ describe('Sourcemaps', function () {
 
     var dirname = 'test/preprocessors/';
 
-    if('inlines sourcemaps', function () {
-      opts.sourcemaps = true;
-      opts.sass = true;
-      var processed = pleeease.process('a{a:a}', opts);
-    });
-
     describe('generates good sourcemaps', function () {
 
       var css, expected, processed;
@@ -355,16 +349,16 @@ describe('Sourcemaps', function () {
       var sourcemapColumn = 541;
 
       beforeEach(function () {
-        opts.browsers   = ["last 99 versions"];
+        opts.browsers   = ['last 99 versions'];
         opts.sourcemaps = {map: {inline: false}};
         expected = fs.readFileSync(dirname + 'sourcemaps.out.css', 'utf-8');
       });
 
       afterEach(function () {
-        var smc = new Map.SourceMapConsumer(processed.map.toJSON());
+        var smc = new SourceMap.SourceMapConsumer(processed.map.toJSON());
         var positions = smc.originalPositionFor({line: sourcemapLine, column: sourcemapColumn});
         positions.line.should.eql(31);
-      })
+      });
 
       it('using Sass', function () {
         css       = fs.readFileSync(dirname + 'sass/sourcemaps.scss', 'utf-8');
@@ -400,16 +394,16 @@ describe('Sourcemaps', function () {
       };
       var check = function (opts, specific) {
         opts.map.sources.should.be.instanceOf(Array).with.lengthOf(specific.nb);
-        if (specific.nb == 4) {
+        if (specific.nb === 4) {
           opts.map.sources.should.containEql('main.css');
         }
         opts.map.sources.should.containEql('../src/files/_import.' + opts.type);
         opts.map.sources.should.containEql('../src/files/main.' + opts.type);
         opts.map.sources.should.containEql('../src/modules/module.' + opts.type);
-        var smc = new Map.SourceMapConsumer(opts.map);
+        var smc = new SourceMap.SourceMapConsumer(opts.map);
         var positions = smc.generatedPositionFor({source: '../src/modules/module.' + opts.type, line: 1, column: 0});
         positions.column.should.eql(19);
-      }
+      };
 
       beforeEach(function () {
         opts = {

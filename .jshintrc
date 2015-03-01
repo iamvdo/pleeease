@@ -18,12 +18,14 @@
     "trailing": true,
     "smarttabs": true,
     "jquery": true,
+    "expr": true,
 
     "predef": [
         "describe",
         "expect",
         "it",
         "require",
-        "beforeEach"
+        "beforeEach",
+        "afterEach"
     ]
 }

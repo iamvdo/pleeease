@@ -40,24 +40,15 @@ gulp.task('standalone', ['clean'], function() {
 /**
  *
  * Lint JS files
- * lint:lib, lint:tests and lint
  *
  */
-gulp.task('lint:lib', function() {
+gulp.task('lint', function() {
     var jshint = require('gulp-jshint');
 
-    gulp.src(['bin/**/*.js', 'lib/**/*.js'])
+    gulp.src(['lib/**/*.js', 'test/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
-gulp.task('lint:tests', function() {
-    var jshint = require('gulp-jshint');
-
-    gulp.src(['tests/**/*.js'])
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'));
-});
-gulp.task('lint', ['lint:lib', 'lint:tests']);
 
 /**
  *

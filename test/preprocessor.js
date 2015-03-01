@@ -1,6 +1,5 @@
 'use strict';
 
-var Preprocessor = require('../lib/preprocessor');
 var pleeease     = require('../lib/pleeease');
 var fs           = require('fs');
 

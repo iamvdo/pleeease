@@ -15,9 +15,9 @@ module.exports = {
 
     var dirname;
     if (opts.sass) {
-      dirname = __dirnames__['preproc'];
+      dirname = __dirnames__.preproc;
     } else {
-      dirname = __dirnames__['features'];
+      dirname = __dirnames__.features;
     }
 
     // css
