@@ -1,7 +1,7 @@
 'use strict';
-var pleeease   = require('../lib/pleeease'),
-    postcss    = require('postcss'),
-    minifier   = require('csswring');
+var pleeease   = require('../lib/pleeease');
+var postcss    = require('postcss');
+var minifier   = require('csswring');
 
 var helpers    = require('../test/_helpers.js');
 

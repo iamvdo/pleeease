@@ -126,13 +126,13 @@ describe('Options', function () {
   });
 
   it('overrides values when `browsers` option is set in `autoprefixer` too', function () {
-    opts.autoprefixer = { browsers: ['ie 9'] };
+    opts.autoprefixer = {browsers: ['ie 9']};
     opts = new Options().extend(opts);
     opts.rem.should.eql(false);
   });
 
   it('uses `browsers` option instead of `autoprefixer` one', function () {
-    opts.autoprefixer = { browsers: ['ie 8'] };
+    opts.autoprefixer = {browsers: ['ie 8']};
     opts.browsers = ['ie 9'];
     opts = new Options().extend(opts);
     opts.rem.should.eql(false);

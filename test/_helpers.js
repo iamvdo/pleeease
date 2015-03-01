@@ -37,7 +37,7 @@ module.exports = {
       processed = processed.css;
     }
 
-    assert.equal(processed,expected);
+    assert.equal(processed, expected);
 
   },
 

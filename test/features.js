@@ -65,7 +65,7 @@ describe('Postprocessors features', function () {
 
     it('adds IE filters when asked', function () {
       opts.autoprefixer = false;
-      opts.filters = { oldIE: true };
+      opts.filters = {oldIE: true};
       opts.same = false;
       test('filters-ie', opts);
     });
@@ -137,7 +137,7 @@ describe('Postprocessors features', function () {
     it('minifies all possible features', function() {
       opts.autoprefixer = false;
       opts.minifier = true;
-      opts.filters = { oldIE: true };
+      opts.filters = {oldIE: true};
       test('minifier', opts);
     });
 

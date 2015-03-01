@@ -52,6 +52,17 @@ gulp.task('lint', function() {
 
 /**
  *
+ * Coding style
+ * 
+ */
+gulp.task('jscs', function() {
+    var jscs = require('gulp-jscs');
+    gulp.src(['lib/**/*.js', 'test/**/*.js'])
+        .pipe(jscs());
+});
+
+/**
+ *
  * Test spec
  * `npm test` (without argv)
  * `gulp test --file cli` (test only cli.js file)

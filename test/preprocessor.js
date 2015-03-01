@@ -33,7 +33,7 @@ describe('Preprocessor', function () {
       processed = pleeease.process(css, opts);
       processed.should.eql(expected);
     });
-    
+
     it('using Sass', function () {
       opts.sass = true;
     });

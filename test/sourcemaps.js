@@ -98,7 +98,7 @@ describe('Sourcemaps', function () {
     it('keeps sourcemaps settings', function () {
       opts.out = output;
       opts.sourcemaps = {
-        map: { inline: false },
+        map: {inline: false},
         from: input
       };
       opts = new Options().extend(opts);
@@ -239,7 +239,6 @@ describe('Sourcemaps', function () {
   describe('Pleeease', function () {
 
     beforeEach(function() {
-      
     });
 
     it('returns processed CSS as string when sourcemaps are disabled', function () {
@@ -259,7 +258,7 @@ describe('Sourcemaps', function () {
     });
 
     it('returns result.map and result.css when sourcemaps are not inlined', function () {
-      opts.sourcemaps = { map: {inline: false} };
+      opts.sourcemaps = {map: {inline: false}};
       var processed = pleeease.process('a{a:a}', opts);
       (processed.map === undefined).should.be.false;
       (processed.css === undefined).should.be.false;
@@ -268,7 +267,7 @@ describe('Sourcemaps', function () {
     });
 
     it('does not add annotation when sourcemaps are not inlined', function () {
-      opts.sourcemaps = { map: {inline: false} };
+      opts.sourcemaps = {map: {inline: false}};
       var processed = pleeease.process('a{a:a}', opts);
       processed.css.should.not.containEql('sourceMappingURL=');
     });
@@ -277,7 +276,7 @@ describe('Sourcemaps', function () {
       var dirname = 'test/sourcemaps/css/';
       var input   = dirname + 'import.css';
       var output  = dirname + 'to.css';
-      opts.sourcemaps = { map: {inline: false}, from: input, to: output};
+      opts.sourcemaps = {map: {inline: false}, from: input, to: output};
       opts.import = {
         path: [dirname]
       };
