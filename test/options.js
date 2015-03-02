@@ -97,13 +97,11 @@ describe('Options', function () {
     opts.next.should.have.property('colors').eql({});
   });
 
-  it('extends options/values from configuration file', function () {
-    var json = '{"autoprefixer": {"browsers": ["ie 8"]},"next": {"colors": true}}';
+  it('does not extend options/values from configuration file', function () {
+    var json = '{"minifier": false}';
     fs.writeFileSync('test/.pleeeaserc', json);
-    opts = new Options();
-    opts = opts.extendConfig(opts.defaults, 'test/.pleeeaserc');
-    opts.autoprefixer.browsers.should.eql(['ie 8']);
-    opts.next.colors.should.eql(true);
+    opts = new Options().extend({});
+    opts.minifier.should.not.eql(false);
     fs.unlinkSync('test/.pleeeaserc');
   });
 
