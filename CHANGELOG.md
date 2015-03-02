@@ -1,3 +1,11 @@
+## HEAD
+
+* Fixed:
+  * Sourcemaps from preprocessors to postprocessors
+  * No longer read .pleeeaserc file in this module
+* Changed:
+  * Use postcss-opacity instead of processors/opacity
+
 ## 3.2.0 - 2015-02-16
 
 * Added:
