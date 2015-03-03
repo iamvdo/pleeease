@@ -29,6 +29,8 @@ describe('Sourcemaps', function () {
       opts.sourcemaps = true;
       opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
+      opts.sourcemaps.should.have.property('from');
+      opts.sourcemaps.should.have.property('to');
 
       opts.sourcemaps = false;
       opts = new Options().extend(opts);
@@ -36,27 +38,39 @@ describe('Sourcemaps', function () {
 
       opts.sourcemaps = {};
       opts = new Options().extend(opts);
-      opts.sourcemaps.should.have.property('map').eql({inline: true});
+      opts.sourcemaps.should.not.have.property('map');
+      opts.sourcemaps.should.have.property('from');
+      opts.sourcemaps.should.have.property('to');
 
       opts.sourcemaps = {map: true};
       opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
+      opts.sourcemaps.should.have.property('from');
+      opts.sourcemaps.should.have.property('to');
 
       opts.sourcemaps = {map: false};
       opts = new Options().extend(opts);
-      opts.sourcemaps.should.eql(false);
+      opts.sourcemaps.should.not.have.property('map');
+      opts.sourcemaps.should.have.property('from');
+      opts.sourcemaps.should.have.property('to');
 
       opts.sourcemaps = {map: {}};
       opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
+      opts.sourcemaps.should.have.property('from');
+      opts.sourcemaps.should.have.property('to');
 
       opts.sourcemaps = {map: {inline: true}};
       opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: true});
+      opts.sourcemaps.should.have.property('from');
+      opts.sourcemaps.should.have.property('to');
 
       opts.sourcemaps = {map: {inline: false}};
       opts = new Options().extend(opts);
       opts.sourcemaps.should.have.property('map').eql({inline: false, annotation: true});
+      opts.sourcemaps.should.have.property('from');
+      opts.sourcemaps.should.have.property('to');
     });
 
     it('uses `from` and `to` from sourcemaps for filename', function () {
@@ -65,7 +79,7 @@ describe('Sourcemaps', function () {
         'to'  : output
       };
       opts = new Options().extend(opts);
-      opts.sourcemaps.should.have.property('map').eql({inline: true});
+      opts.sourcemaps.should.not.have.property('map');
       opts.sourcemaps.should.have.property('from').eql(input);
       opts.sourcemaps.should.have.property('to').eql(output);
     });
@@ -91,6 +105,7 @@ describe('Sourcemaps', function () {
       opts = new Options().extend(opts);
       (opts.in  === undefined).should.be.true;
       (opts.out === undefined).should.be.true;
+      opts.sourcemaps.should.not.have.property('map');
       opts.sourcemaps.should.have.property('from').eql(input);
       opts.sourcemaps.should.have.property('to').eql(output);
     });
@@ -247,6 +262,13 @@ describe('Sourcemaps', function () {
       (processed.map === undefined).should.be.true;
       (processed.css === undefined).should.be.true;
       processed.should.be.type('string');
+    });
+
+    it('returns processed CSS as string when sourcemaps are disabled, even if `to` of `from` are set', function () {
+      opts.sourcemaps = {from: 'input.css', to: 'output.css'};
+      var processed = pleeease.process('a{a:a}', opts);
+      (processed.map === undefined).should.be.true;
+      (processed.css === undefined).should.be.true;
     });
 
     it('returns processed CSS as string when sourcemaps are enabled (not inlined)', function () {

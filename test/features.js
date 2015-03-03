@@ -104,9 +104,9 @@ describe('Postprocessors features', function () {
         // fixed CSS
         return pleeease.process(CSS.join('\n'), opts);
       };
-      opts.in = [__features + 'import.css', __features + 'mq.css'];
+      var inputs = [__features + 'import.css', __features + 'mq.css'];
       // process
-      var processed = compile(opts.in);
+      var processed = compile(inputs);
       var expected = fs.readFileSync(__features + 'import.out.css').toString();
       processed.should.eql(expected);
     });
@@ -123,6 +123,21 @@ describe('Postprocessors features', function () {
       var _in      = fs.readFileSync('test/features/url.css', 'utf-8');
       var expected = fs.readFileSync('test/features/url.out.css', 'utf-8');
       var processed = pleeease.process(_in, opts);
+      processed.should.eql(expected);
+    });
+
+    it('rebases urls uses `out` or `sourcemaps.to` option', function () {
+      opts.minifier = true;
+      opts.out = 'test/features/url.out.css';
+      opts.import   = {path: 'test/features'};
+      var _in      = fs.readFileSync('test/features/url.css', 'utf-8');
+      var expected = fs.readFileSync('test/features/url.2.out.css', 'utf-8');
+      var processed = pleeease.process(_in, opts);
+      processed.should.eql(expected);
+
+      opts.sourcemaps = {to: opts.out};
+      delete opts.out;
+      processed = pleeease.process(_in, opts);
       processed.should.eql(expected);
     });
 
