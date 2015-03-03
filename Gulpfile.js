@@ -42,12 +42,13 @@ gulp.task('standalone', ['clean'], function() {
  * Lint JS files
  *
  */
-gulp.task('lint', function() {
+gulp.task('lint', function(cb) {
     var jshint = require('gulp-jshint');
 
     gulp.src(['lib/**/*.js', 'test/**/*.js'])
         .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'));
+        .pipe(jshint.reporter('jshint-stylish'))
+        .on('finish', cb);
 });
 
 /**
@@ -55,10 +56,11 @@ gulp.task('lint', function() {
  * Coding style
  * 
  */
-gulp.task('jscs', function() {
+gulp.task('jscs', function(cb) {
     var jscs = require('gulp-jscs');
     gulp.src(['lib/**/*.js', 'test/**/*.js'])
-        .pipe(jscs());
+        .pipe(jscs())
+        .on('finish', cb);
 });
 
 /**
@@ -68,14 +70,40 @@ gulp.task('jscs', function() {
  * `gulp test --file cli` (test only cli.js file)
  *
  */
-gulp.task('test', function () {
-    require('should');
-    var mocha = require('gulp-mocha');
-    var args = require('yargs').argv;
-    var file = args.file || '*';
+gulp.task('test', ['lint', 'jscs'], function () {
+  require('should');
+  var mocha = require('gulp-mocha');
+  var args = require('yargs').argv;
+  var file = args.file || '*';
 
-    return gulp.src('test/' + file + '.js', {read: false})
-          .pipe(mocha({reporter: 'spec'}));
+  gulp.src('test/' + file + '.js', {read: false})
+    .pipe(mocha({reporter: 'spec'}))
+
+});
+
+/**
+ *
+ * Coverage
+ *
+ */
+gulp.task('istanbul', function (cb) {
+  require('should');
+  var istanbul = require('gulp-istanbul');
+  var mocha    = require('gulp-mocha');
+  gulp.src('lib/**/*.js')
+    .pipe(istanbul())
+    .pipe(istanbul.hookRequire())
+    .on('finish', function () {
+      gulp.src('test/*.js', {read: false})
+        .pipe(mocha({reporter: 'spec'}))
+        .pipe(istanbul.writeReports())
+        .on('end', cb)
+    });
+})
+gulp.task('coverage', ['istanbul'], function (cb) {
+  var coveralls = require('gulp-coveralls');
+  gulp.src('coverage/**/lcov.info')
+    .pipe(coveralls());
 });
 
 /**

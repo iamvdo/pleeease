@@ -349,12 +349,12 @@ describe('Sourcemaps', function () {
 
       opts.sass = false;
       opts.less = true;
-      var processed = pleeease.process('a{a:a}', opts);
+      processed = pleeease.process('a{a:a}', opts);
       processed.css.should.containEql('sourceMappingURL=');
 
       opts.sass = opts.less = false;
       opts.stylus = true;
-      var processed = pleeease.process('a{a:a}', opts);
+      processed = pleeease.process('a{a:a}', opts);
       processed.css.should.containEql('sourceMappingURL=');
     });
 
