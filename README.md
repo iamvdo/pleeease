@@ -14,6 +14,7 @@ Pleeease.NEXT goes even further and allows you to use some of the future CSS fea
 Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor and uses preprocessors Sass, LESS and Stylus.
 
 [![Build Status](https://travis-ci.org/iamvdo/pleeease.svg?branch=master)](https://travis-ci.org/iamvdo/pleeease)
+[![Coverage Status](https://coveralls.io/repos/iamvdo/pleeease/badge.svg?branch=coverage)](https://coveralls.io/r/iamvdo/pleeease?branch=coverage)
 
 ##Plugins
 * for [less.js](https://github.com/bassjobsen/less-plugin-pleeease)
