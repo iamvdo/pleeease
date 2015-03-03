@@ -1,4 +1,4 @@
-## HEAD
+## 3.2.1
 
 * Fixed:
   * Sourcemaps from preprocessors to postprocessors
