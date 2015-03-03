@@ -1,3 +1,8 @@
+## 3.2.2 - 2015-03_03
+
+* Fixed:
+  * Rebase URL according to `options.out` or `options.sourcemaps.to` (Ref #34)
+
 ## 3.2.1 - 2015-03-03
 
 * Fixed:
