@@ -1,4 +1,4 @@
-## 3.2.1
+## 3.2.1 - 2015-03-03
 
 * Fixed:
   * Sourcemaps from preprocessors to postprocessors
