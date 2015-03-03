@@ -46,6 +46,42 @@ describe('Preprocessor', function () {
 
   });
 
+  describe('Throws errors', function () {
+
+    var css, expected, processed;
+
+    beforeEach(function () {
+      css      = fs.readFileSync(dirname + 'css.css', 'utf-8');
+      expected = fs.readFileSync(dirname + 'css.out.css', 'utf-8');
+      opts.import = {path: dirname};
+    });
+
+    afterEach(function () {
+      processed = pleeease.process(css, opts);
+      processed.should.eql(expected);
+    });
+
+    it('using Sass', function () {
+      opts.sass = true;
+      (function () {
+        return pleeease.process('$a=8;a{a:a}', opts);
+      }).should.throw(/^Sass: parsing fails/);
+    });
+    it('using LESS', function () {
+      opts.less = true;
+      (function () {
+        return pleeease.process('@a=8;a{a:a}', opts);
+      }).should.throw(/^LESS: parsing fails/);
+    });
+    it('using Stylus', function () {
+      opts.stylus = true;
+      (function () {
+        return pleeease.process('a:8;a{a:a}', opts);
+      }).should.throw(/^Stylus: parsing fails/);
+    });
+
+  });
+
   describe('Compiles', function () {
 
     var css, expected, processed;

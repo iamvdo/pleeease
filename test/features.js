@@ -111,6 +111,12 @@ describe('Postprocessors features', function () {
       processed.should.eql(expected);
     });
 
+    it('does not import when false', function () {
+      opts.import = false;
+      opts.same = true;
+      test('import', opts);
+    });
+
     it('rebases urls', function () {
       opts.minifier = true;
       opts.import   = {path: 'test/features'};
