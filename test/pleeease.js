@@ -88,6 +88,50 @@ describe('Pleeease', function () {
 
   });
 
+  describe('#parse', function () {
+
+    var Root = require('../node_modules/postcss/lib/root.js');
+    var internal, parsed;
+
+    beforeEach(function () {
+      internal = new pleeease();
+    });
+
+    afterEach(function () {
+      parsed.should.be.an.instanceOf(Root);
+    });
+
+    it('parses CSS as string', function () {
+      parsed = internal.parse('a{a:a}');
+    });
+
+    it('parses CSS as PostCSS AST', function () {
+      var css = 'a{a:a}';
+      var ast = postcss.parse(css);
+      parsed = internal.parse(ast);
+    });
+
+    it('parses with sourcemaps', function () {
+      internal.setOptions({sourcemaps: true});
+      parsed = internal.parse('a{a:a}');
+    });
+
+    it('parses with preprocessors', function () {
+      internal.setOptions({sass: true});
+      parsed = internal.parse('a{a:a}');
+    });
+
+    it('parses with preprocessors and sourcemaps', function () {
+      internal.setOptions({sass: true, sourcemaps: true});
+      parsed = internal.parse('a{a:a}');
+    });
+
+    it('parses with preprocessors and from/to files', function () {
+      internal.setOptions({sass: true, in: 'input.css', out: 'output.css'});
+      parsed = internal.parse('a{a:a}');
+    });
+
+  });
 
   describe('#setOptions', function () {
 
