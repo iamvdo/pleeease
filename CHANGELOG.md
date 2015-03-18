@@ -1,3 +1,11 @@
+## 3.2.4 - 2015-03-18
+
+* Fixed:
+  * Apply previous sourcemap only if sourcemaps.map exists
+  * Set annotation:true only if it's not false
+* Added:
+  * Internal method to update options
+
 ## 3.2.3 - 2015-03-05
 
 * Fixed:
