@@ -71,6 +71,12 @@ describe('Sourcemaps', function () {
       opts.sourcemaps.should.have.property('map').eql({inline: false, annotation: true});
       opts.sourcemaps.should.have.property('from');
       opts.sourcemaps.should.have.property('to');
+
+      opts.sourcemaps = {map: {inline: false, annotation: false}};
+      opts = new Options().extend(opts);
+      opts.sourcemaps.should.have.property('map').eql({inline: false, annotation: false});
+      opts.sourcemaps.should.have.property('from');
+      opts.sourcemaps.should.have.property('to');
     });
 
     it('uses `from` and `to` from sourcemaps for filename', function () {
