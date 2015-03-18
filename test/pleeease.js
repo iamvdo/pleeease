@@ -88,4 +88,24 @@ describe('Pleeease', function () {
 
   });
 
+
+  describe('#setOptions', function () {
+
+    it('extends default options', function () {
+      var internal = new pleeease();
+      internal.setOptions({sourcemaps: true});
+      internal.options.sourcemaps.should.be.an.instanceOf(Object);
+      internal.options.sourcemaps.should.have.property('map');
+    });
+
+    it('extends only new options', function () {
+      var internal = new pleeease({rem: ['20px']});
+      internal.options.rem.should.eql(['20px']);
+      internal.setOptions({autoprefixer: false});
+      internal.options.rem.should.eql(['20px']);
+      internal.options.autoprefixer.should.eql(false);
+    });
+
+  });
+
 });
