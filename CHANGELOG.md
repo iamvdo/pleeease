@@ -1,3 +1,8 @@
+## HEAD
+
+* Changed:
+  * Replace pseudo elements processor with dedicated module
+
 ## 3.2.4 - 2015-03-18
 
 * Fixed:
