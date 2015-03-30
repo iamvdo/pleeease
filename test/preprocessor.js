@@ -2,6 +2,7 @@
 
 var pleeease     = require('../lib/pleeease');
 var fs           = require('fs');
+var Preprocessor = require('../lib/preprocessor');
 
 var dirname = 'test/preprocessors/';
 
@@ -17,6 +18,39 @@ describe('Preprocessor', function () {
   beforeEach(function () {
     opts = {};
     opts.minifier = true;
+  });
+
+  describe('#sass', function () {
+
+    it('doesn\'t add annotation', function () {
+      var p = new pleeease({sass: true, sourcemaps: true});
+      var pre = new Preprocessor('a{a:a}', p.options);
+      var result = pre.sass();
+      result.css.should.not.containEql('sourceMappingURL=');
+    });
+
+  });
+
+  describe('#less', function () {
+
+    it('doesn\'t add annotation', function () {
+      var p = new pleeease({less: true, sourcemaps: true});
+      var pre = new Preprocessor('a{a:a}', p.options);
+      var result = pre.less();
+      result.css.should.not.containEql('sourceMappingURL=');
+    });
+
+  });
+
+  describe('#stylus', function () {
+
+    it('doesn\'t add annotation', function () {
+      var p = new pleeease({stylus: true, sourcemaps: true});
+      var pre = new Preprocessor('a{a:a}', p.options);
+      var result = pre.stylus();
+      result.css.should.not.containEql('sourceMappingURL=');
+    });
+
   });
 
   describe('Processes plain ol\' CSS', function () {

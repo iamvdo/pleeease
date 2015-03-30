@@ -369,21 +369,48 @@ describe('Sourcemaps', function () {
 
     var dirname = 'test/preprocessors/';
 
-    it('adds annotations with preprocessors', function () {
-      opts.sourcemaps = {map: {inline: false}};
-      opts.sass = true;
-      var processed = pleeease.process('a{a:a}', opts);
-      processed.css.should.containEql('sourceMappingURL=');
+    describe('adds annotation', function () {
 
-      opts.sass = false;
-      opts.less = true;
-      processed = pleeease.process('a{a:a}', opts);
-      processed.css.should.containEql('sourceMappingURL=');
+      beforeEach(function () {
+        opts.sourcemaps = {map: {inline: false}};
+      });
+      afterEach(function () {
+        var processed = pleeease.process('a{a:a}', opts);
+        processed.css.should.containEql('sourceMappingURL=');
+      });
 
-      opts.sass = opts.less = false;
-      opts.stylus = true;
-      processed = pleeease.process('a{a:a}', opts);
-      processed.css.should.containEql('sourceMappingURL=');
+      it('with Sass', function () {
+        opts.sass = true;
+      });
+      it('with LESS', function () {
+        opts.less = true;
+      });
+      it('with Stylus', function () {
+        opts.stylus = true;
+      });
+
+    });
+
+    describe('adds annotation only once', function () {
+
+      beforeEach(function () {
+        opts.sourcemaps = {map: {inline: false}};
+      });
+      afterEach(function () {
+        var processed = pleeease.process('a{a:a}', opts);
+        processed.css.match(/sourceMappingURL=/g).length.should.eql(1);
+      });
+
+      it('with Sass', function () {
+        opts.sass = true;
+      });
+      it('with LESS', function () {
+        opts.less = true;
+      });
+      it('with Stylus', function () {
+        opts.stylus = true;
+      });
+
     });
 
     describe('generates good sourcemaps', function () {
