@@ -308,6 +308,7 @@ describe('Sourcemaps', function () {
       opts.import = {
         path: [dirname]
       };
+      // without minifier
       opts.minifier = false;
       var css = fs.readFileSync(input);
       var processed = pleeease.process(css, opts);
@@ -332,12 +333,11 @@ describe('Sourcemaps', function () {
       positions.column.should.eql(0);
 
       // with minifier
-      /*
       opts.minifier = true;
       processed = pleeease.process(css, opts);
 
       smc = new SourceMap.SourceMapConsumer(processed.map.toJSON());
-      positions = smc.originalPositionFor({line: 1, column: 23});
+      positions = smc.originalPositionFor({line: 1, column: 21});
       positions.source.should.eql('import.css');
       positions.line.should.eql(2);
       positions.column.should.eql(0);
@@ -354,7 +354,6 @@ describe('Sourcemaps', function () {
       positions = smc.generatedPositionFor({source: 'imported.css', line: 1, column: 0});
       positions.line.should.eql(1);
       positions.column.should.eql(0);
-      */
     });
 
     it('creates default inline sourcemaps', function () {
