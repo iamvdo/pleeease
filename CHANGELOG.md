@@ -1,3 +1,9 @@
+## 3.2.6 - 2015-04-08
+
+* Fixed:
+  * Sourcemaps with PostCSS 4.1
+  * postcss-url with PostCSS 4.1
+
 ## 3.2.5 - 2015-03-30
 
 * Changed:
