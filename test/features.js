@@ -181,6 +181,14 @@ describe('Postprocessors features', function () {
 
   });
 
+  describe('vmin', function () {
+
+    it('adds fallback for vmin unit', function () {
+      test('vmin', opts);
+    });
+
+  });
+
   describe('NEXT', function () {
 
     it('doesn\'t apply by default', function () {
