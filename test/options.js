@@ -167,17 +167,4 @@ describe('Options', function () {
     }).should.throwError();
   });
 
-  it('adds `in` and `out` to `sourcemaps.from` and `sourcemaps.to` even if sourcemaps:false', function () {
-    var input  = 'input.css';
-    var output = 'output.css';
-    opts.in  = input;
-    opts.out = output;
-    opts = new Options().extend(opts);
-    (opts.in  === undefined).should.be.true;
-    (opts.out === undefined).should.be.true;
-    opts.sourcemaps.should.have.property('from').eql(input);
-    opts.sourcemaps.should.have.property('to').eql(output);
-    opts.sourcemaps.should.not.have.property('map');
-  });
-
 });
