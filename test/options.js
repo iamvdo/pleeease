@@ -105,14 +105,30 @@ describe('Options', function () {
     fs.unlinkSync('test/.pleeeaserc');
   });
 
-  it('overrides values when `browsers` option is set', function () {
-    opts.rem = ['20px'];
+  it('overrides multiple options when `browsers` option is set', function () {
+    opts.rem = true;
+    opts.opacity = true;
+    opts.pseudoElements = true;
     opts.browsers = ['ie 9'];
     opts = new Options().extend(opts);
-    opts.autoprefixer.should.have.property('browsers').eql(['ie 9']);
     opts.rem.should.eql(false);
     opts.opacity.should.eql(false);
     opts.pseudoElements.should.eql(false);
+  });
+
+  it('copies values in autoprefixer.browsers only if undefined', function () {
+    opts.browsers = ['ie 9'];
+    opts.autoprefixer = false;
+    opts = new Options().extend(opts);
+    opts.autoprefixer.should.eql(false);
+
+    opts.autoprefixer = true;
+    opts = new Options().extend(opts);
+    opts.autoprefixer.should.eql({});
+
+    opts.autoprefixer = {browsers: ['ie 8']};
+    opts = new Options().extend(opts);
+    opts.autoprefixer.should.have.property('browsers').eql(['ie 8']);
   });
 
   it('has correct values when multiple browsers are set', function () {
@@ -123,13 +139,14 @@ describe('Options', function () {
     opts.pseudoElements.should.eql(true);
   });
 
-  it('overrides values when `browsers` option is set in `autoprefixer` too', function () {
+  it('doesn\'t override values when `browsers` option is set in `autoprefixer`', function () {
     opts.autoprefixer = {browsers: ['ie 9']};
+    opts.rem = ['20px'];
     opts = new Options().extend(opts);
-    opts.rem.should.eql(false);
+    opts.rem.should.eql(['20px']);
   });
 
-  it('uses `browsers` option instead of `autoprefixer` one', function () {
+  it('doesn\'t use `autoprefixer.browsers` key', function () {
     opts.autoprefixer = {browsers: ['ie 8']};
     opts.browsers = ['ie 9'];
     opts = new Options().extend(opts);
