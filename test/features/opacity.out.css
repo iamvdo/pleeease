@@ -1,12 +1,4 @@
 .opacity {
   opacity: .5;
-  filter: alpha(opacity=50);
-}
-.opacity {
-  opacity: .216708;
-  filter: alpha(opacity=21);
-}
-.opacity {
-  opacity: .5;
-  filter: alpha(opacity=50);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }

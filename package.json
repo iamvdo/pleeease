@@ -37,7 +37,7 @@
     "postcss-custom-media": "^3.0.0",
     "postcss-custom-properties": "^3.0.0",
     "postcss-import": "^5.0.0",
-    "postcss-opacity": "^1.0.0",
+    "postcss-opacity": "^2.0.0",
     "postcss-pseudoelements": "^2.1.0",
     "postcss-url": "^3.0.0",
     "stylus": "~0.50.0"
