@@ -10,7 +10,7 @@ var __features  = require('../test/_helpers.js').dirname.features;
  * Describe Features
  *
  */
-describe('Postprocessors features', function () {
+describe('Postprocessors', function () {
 
   var opts;
 
@@ -19,74 +19,40 @@ describe('Postprocessors features', function () {
     opts.minifier = false;
   });
 
-  describe('autoprefixer', function () {
+  describe('Features', function () {
 
-    it('generates -webkit- prefixes for calc() (support iOS6)', function () {
-      opts.autoprefixer = {browsers: ['iOS 6']};
-      test('prefixes', opts);
-    });
+    var optsFeatures = {
+      autoprefixer: {autoprefixer: {browsers: ['iOS 6']}},
+      filters     : {autoprefixer: false},
+      filtersIE   : {autoprefixer: false, filters: {oldIE: true}},
+      mqpacker    : {mqpacker: true},
+      remopts     : {rem: ['10px', {replace: true}]}
+    };
 
-  });
+    function _test (feature, sub) {
+      var opt = {};
+      sub = sub || '';
+      // test with feature
+      if (optsFeatures[feature + sub]) {
+        opt = optsFeatures[feature + sub];
+      }
+      opt.minifier = opt.minifier || false;
+      test(feature + sub, opt);
+      // test without feature
+      opt[feature] = false;
+      opt.same = true;
+      test(feature + sub, opt);
+    }
 
-  describe('rem', function () {
-
-    it('adds fallback for rem unit', function () {
-      test('rem', opts);
-    });
-
-    it('converts rem using config', function () {
-      opts.rem = ['10px', {replace: true}];
-      test('rem.2', opts);
-    });
-
-  });
-
-  describe('Pseudo-elements', function () {
-
-    it('replaces pseudo-elements syntax', function () {
-      test('pseudoElements', opts);
-    });
-
-  });
-
-  describe('Filters', function () {
-
-    it('converts CSS filters to SVG', function () {
-      opts.autoprefixer = false;
-      test('filters', opts);
-    });
-
-    it('doesn\'t convert CSS filters to SVG when asked', function () {
-      opts.autoprefixer = false;
-      opts.filters = false;
-      opts.same = true;
-      test('filters', opts);
-    });
-
-    it('adds IE filters when asked', function () {
-      opts.autoprefixer = false;
-      opts.filters = {oldIE: true};
-      opts.same = false;
-      test('filters-ie', opts);
-    });
-
-  });
-
-  describe('Opacity', function () {
-
-    it('converts opacity into filter', function () {
-      test('opacity', opts);
-    });
-
-  });
-
-  describe('MQs', function () {
-
-    it('combines media-queries', function () {
-      opts.minifier = true;
-      opts.mqpacker = true;
-      test('mq', opts);
-    });
+    it('adds prefixes'                 , function () { _test('autoprefixer');   });
+    it('adds rem fallback'             , function () { _test('rem');            });
+    it('adds rem fallback with options', function () { _test('rem', 'opts');    });
+    it('replaces pseudo-elements'      , function () { _test('pseudoElements'); });
+    it('converts CSS filters'          , function () { _test('filters');        });
+    it('adds IE filters'               , function () { _test('filters', 'IE');  });
+    it('adds vmin'                     , function () { _test('vmin');           });
+    it('converts opacity into filter'  , function () { _test('opacity');        });
+    it('combines media-queries'        , function () { _test('mqpacker');       });
 
   });
 
@@ -104,7 +70,7 @@ describe('Postprocessors features', function () {
         // fixed CSS
         return pleeease.process(CSS.join('\n'), opts);
       };
-      var inputs = [__features + 'import.css', __features + 'mq.css'];
+      var inputs = [__features + 'import.css', __features + 'mqpacker.css'];
       // process
       var processed = compile(inputs);
       var expected = fs.readFileSync(__features + 'import.out.css').toString();
@@ -177,14 +143,6 @@ describe('Postprocessors features', function () {
       opts.minifier = true;
       var processed = pleeease.process(css, opts);
       processed.should.eql(css);
-    });
-
-  });
-
-  describe('vmin', function () {
-
-    it('adds fallback for vmin unit', function () {
-      test('vmin', opts);
     });
 
   });
