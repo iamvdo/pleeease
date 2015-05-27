@@ -20,9 +20,9 @@
     "url": "https://github.com/iamvdo/pleeease"
   },
   "dependencies": {
-    "caniuse-db": "^1.0.30000084",
     "autoprefixer-core": "~5.2.0",
     "browserslist": "~0.4.0",
+    "caniuse-db": "~1.0.30000181",
     "commondir": "~1.0.0",
     "css-mqpacker": "^3.0.0",
     "csswring": "^3.0.0",
