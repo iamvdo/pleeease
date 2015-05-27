@@ -1,3 +1,8 @@
+## 3.3.0 - 2015-05-27
+
+* Added: Autoprefixer 5.2
+* Fix: feature detection from caniuse data
+
 ## 3.2.6 - 2015-04-08
 
 * Fixed:
