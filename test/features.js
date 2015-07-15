@@ -126,6 +126,16 @@ describe('Postprocessors features', function () {
       processed.should.eql(expected);
     });
 
+    it('does not rebase when false', function () {
+      opts.minifier = true;
+      opts.import   = {path: 'test/features'};
+      opts.rebaseUrls = false;
+      var _in      = fs.readFileSync('test/features/url.css', 'utf-8');
+      var expected = fs.readFileSync('test/features/url.3.out.css', 'utf-8');
+      var processed = pleeease.process(_in, opts);
+      processed.should.eql(expected);
+    });
+
     it('rebases urls uses `out` or `sourcemaps.to` option', function () {
       opts.minifier = true;
       opts.out = 'test/features/url.out.css';
