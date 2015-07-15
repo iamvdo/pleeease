@@ -1,3 +1,7 @@
+## 3.4.0 - 2015-07-15
+
+* Added: Option `rebaseUrls` to rebase URLs (or not)
+
 ## 3.3.0 - 2015-05-27
 
 * Added: Autoprefixer 5.2
