@@ -25,6 +25,7 @@ Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor and 
 * for [Gulp](https://github.com/danielhusar/gulp-pleeease)
 * for [Brunch](https://github.com/iamvdo/brunch-pleeease)
 * for [Grunt](https://github.com/danielhusar/grunt-pleeease)
+* for [webpack](https://github.com/lmtm/pleeease-loader)
 
 ##Contribute
 
