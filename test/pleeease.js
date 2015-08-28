@@ -3,8 +3,6 @@ var pleeease   = require('../lib/pleeease');
 var postcss    = require('postcss');
 var minifier   = require('csswring');
 
-var helpers    = require('../test/_helpers.js');
-
 /**
  *
  * Describe Pleeease
@@ -15,56 +13,110 @@ describe('Pleeease', function () {
   beforeEach(function() {
   });
 
-  it('processes CSS as string', function () {
+  it('returns promise', function () {
     var css = 'a{a:a}';
-    pleeease.process(css).should.eql(css);
+    var result = pleeease.process(css);
+    result.should.be.a.Promise();
   });
 
-  it('processes CSS as PostCSS AST', function () {
+  it('processes CSS as string', function (done) {
+    var css = 'a{a:a}';
+    pleeease.process(css).then(function (result) {
+      result.should.eql(css);
+      done();
+    }).catch(done);
+  });
+
+  it('processes CSS as PostCSS AST', function (done) {
     var css = 'a{a:a}';
     var ast = postcss.parse(css);
-    pleeease.process(ast).should.eql(css);
+    pleeease.process(ast).then(function (result) {
+      result.should.eql(css);
+      done();
+    }).catch(done);
   });
 
-  it('throws error when no arguments are given', function () {
-    (function () {
-      return pleeease.process();
-    }).should.throw(/^CSS missing/);
+  it('throws error when no arguments are given', function (done) {
+    pleeease.process().then(function () {
+      done('should not run');
+    }).catch(function (error) {
+      error.should.be.an.instanceOf(Error);
+      error.should.have.property('message', 'CSS missing in pleeease.process()');
+      done();
+    }).catch(done);
   });
 
-  it('throws error when PostCSS fails parsing CSS', function () {
-    (function () {
-      return pleeease.process(true);
-    }).should.throwError;
-    (function () {
-      return pleeease.process({});
-    }).should.throwError;
+  it('throws error with no catch', function (done) {
+    pleeease.process().then(function () {
+      done('should not run');
+    }, function (error) {
+      error.should.be.an.instanceOf(Error);
+      error.should.have.property('message', 'CSS missing in pleeease.process()');
+      done();
+    }).catch(done);
   });
 
-  it('processes CSS string with options', function () {
+  it('throws CssSyntaxError error from PostCSS', function (done) {
+    pleeease.process('a{').then(function () {
+      done('should not run');
+    }).catch(function (error) {
+      error.should.be.an.instanceOf(Error);
+      error.should.have.property('name', 'CssSyntaxError');
+      error.should.have.property('reason', 'Unclosed block');
+      done();
+    }).catch(done);
+  });
+
+  it('throws CssSyntaxError error with no catch', function (done) {
+    pleeease.process('a{').then(function () {
+      done('should not run');
+    }, function (error) {
+      error.should.be.an.instanceOf(Error);
+      error.should.have.property('name', 'CssSyntaxError');
+      error.should.have.property('reason', 'Unclosed block');
+      done();
+    }).catch(done);
+  });
+
+  it('processes CSS string with options', function (done) {
     var css = 'a{}';
-    pleeease.process(css, {minifier: false}).should.eql(css);
+    pleeease.process(css, {minifier: false}).then(function (result) {
+      result.should.eql(css);
+      done();
+    }).catch(done);
   });
 
-  it('uses filename from `sourcemaps.from` option', function () {
+  it('uses filename from `sourcemaps.from` option', function (done) {
     var file = 'in.css';
-    var map = pleeease.process('a{a:a}', {sourcemaps: {map: {inline: false}, from: file}}).map;
-    map.toJSON().sources[0].should.eql(file);
+    var opts = {sourcemaps: {map: {inline: false}, from: file}};
+    pleeease.process('a{a:a}', opts).then(function (result) {
+      result.map.toJSON().sources[0].should.eql(file);
+      done();
+    }).catch(done);
   });
 
-  it('can be used as a plugin', function () {
-    postcss().use(pleeease).process('a{a: a}').css.should.eql('a{a:a}');
+  it('can be used as a plugin', function (done) {
+    postcss([pleeease]).process('a{a: a}').then(function (result) {
+      result.css.should.eql('a{a:a}');
+      done();
+    }).catch(done);
   });
 
-  it('accepts options when use as a plugin', function () {
-    postcss().use(pleeease({minifier: false})).process('a{a: a}').css.should.eql('a{a: a}');
-    postcss().use(pleeease({minifier: true})).process('a{a: a}').css.should.eql('a{a:a}');
+  it('accepts options when use as a plugin', function (done) {
+    postcss([pleeease({vim: true})]).process('a{a: 1vmin}').then(function (result) {
+      result.css.should.eql('a{a:1vm;a:1vmin}');
+      done();
+    }).catch(done);
   });
 
-  it('can be piped with another module', function () {
-    postcss().use(pleeease({minifier: false})).use(minifier).process('a{a: a}').css.should.eql('a{a:a}');
+  it('can be piped with another module', function (done) {
+    postcss([pleeease({vim: true, minifier: false}), minifier]).process('a{a: 1vmin}').then(function (result) {
+      result.css.should.eql('a{a:1vm;a:1vmin}');
+      done();
+    }).catch(done);
   });
 
+  /*
   it('works in standalone version', function () {
 
     var json = require('../package.json');
@@ -87,6 +139,7 @@ describe('Pleeease', function () {
     processed.should.be.eql(expected);
 
   });
+  */
 
   describe('#parse', function () {
 
@@ -94,7 +147,7 @@ describe('Pleeease', function () {
     var internal, parsed;
 
     beforeEach(function () {
-      internal = new pleeease();
+      internal = new pleeease.processor();
     });
 
     afterEach(function () {
@@ -136,14 +189,14 @@ describe('Pleeease', function () {
   describe('#setOptions', function () {
 
     it('extends default options', function () {
-      var internal = new pleeease();
+      var internal = new pleeease.processor();
       internal.setOptions({sourcemaps: true});
       internal.options.sourcemaps.should.be.an.instanceOf(Object);
       internal.options.sourcemaps.should.have.property('map');
     });
 
     it('extends only new options', function () {
-      var internal = new pleeease({rem: ['20px']});
+      var internal = new pleeease.processor({rem: ['20px']});
       internal.options.rem.should.eql(['20px']);
       internal.setOptions({autoprefixer: false});
       internal.options.rem.should.eql(['20px']);
