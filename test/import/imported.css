@@ -2,8 +2,3 @@
 .imported {
 	color: #000;
 }
-@media screen {
-  .imported {
-    color: #FFF;
-  }
-}
