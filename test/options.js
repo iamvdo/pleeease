@@ -75,26 +75,11 @@ describe('Options', function () {
     opts.minifier.should.have.property('preserveHacks').eql(false);
   });
 
-  it('extends values for pleeease.next', function () {
+  it('does not extend values for old pleeease.next', function () {
     opts.next = true;
     opts = new Options().extend(opts);
-    opts.next.should.have.property('customProperties').eql({});
-    opts.next.should.have.property('calc').eql(true);
-
-    opts.next = {
-      customProperties: true
-    };
-    opts = new Options().extend(opts);
-    opts.next.customProperties.should.eql({});
-    opts.next.should.not.have.property('calc');
-
-    opts.next = {
-      customProperties: false,
-      colors: true
-    };
-    opts = new Options().extend(opts);
-    opts.next.should.have.property('customProperties').eql(false);
-    opts.next.should.have.property('colors').eql({});
+    opts.next.should.not.have.property('customProperties');
+    opts.next.should.not.have.property('calc').eql(true);
   });
 
   it('does not extend options/values from configuration file', function () {
