@@ -72,6 +72,7 @@ gulp.task('jscs', function(cb) {
  */
 gulp.task('test', ['lint', 'jscs'], function () {
   require('should');
+  require('should-promised');
   var mocha = require('gulp-mocha');
   var args = require('yargs').argv;
   var file = args.file || '*';
@@ -88,6 +89,7 @@ gulp.task('test', ['lint', 'jscs'], function () {
  */
 gulp.task('istanbul', function (cb) {
   require('should');
+  require('should-promised');
   var istanbul = require('gulp-istanbul');
   var mocha    = require('gulp-mocha');
   gulp.src('lib/**/*.js')
