@@ -33,7 +33,7 @@
     "pixrem": "^2.0.0",
     "pleeease-filters": "^1.0.0",
     "postcss": "^5.0.0",
-    "postcss-import": "^5.0.0",
+    "postcss-import": "^7.0.0",
     "postcss-opacity": "^2.0.0",
     "postcss-pseudoelements": "^2.1.0",
     "postcss-url": "^3.0.0",
