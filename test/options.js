@@ -109,7 +109,7 @@ describe('Options', function () {
 
     opts.autoprefixer = true;
     opts = new Options().extend(opts);
-    opts.autoprefixer.should.eql({});
+    opts.autoprefixer.should.eql({browsers: ['ie 9']});
 
     opts.autoprefixer = {browsers: ['ie 8']};
     opts = new Options().extend(opts);
