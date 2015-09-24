@@ -47,7 +47,7 @@ describe('Postprocessors', function () {
     var optsFeatures = {
       import      : {import: {path: 'test/features/'}, minifier: true},
       filters     : {autoprefixer: false},
-      remOpts     : {rem: ['10px', {replace: true}]},
+      remOpts     : {rem: {rootValue: '10px', replace: true}},
       mqpacker    : {mqpacker: true},
       filtersIE   : {autoprefixer: false, filters: {oldIE: true}},
       sourcemaps  : {sourcemaps: true},

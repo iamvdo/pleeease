@@ -36,10 +36,10 @@ describe('Options', function () {
     opts.autoprefixer.browsers.should.eql(['last 20 versions']);
 
     opts = {
-      rem: ['10px', {replace: true}]
+      rem: {rootValue: '10px', replace: true}
     };
     opts = new Options().extend(opts);
-    opts.rem.should.eql(['10px', {replace: true}]);
+    opts.rem.should.eql({rootValue: '10px', replace: true});
   });
 
   it('extends values when set to true', function () {
@@ -119,16 +119,16 @@ describe('Options', function () {
   it('has correct values when multiple browsers are set', function () {
     opts.browsers = ['last 99 versions'];
     opts = new Options().extend(opts);
-    opts.rem.should.eql(['16px']);
+    opts.rem.should.eql({rootValue: '16px'});
     opts.opacity.should.eql(true);
     opts.pseudoElements.should.eql(true);
   });
 
   it('doesn\'t override values when `browsers` option is set in `autoprefixer`', function () {
     opts.autoprefixer = {browsers: ['ie 9']};
-    opts.rem = ['20px'];
+    opts.rem = {rootValue: '20px'};
     opts = new Options().extend(opts);
-    opts.rem.should.eql(['20px']);
+    opts.rem.should.eql({rootValue: '20px'});
   });
 
   it('doesn\'t use `autoprefixer.browsers` key', function () {

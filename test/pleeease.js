@@ -196,10 +196,10 @@ describe('Pleeease', function () {
     });
 
     it('extends only new options', function () {
-      var internal = new pleeease.processor({rem: ['20px']});
-      internal.options.rem.should.eql(['20px']);
+      var internal = new pleeease.processor({rem: {rootValue: '20px'}});
+      internal.options.rem.should.eql({rootValue: '20px'});
       internal.setOptions({autoprefixer: false});
-      internal.options.rem.should.eql(['20px']);
+      internal.options.rem.should.eql({rootValue: '20px'});
       internal.options.autoprefixer.should.eql(false);
     });
 
