@@ -156,4 +156,36 @@ describe('Postprocessors', function () {
 
   });
 
+  describe('Modules', function () {
+
+    var colorFn = require('postcss-color-function');
+    var css = 'a { background: color(red a(90%)) }';
+    var expected = 'a{background:rgba(255,0,0,.9)}';
+
+    beforeEach(function () {
+      opts.minifier = true;
+    });
+
+    it('uses external module before all', function (done) {
+      opts.modules = {
+        before: [colorFn]
+      };
+      pleeease.process(css, opts).then(function (result) {
+        result.should.eql(expected);
+        done();
+      }).catch(done);
+    });
+
+    it('uses external module after all', function (done) {
+      opts.modules = {
+        after: [colorFn]
+      };
+      pleeease.process(css, opts).then(function (result) {
+        result.should.eql(expected);
+        done();
+      }).catch(done);
+    });
+
+  })
+
 });
