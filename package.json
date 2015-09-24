@@ -29,16 +29,16 @@
     "deep-extend": "~0.3.0",
     "es6-promise": "^3.0.2",
     "less": "~2.4.0",
-    "node-sass": "~3.0.0",
+    "node-sass": "~3.3.0",
     "pixrem": "^3.0.0",
-    "pleeease-filters": "^1.0.0",
+    "pleeease-filters": "^2.0.0",
     "postcss": "^5.0.0",
     "postcss-import": "^7.0.0",
-    "postcss-opacity": "^2.0.0",
-    "postcss-pseudoelements": "^2.1.0",
-    "postcss-url": "^3.0.0",
-    "postcss-vmin": "^1.0.0",
-    "stylus": "~0.50.0"
+    "postcss-opacity": "^3.0.0",
+    "postcss-pseudoelements": "^3.0.0",
+    "postcss-url": "^5.0.0",
+    "postcss-vmin": "^2.0.0",
+    "stylus": "~0.52.0"
   },
   "devDependencies": {
     "browserify": "~9.0.0",
