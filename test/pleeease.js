@@ -102,6 +102,17 @@ describe('Pleeease', function () {
     }).catch(done);
   });
 
+  it('throws when used as a plugin', function (done) {
+    postcss([pleeease]).process('a{').then(function () {
+      done('should not run');
+    }).catch(function (error) {
+      error.should.be.an.instanceOf(Error);
+      error.should.have.property('name', 'CssSyntaxError');
+      error.should.have.property('reason', 'Unclosed block');
+      done();
+    }).catch(done);
+  });
+
   it('accepts options when use as a plugin', function (done) {
     postcss([pleeease({vim: true})]).process('a{a: 1vmin}').then(function (result) {
       result.css.should.eql('a{a:1vm;a:1vmin}');
