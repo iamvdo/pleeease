@@ -53,7 +53,7 @@ describe('Options', function () {
 
     opts.mqpacker = true;
     opts = new Options().extend(opts);
-    opts.mqpacker.should.eql(true);
+    opts.mqpacker.should.eql({});
   });
 
   it('extends values when an object is set', function () {

@@ -24,7 +24,7 @@
     "browserslist": "~1.0.0",
     "caniuse-db": "~1.0.30000181",
     "commondir": "~1.0.0",
-    "css-mqpacker": "^3.0.0",
+    "css-mqpacker": "^4.0.0",
     "csswring": "^4.0.0",
     "deep-extend": "~0.3.0",
     "es6-promise": "^3.0.2",
