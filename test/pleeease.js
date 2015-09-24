@@ -114,14 +114,14 @@ describe('Pleeease', function () {
   });
 
   it('accepts options when use as a plugin', function (done) {
-    postcss([pleeease({vim: true})]).process('a{a: 1vmin}').then(function (result) {
-      result.css.should.eql('a{a:1vm;a:1vmin}');
+    postcss([pleeease({vmin: false})]).process('a{a: 1vmin}').then(function (result) {
+      result.css.should.eql('a{a:1vmin}');
       done();
     }).catch(done);
   });
 
   it('can be piped with another module', function (done) {
-    postcss([pleeease({vim: true, minifier: false}), minifier]).process('a{a: 1vmin}').then(function (result) {
+    postcss([pleeease({minifier: false}), minifier]).process('a{a: 1vmin}').then(function (result) {
       result.css.should.eql('a{a:1vm;a:1vmin}');
       done();
     }).catch(done);
