@@ -186,6 +186,6 @@ describe('Postprocessors', function () {
       }).catch(done);
     });
 
-  })
+  });
 
 });
