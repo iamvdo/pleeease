@@ -7,11 +7,9 @@ Pleeease
 * [Documentation](http://pleeease.io/docs)
 * [Interactive Demo](http://pleeease.io/play)
 
-Pleeease is a Node.js application that easily process your CSS. It simplifies the use of preprocessors and combines them with best postprocessors. It helps create clean stylesheets, support older browsers and offers better maintenability. This means no more Compass for prefixes, no more rem mixins, and so on.
+Pleeease is a Node.js application that easily process your CSS. **It combines CSS preprocessors with PostCSS plugins, like Autoprefixer, Pixrem and so on, with full sourcemaps support**. It helps create clean stylesheets, support older browsers and offers better maintenability.
 
-Pleeease.NEXT goes even further and allows you to use some of the future CSS features today. [Read cautionary note](http://pleeease.io/docs/#pleeease-next).
-
-Pleeease is based on [PostCSS](https://github.com/ai/postcss) postprocessor and uses preprocessors Sass, LESS and Stylus.
+In short, `Pleeease === ((Sass || LESS || Stylus) || CSS) && PostCSS`
 
 [![Build Status](https://travis-ci.org/iamvdo/pleeease.svg?branch=master)](https://travis-ci.org/iamvdo/pleeease)
 [![Coverage Status](https://coveralls.io/repos/iamvdo/pleeease/badge.svg?branch=coverage)](https://coveralls.io/r/iamvdo/pleeease?branch=coverage)

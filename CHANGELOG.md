@@ -1,3 +1,13 @@
+## 4.0.0
+
+* Changes: Remove pleeease.NEXT
+* Changes: API is now aync only
+* Added: new vmin postprocessor
+* Added: new `modules` option, to add own PostCSS plugins
+* Added: PostCSS 5, Autoprefixer 6
+* Added: Node-sass 3.3, Stylus 0.52
+* Fixed: browsers key no longer override autoprefixer's one
+
 ## 3.4.0 - 2015-07-15
 
 * Added: Option `rebaseUrls` to rebase URLs (or not)
