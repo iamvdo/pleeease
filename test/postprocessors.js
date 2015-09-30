@@ -47,7 +47,7 @@ describe('Postprocessors', function () {
     var optsFeatures = {
       import      : {import: {path: 'test/features/'}, minifier: true},
       filters     : {autoprefixer: false},
-      remOpts     : {rem: {rootValue: '10px', replace: true}},
+      remopts     : {rem: {rootValue: '10px', replace: true}},
       mqpacker    : {mqpacker: true},
       filtersIE   : {autoprefixer: false, filters: {oldIE: true}},
       sourcemaps  : {sourcemaps: true},
@@ -65,7 +65,7 @@ describe('Postprocessors', function () {
 
     it('adds prefixes'              , function (done) { _test('autoprefixer', done);   });
     it('adds rem fallback'          , function (done) { _test('rem', done);            });
-    it('adds rem fallback with opts', function (done) { _test('remOpts', done);        });
+    it('adds rem fallback with opts', function (done) { _test('remopts', done);        });
     it('replaces pseudo-elements'   , function (done) { _test('pseudoElements', done); });
     it('converts CSS filters'       , function (done) { _test('filters', done);        });
     it('adds IE filters'            , function (done) { _test('filtersIE', done);      });
