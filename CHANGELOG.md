@@ -4,7 +4,8 @@
 * Changes: API is now aync only
 * Added: new vmin postprocessor
 * Added: new `modules` option, to add own PostCSS plugins
-* Added: PostCSS 5, Autoprefixer 6
+* Added: Node.js 4
+* Added: PostCSS 5, Autoprefixer 6 & other PostCSS modules
 * Added: Node-sass 3.3, Stylus 0.52
 * Fixed: browsers key no longer override autoprefixer's one
 
