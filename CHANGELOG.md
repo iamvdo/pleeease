@@ -1,4 +1,6 @@
-## 4.0.0
+4.0.1 (2015-09-30) Fix test on Windows
+
+## 4.0.0 - 2015-09-30
 
 * Changes: Remove pleeease.NEXT
 * Changes: API is now aync only
