@@ -127,8 +127,7 @@ describe('Pleeease', function () {
     }).catch(done);
   });
 
-  /*
-  it('works in standalone version', function () {
+  it('works in standalone version', function (done) {
 
     var json = require('../package.json');
     var version;
@@ -139,18 +138,18 @@ describe('Pleeease', function () {
       }
     }
     var standalone = require('../standalone/pleeease-' + version + '.min.js');
-    var css      = helpers.readFile('test/features/filters.css');
-    var expected = helpers.readFile('test/features/filters.out.css');
+    var css      = require('fs').readFileSync('test/features/filters.css', 'utf-8');
+    var expected = require('fs').readFileSync('test/features/filters.out.css', 'utf-8');
     var opts = {
       autoprefixer: false,
       minifier    : false
     };
-    var processed   = standalone.process(css, opts);
-
-    processed.should.be.eql(expected);
+    standalone.process(css, opts).then(function (result) {
+      result.should.be.eql(expected);
+      done();
+    }).catch(done);
 
   });
-  */
 
   describe('#parse', function () {
 
