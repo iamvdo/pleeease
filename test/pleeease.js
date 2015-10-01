@@ -41,7 +41,7 @@ describe('Pleeease', function () {
       done('should not run');
     }).catch(function (error) {
       error.should.be.an.instanceOf(Error);
-      error.should.have.property('message', 'CSS missing in pleeease.process()');
+      error.should.have.property('message', 'CSS string or CSS AST data was not provided to pleeease.process()');
       done();
     }).catch(done);
   });
@@ -51,7 +51,7 @@ describe('Pleeease', function () {
       done('should not run');
     }, function (error) {
       error.should.be.an.instanceOf(Error);
-      error.should.have.property('message', 'CSS missing in pleeease.process()');
+      error.should.have.property('message', 'CSS string or CSS AST data was not provided to pleeease.process()');
       done();
     }).catch(done);
   });
