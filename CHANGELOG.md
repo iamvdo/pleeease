@@ -1,3 +1,4 @@
+4.0.2 (2015-10-27) Fix broken output when pleeease-cli gives pleeease.parse AST data (#62)
 4.0.1 (2015-09-30) Fix test on Windows
 
 ## 4.0.0 - 2015-09-30
