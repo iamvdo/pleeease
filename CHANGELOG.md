@@ -1,3 +1,4 @@
+4.0.4 (2015-11-12) Add stable Node to Travis (+ update node-sass)
 4.0.3 (2015-10-29) Fix sourcemaps creation for LESS
 4.0.2 (2015-10-27) Fix broken output when pleeease-cli gives pleeease.parse AST data (#62)
 4.0.1 (2015-09-30) Fix test on Windows
