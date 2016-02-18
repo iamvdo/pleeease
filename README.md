@@ -7,7 +7,7 @@ Pleeease
 * [Documentation](http://pleeease.io/docs)
 * [Interactive Demo](http://pleeease.io/play)
 
-Pleeease is a Node.js application that easily process your CSS. **It combines CSS preprocessors with PostCSS plugins, like Autoprefixer, Pixrem and so on, with full sourcemaps support**. It helps create clean stylesheets, support older browsers and offers better maintenability.
+Pleeease is a Node.js application that easily process your CSS. **It combines CSS preprocessors with PostCSS plugins, like Autoprefixer, Pixrem and so on, with full sourcemaps support**. It helps create clean stylesheets, support older browsers and offers better maintainability.
 
 In short, `Pleeease === ((Sass || LESS || Stylus) || CSS) && PostCSS`
 
