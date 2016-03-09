@@ -60,7 +60,6 @@ describe('Pleeease', function () {
     pleeease.process('a{').then(function () {
       done('should not run');
     }).catch(function (error) {
-      error.should.be.an.instanceOf(Error);
       error.should.have.property('name', 'CssSyntaxError');
       error.should.have.property('reason', 'Unclosed block');
       done();
@@ -71,7 +70,6 @@ describe('Pleeease', function () {
     pleeease.process('a{').then(function () {
       done('should not run');
     }, function (error) {
-      error.should.be.an.instanceOf(Error);
       error.should.have.property('name', 'CssSyntaxError');
       error.should.have.property('reason', 'Unclosed block');
       done();
@@ -106,7 +104,6 @@ describe('Pleeease', function () {
     postcss([pleeease]).process('a{').then(function () {
       done('should not run');
     }).catch(function (error) {
-      error.should.be.an.instanceOf(Error);
       error.should.have.property('name', 'CssSyntaxError');
       error.should.have.property('reason', 'Unclosed block');
       done();
