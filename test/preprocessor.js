@@ -109,7 +109,8 @@ describe('Preprocessor', function () {
     });
     it('using LESS', function (done) {
       opts.less = true;
-      pleeease.process('@a=8;a{a:a}', opts).then(function () {
+      pleeease.process('$a=8;a{a:a}', opts).then(function (r) {
+        console.log(r);
         done('should not run');
       }).catch(function (error) {
         error.should.be.an.instanceOf(Error);

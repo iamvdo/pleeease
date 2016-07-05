@@ -28,7 +28,7 @@
     "csswring": "^4.0.0",
     "deep-extend": "~0.3.0",
     "es6-promise": "^3.0.2",
-    "less": "~2.4.0",
+    "less": "~2.7.0",
     "node-sass": "~3.4.0",
     "pixrem": "^3.0.0",
     "pleeease-filters": "^2.0.0",
