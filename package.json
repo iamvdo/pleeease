@@ -1,6 +1,6 @@
 {
   "name": "pleeease",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "Process CSS with ease",
   "author": {
     "name": "Vincent De Oliveira"
@@ -29,7 +29,7 @@
     "deep-extend": "~0.3.0",
     "es6-promise": "^3.0.2",
     "less": "~2.4.0",
-    "node-sass": "~3.4.0",
+    "node-sass": "~3.8.0",
     "pixrem": "^3.0.0",
     "pleeease-filters": "^2.0.0",
     "postcss": "^5.0.0",
