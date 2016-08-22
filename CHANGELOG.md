@@ -1,15 +1,20 @@
-4.0.5 (2016-07-19) Update dependencies (LESS, node-sass, stylus)
-4.0.4 (2015-11-12) Add stable Node to Travis (+ update node-sass)
-4.0.3 (2015-10-29) Fix sourcemaps creation for LESS
-4.0.2 (2015-10-27) Fix broken output when pleeease-cli gives pleeease.parse AST data (#62)
-4.0.1 (2015-09-30) Fix test on Windows
 
-## 4.0.0 - 2015-09-30
+**4.0.5** (2016-07-19) Update dependencies (LESS, node-sass, stylus)
+
+**4.0.4** (2015-11-12) Add stable Node to Travis (+ update node-sass)
+
+**4.0.3** (2015-10-29) Fix sourcemaps creation for LESS
+
+**4.0.2** (2015-10-27) Fix broken output when pleeease-cli gives pleeease.parse AST data (#62)
+
+**4.0.1** (2015-09-30) Fix test on Windows
+
+## [4.0.0] - 2015-09-30
 
 * Changes: Remove pleeease.NEXT
 * Changes: API is now aync only
 * Added: new vmin postprocessor
-* Added: new `modules` option, to add own PostCSS plugins
+* Added: new `modules` option, to add every PostCSS plugins you need
 * Added: Node.js 4
 * Added: PostCSS 5, Autoprefixer 6 & other PostCSS modules
 * Added: Node-sass 3.3, Stylus 0.52
@@ -173,3 +178,4 @@
 [1.1.0]: https://github.com/iamvdo/pleeease/releases/tag/1.1.0
 [2.0.0]: https://github.com/iamvdo/pleeease/releases/tag/2.0.0
 [3.0.0]: https://github.com/iamvdo/pleeease/releases/tag/3.0.0
+[4.0.0]: https://github.com/iamvdo/pleeease/releases/tag/4.0.0
