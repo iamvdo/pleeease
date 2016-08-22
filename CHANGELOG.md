@@ -1,3 +1,7 @@
+## 4.1.0 - 2016-08-22
+
+* Update Autoprefixer to 6.4 (and caniuse data)
+* Update Pixrem to 3.0.2 (fix a reduce-css-calc bug)
 
 **4.0.5** (2016-07-19) Update dependencies (LESS, node-sass, stylus)
 
