@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "browserify": "~9.0.0",
-    "fs-extra": "~2.1.2",
+    "fs-extra": "~2.0.0",
     "gulp": "~3.9.1",
     "gulp-bump": "~0.3.0",
     "gulp-coveralls": "^0.1.3",
