@@ -1,3 +1,4 @@
+**4.2.1** (2017-03-17) Fix fs-extra version (compatibility Node 0.12)
 **4.2.0** (2017-03-17) Update modules (compatibility Node 7)
 
 ## 4.1.0 - 2016-08-22
