@@ -1,3 +1,5 @@
+**4.2.0** (2017-03-17) Update modules (compatibility Node 7)
+
 ## 4.1.0 - 2016-08-22
 
 * Update Autoprefixer to 6.4 (and caniuse data)
