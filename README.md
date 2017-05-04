@@ -14,18 +14,18 @@ In short, `Pleeease === ((Sass || LESS || Stylus) || CSS) && PostCSS`
 [![Build Status](https://travis-ci.org/iamvdo/pleeease.svg?branch=master)](https://travis-ci.org/iamvdo/pleeease)
 [![Coverage Status](https://coveralls.io/repos/iamvdo/pleeease/badge.svg?branch=coverage)](https://coveralls.io/r/iamvdo/pleeease?branch=coverage)
 
-##Plugins
+## Plugins
 * for [less.js](https://github.com/bassjobsen/less-plugin-pleeease)
 * for [Meteor](https://github.com/bassjobsen/less-pleeease)
 
-##Workflow
+## Workflow
 
 * for [Gulp](https://github.com/danielhusar/gulp-pleeease)
 * for [Brunch](https://github.com/iamvdo/brunch-pleeease)
 * for [Grunt](https://github.com/danielhusar/grunt-pleeease)
 * for [webpack](https://github.com/lmtm/pleeease-loader)
 
-##Contribute
+## Contribute
 
 * Clone repository
 * Install dependencies with `npm install`
@@ -34,6 +34,6 @@ In short, `Pleeease === ((Sass || LESS || Stylus) || CSS) && PostCSS`
 
 There is a lot of stuff to do: adding more unit tests, adding new postprocess tasks, etc.
 
-##Licence
+## Licence
 
 MIT [Vincent De Oliveira](https://github.com/iamvdo)
