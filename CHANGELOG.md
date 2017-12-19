@@ -1,3 +1,4 @@
+**4.3.0** (2017-12-19) Update postcss-url (#86)
 **4.2.1** (2017-03-17) Fix fs-extra version (compatibility Node 0.12)
 **4.2.0** (2017-03-17) Update modules (compatibility Node 7)
 
