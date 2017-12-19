@@ -37,7 +37,3 @@ There is a lot of stuff to do: adding more unit tests, adding new postprocess ta
 ## Licence
 
 MIT [Vincent De Oliveira](https://github.com/iamvdo)
-
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/5WjDbieev3xYBiKEENxsdY9L/iamvdo/pleeease'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/5WjDbieev3xYBiKEENxsdY9L/iamvdo/pleeease.svg' />
-</a>
