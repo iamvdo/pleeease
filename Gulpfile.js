@@ -20,7 +20,7 @@ gulp.task('clean', function (done) {
 gulp.task('standalone', ['clean'], function() {
     var fs         = require('fs');
     var source     = require('vinyl-source-stream');
-    var uglify     = require('gulp-uglify');
+    var uglify     = require('gulp-uglify-es').default;
     var streamify  = require('gulp-streamify');
     var browserify = require('browserify');
 
