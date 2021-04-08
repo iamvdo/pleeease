@@ -3,9 +3,9 @@ Pleeease
 
 **Process CSS with ease.**
 
-* [Website](http://pleeease.io)
-* [Documentation](http://pleeease.io/docs)
-* [Interactive Demo](http://pleeease.io/play)
+* [Website](http://pleeease.iamvdo.me)
+* [Documentation](http://pleeease.iamvdo.me/docs)
+* [Interactive Demo](http://pleeease.iamvdo.me/play)
 
 Pleeease is a Node.js application that easily process your CSS. **It combines CSS preprocessors with PostCSS plugins, like Autoprefixer, Pixrem and so on, with full sourcemaps support**. It helps create clean stylesheets, support older browsers and offers better maintainability.
 
